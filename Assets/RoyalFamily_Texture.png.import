@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg081t57c6jk5"
-path.s3tc="res://.godot/imported/Jump_Right_Up.png-22ff4aae4b9bce83d4d2c9b8b8ae691a.s3tc.ctex"
+uid="uid://c8kcdgeaq264n"
+path.s3tc="res://.godot/imported/RoyalFamily_Texture.png-82321431be895a9e2b680b6474a783b6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a58cf36a9e2899b6961ccd946587fc51"
+}
 
 [deps]
 
-source_file="res://Assets/The Female Adventurer - Free/Jump - NEW/Normal/Jump_Right_Up.png"
-dest_files=["res://.godot/imported/Jump_Right_Up.png-22ff4aae4b9bce83d4d2c9b8b8ae691a.s3tc.ctex"]
+source_file="res://Assets/RoyalFamily_Texture.png"
+dest_files=["res://.godot/imported/RoyalFamily_Texture.png-82321431be895a9e2b680b6474a783b6.s3tc.ctex"]
 
 [params]
 

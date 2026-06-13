@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://dean2k5noao13"]
+
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_menu"]
+
+[node name="MainMenu" type="Control" unique_id=1124415471]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=775105711]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -95.0
+offset_right = 150.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "PVP Rescue Rush LAN"
+horizontal_alignment = 1
+
+[node name="HostButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host LAN Game"
+
+[node name="CodeEdit" type="LineEdit" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "Host code"
+max_length = 4
+
+[node name="JoinButton" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join By Code"
+
+[node name="StatusLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host or enter a LAN code."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg081t57c6jk5"
-path.s3tc="res://.godot/imported/Jump_Right_Up.png-22ff4aae4b9bce83d4d2c9b8b8ae691a.s3tc.ctex"
+uid="uid://coucdy12rtswc"
+path.s3tc="res://.godot/imported/prince2_Texture.png-1665e1e5f636f3b3cb67bbbf5c5438e7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "a58cf36a9e2899b6961ccd946587fc51"
+}
 
 [deps]
 
-source_file="res://Assets/The Female Adventurer - Free/Jump - NEW/Normal/Jump_Right_Up.png"
-dest_files=["res://.godot/imported/Jump_Right_Up.png-22ff4aae4b9bce83d4d2c9b8b8ae691a.s3tc.ctex"]
+source_file="res://Assets/prince2_Texture.png"
+dest_files=["res://.godot/imported/prince2_Texture.png-1665e1e5f636f3b3cb67bbbf5c5438e7.s3tc.ctex"]
 
 [params]
 
