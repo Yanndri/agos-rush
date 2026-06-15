@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bvbgj8xet2hyg"
+path="res://.godot/imported/conveyor-junction-t.obj-d8c40b2791d07d1c179c9bb2b67a18d6.mesh"
+
+[deps]
+
+files=["res://.godot/imported/conveyor-junction-t.obj-d8c40b2791d07d1c179c9bb2b67a18d6.mesh"]
+
+source_file="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-junction-t.obj"
+dest_files=["res://.godot/imported/conveyor-junction-t.obj-d8c40b2791d07d1c179c9bb2b67a18d6.mesh", "res://.godot/imported/conveyor-junction-t.obj-d8c40b2791d07d1c179c9bb2b67a18d6.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

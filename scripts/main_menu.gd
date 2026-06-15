@@ -17,3 +17,4 @@ func _on_join_button_pressed() -> void:
 
 func _on_network_status_changed(message: String) -> void:
 	status_label.text = message
+	#print(message)

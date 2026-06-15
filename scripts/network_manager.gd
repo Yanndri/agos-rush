@@ -46,7 +46,7 @@ func host_game() -> bool:
 	multiplayer.multiplayer_peer = peer
 	_start_broadcasting()
 	status_changed.emit("Hosting. Code: %s" % host_code)
-	print(host_code)
+	print("network_manager: ", host_code)
 	get_tree().change_scene_to_file(MAIN_SCENE)
 	return true
 

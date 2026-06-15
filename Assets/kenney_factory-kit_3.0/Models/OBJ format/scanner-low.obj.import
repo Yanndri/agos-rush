@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bcp38b8e3acrf"
+path="res://.godot/imported/scanner-low.obj-2198a706804c979c3a02080764e270e1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/scanner-low.obj-2198a706804c979c3a02080764e270e1.mesh"]
+
+source_file="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/scanner-low.obj"
+dest_files=["res://.godot/imported/scanner-low.obj-2198a706804c979c3a02080764e270e1.mesh", "res://.godot/imported/scanner-low.obj-2198a706804c979c3a02080764e270e1.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

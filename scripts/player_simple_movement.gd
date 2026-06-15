@@ -7,14 +7,18 @@ extends CharacterBody3D
 @export var turn_speed := 8.0
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
 @onready var model_pivot: Node3D = $ModelPivot
 @onready var camera: Camera3D = $CameraPivot/Camera3D
 
+var animation_playback: AnimationNodeStateMachinePlayback
 var jump_animation_time_left := 0.0
 var last_animation: StringName = &"Idle"
 
 func _ready() -> void:
 	camera.current = is_multiplayer_authority()
+	animation_tree.active = true
+	animation_playback = animation_tree.get("parameters/playback")
 	_play_animation("Idle")
 
 func _physics_process(delta: float) -> void:
@@ -76,7 +80,5 @@ func _start_jump_animation_lock() -> void:
 
 func _play_animation(animation_name: StringName) -> void:
 	last_animation = animation_name
-	if animation_player.current_animation == animation_name:
-		return
-	if animation_player.has_animation(animation_name):
-		animation_player.play(animation_name)
+	if animation_playback and animation_playback.get_current_node() != String(animation_name):
+		animation_playback.travel(animation_name)

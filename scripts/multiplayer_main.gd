@@ -1,6 +1,6 @@
 extends Node3D
 
-const PLAYER_SCENE := preload("res://scenes/player.tscn")
+const PLAYER_SCENE := preload("res://scenes/PlayerShaun.tscn")
 const SPAWN_POINTS := [
 	Vector3(-4.8, 0.8, 2.2),
 	Vector3(-2.8, 0.8, 2.2),
@@ -9,6 +9,8 @@ const SPAWN_POINTS := [
 ]
 
 func _ready() -> void:
+	_update_room_code_label("LAN Code: %s" % NetworkManager.host_code if multiplayer.multiplayer_peer and multiplayer.is_server() and not NetworkManager.host_code.is_empty() else "")
+	
 	if multiplayer.multiplayer_peer == null:
 		_spawn_player(1)
 		return
@@ -20,6 +22,11 @@ func _ready() -> void:
 		_spawn_player.rpc(1)
 		for peer_id in multiplayer.get_peers():
 			_spawn_player.rpc(peer_id)
+
+func _update_room_code_label(message: String) -> void:
+	var room_code_label := get_node_or_null("%RoomCodeLabel") as Label
+	if room_code_label:
+		room_code_label.text = message
 
 func _on_peer_connected(peer_id: int) -> void:
 	if not multiplayer.is_server():
@@ -54,6 +61,7 @@ func _show_host_code_label() -> void:
 	var label := Label.new()
 	label.name = "HostCodeLabel"
 	label.text = "LAN Code: %s" % NetworkManager.host_code
+	print("MultiplayerMain2: ", NetworkManager.host_code)
 	label.position = Vector2(12, 12)
 	label.add_theme_font_size_override("font_size", 22)
 	layer.add_child(label)

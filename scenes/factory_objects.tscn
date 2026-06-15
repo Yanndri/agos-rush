@@ -1,0 +1,556 @@
+[gd_scene format=3 uid="uid://byc123ylmalhp"]
+
+[ext_resource type="ArrayMesh" uid="uid://c3hc40jpc1qvp" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-bend.obj" id="1_5paht"]
+[ext_resource type="ArrayMesh" uid="uid://6j5yja6356bo" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-curve.obj" id="2_bjl1y"]
+[ext_resource type="ArrayMesh" uid="uid://bs4ki4udi1sk1" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-cross.obj" id="3_nfa4r"]
+[ext_resource type="PackedScene" uid="uid://bm1iehwpwp0dn" path="res://scenes/water_valve.tscn" id="4_e0xoh"]
+[ext_resource type="ArrayMesh" uid="uid://couehrtlnimak" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large.obj" id="5_oh3u3"]
+[ext_resource type="ArrayMesh" uid="uid://bk8lsin858o6y" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-side.obj" id="6_2mevu"]
+[ext_resource type="ArrayMesh" uid="uid://cdrl6jwxnxvus" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-long.obj" id="7_o1df1"]
+[ext_resource type="ArrayMesh" uid="uid://biwknj4hk5pr7" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-junction.obj" id="8_0d5cb"]
+[ext_resource type="ArrayMesh" uid="uid://4qvplp6cfio4" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-curve.obj" id="9_ub0jq"]
+[ext_resource type="ArrayMesh" uid="uid://b65q7tsruxik6" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-large-bend.obj" id="10_52qc8"]
+[ext_resource type="ArrayMesh" uid="uid://s4xejwaprip7" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large.obj" id="11_0o08d"]
+[ext_resource type="ArrayMesh" uid="uid://co8wqlgr77olk" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-valve.obj" id="12_5pmta"]
+[ext_resource type="ArrayMesh" uid="uid://b31ook12qxfdh" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-side.obj" id="13_3cg50"]
+[ext_resource type="ArrayMesh" uid="uid://2vgytef33lv5" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-long.obj" id="14_rsmrx"]
+[ext_resource type="ArrayMesh" uid="uid://d1rwkhwph23gs" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-junction.obj" id="15_sdqh0"]
+[ext_resource type="ArrayMesh" uid="uid://e84u24drt1a0" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-cross.obj" id="16_8wbfr"]
+[ext_resource type="ArrayMesh" uid="uid://3plki63evfw" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/pipe-glass-large-bump.obj" id="17_euxmi"]
+[ext_resource type="ArrayMesh" uid="uid://ckmeusf70ily8" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/oopi.obj" id="18_3mcrx"]
+[ext_resource type="ArrayMesh" uid="uid://c74yghg57r51a" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/machine.obj" id="19_yppgh"]
+[ext_resource type="ArrayMesh" uid="uid://bfhsg0t1dcxcc" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/machine-window.obj" id="20_0sl2b"]
+[ext_resource type="ArrayMesh" uid="uid://dhoxnfkg0t6h0" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/machine-window-bar.obj" id="21_8ff2y"]
+[ext_resource type="ArrayMesh" uid="uid://bx003bglh1rrg" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/indicator-special-lines.obj" id="22_u0a2y"]
+[ext_resource type="ArrayMesh" uid="uid://d31aq8abx2tuy" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/indicator-special-area.obj" id="23_eupba"]
+[ext_resource type="ArrayMesh" uid="uid://c2en8segdynkt" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/indicator-special-cross.obj" id="24_1jev5"]
+[ext_resource type="ArrayMesh" uid="uid://dtdxlrf1f4sqi" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/indicator-special-arrow.obj" id="25_hkldb"]
+[ext_resource type="ArrayMesh" uid="uid://bc0rngpor467l" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/hopper-square.obj" id="26_4878y"]
+[ext_resource type="ArrayMesh" uid="uid://blsbtnnfuhi44" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/hopper-round.obj" id="27_8djod"]
+[ext_resource type="ArrayMesh" uid="uid://dq657kr1wg4hj" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/hopper-high-square.obj" id="28_dpv74"]
+[ext_resource type="ArrayMesh" uid="uid://c2mro1hgirtqt" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/hopper-high-round.obj" id="29_cq60o"]
+[ext_resource type="ArrayMesh" uid="uid://bfnnw0i88e8r2" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/floor.obj" id="30_ykbf7"]
+[ext_resource type="ArrayMesh" uid="uid://6t7crlfriqih" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/floor-large.obj" id="31_ryiic"]
+[ext_resource type="ArrayMesh" uid="uid://dge42hlyoudl3" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/door.obj" id="32_j0y8l"]
+[ext_resource type="ArrayMesh" uid="uid://b3fwb7g43r2tr" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/door-wide-open.obj" id="33_dvujh"]
+[ext_resource type="ArrayMesh" uid="uid://b2bhjlmoya3ls" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/door-wide-half.obj" id="34_tsc73"]
+[ext_resource type="ArrayMesh" uid="uid://bgarpunuhh66f" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/door-wide-closed.obj" id="35_qjvco"]
+[ext_resource type="ArrayMesh" uid="uid://grlxfrkbr4n8" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/crane.obj" id="36_gy4g8"]
+[ext_resource type="ArrayMesh" uid="uid://q7unjutxqaot" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/crane-magnet.obj" id="37_e0xoh"]
+[ext_resource type="ArrayMesh" uid="uid://dk7hdcu61lhpa" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/crane-lift.obj" id="38_f4jka"]
+[ext_resource type="ArrayMesh" uid="uid://b4el4pqdd57o7" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor.obj" id="39_fcwqu"]
+[ext_resource type="ArrayMesh" uid="uid://jke4k5kjyjgd" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe.obj" id="40_pgawr"]
+[ext_resource type="ArrayMesh" uid="uid://mvlag7bc1sh" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-sides.obj" id="41_klo3b"]
+[ext_resource type="ArrayMesh" uid="uid://crmc8dgvg7q5a" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-sides-junction-t.obj" id="42_v6mt5"]
+[ext_resource type="ArrayMesh" uid="uid://cpuf1ksnrrp3q" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-sides-cross.obj" id="43_evqtr"]
+[ext_resource type="ArrayMesh" uid="uid://b08kk8fg5nmo" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-part-middle.obj" id="44_achpm"]
+[ext_resource type="ArrayMesh" uid="uid://dw342hlnae7e2" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-part-end.obj" id="45_okbyo"]
+[ext_resource type="ArrayMesh" uid="uid://dth61f6y7mpv" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-fence-slope.obj" id="46_r4gg3"]
+[ext_resource type="ArrayMesh" uid="uid://c4tni81nlmh56" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-fence.obj" id="47_2eya5"]
+[ext_resource type="ArrayMesh" uid="uid://b8b5ghnfljkox" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-high-slope.obj" id="48_lsfxj"]
+[ext_resource type="ArrayMesh" uid="uid://2ioim3uex2ia" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-high.obj" id="49_cx3yr"]
+[ext_resource type="ArrayMesh" uid="uid://cw08g3gshmjie" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-sides.obj" id="50_5agq7"]
+[ext_resource type="ArrayMesh" uid="uid://c2kv3mguj4sgx" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe-fence-slope.obj" id="51_amlf3"]
+[ext_resource type="ArrayMesh" uid="uid://bcv8oarkdv8hm" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe-fence.obj" id="52_52fny"]
+[ext_resource type="ArrayMesh" uid="uid://c24ppedg6u7v6" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe-high-slope.obj" id="53_tn3if"]
+[ext_resource type="ArrayMesh" uid="uid://745gsnkjraf4" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe-high.obj" id="54_65gkh"]
+[ext_resource type="ArrayMesh" uid="uid://b1ytbrmc8bhh3" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe-side.obj" id="55_x4vhb"]
+[ext_resource type="ArrayMesh" uid="uid://da0j055qjg6cw" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars-stripe.obj" id="56_wdxga"]
+[ext_resource type="ArrayMesh" uid="uid://djk4e4dgs7mpp" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-bars.obj" id="57_wgki4"]
+[ext_resource type="ArrayMesh" uid="uid://c0inxu5pfigmd" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-corner.obj" id="58_a7bw7"]
+[ext_resource type="ArrayMesh" uid="uid://if826hlr51wc" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-cross.obj" id="59_tui03"]
+[ext_resource type="ArrayMesh" uid="uid://bvbgj8xet2hyg" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-junction-t.obj" id="60_0y8wc"]
+[ext_resource type="ArrayMesh" uid="uid://d1i3xxkwsyaec" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-part-end.obj" id="61_54f5f"]
+[ext_resource type="ArrayMesh" uid="uid://dty45aktsam3" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-part-middle.obj" id="62_mpt46"]
+[ext_resource type="ArrayMesh" uid="uid://cb0278ypxtwt1" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-sides-part-end.obj" id="63_jecfl"]
+[ext_resource type="ArrayMesh" uid="uid://bqwcvxnle8pq6" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-sides-part-middle.obj" id="64_6cw2u"]
+[ext_resource type="ArrayMesh" uid="uid://c68lti1gv1nl5" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-sides.obj" id="65_aiv76"]
+[ext_resource type="ArrayMesh" uid="uid://okfqdtv0wp8v" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-stripe-sides-part-end.obj" id="66_w2vda"]
+[ext_resource type="ArrayMesh" uid="uid://dtifgn0r63m8t" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-stripe-sides-part-middle.obj" id="67_qpmbs"]
+[ext_resource type="ArrayMesh" uid="uid://p41dynnq3l1l" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-stripe-sides.obj" id="68_okwaq"]
+[ext_resource type="ArrayMesh" uid="uid://dx1mwrh4ganul" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long-stripe.obj" id="69_j8gti"]
+[ext_resource type="ArrayMesh" uid="uid://cu3fp3k4nw8ir" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-long.obj" id="70_u2yvd"]
+[ext_resource type="ArrayMesh" uid="uid://bv0c2pjriftnv" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-sides-cross.obj" id="71_jwupt"]
+[ext_resource type="ArrayMesh" uid="uid://dh5fl70sa7qyv" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-sides-junction-t.obj" id="72_mbxrc"]
+[ext_resource type="ArrayMesh" uid="uid://col631scuf8ex" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-sides.obj" id="73_r2qii"]
+[ext_resource type="ArrayMesh" uid="uid://drl0j7pgobdvu" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-corner.obj" id="74_7xo51"]
+[ext_resource type="ArrayMesh" uid="uid://3j07ktsg1ygj" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-cross.obj" id="75_v4lja"]
+[ext_resource type="ArrayMesh" uid="uid://cku84qik1jquo" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/conveyor-stripe-junction-t.obj" id="76_pauih"]
+[ext_resource type="ArrayMesh" uid="uid://25ce434lxnrk" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/screen-hanging-small.obj" id="77_2sc8m"]
+[ext_resource type="ArrayMesh" uid="uid://bjpswt8yhihew" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-high.obj" id="78_eulsf"]
+[ext_resource type="ArrayMesh" uid="uid://dkpify5wpt6g3" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-short.obj" id="79_cm7d6"]
+[ext_resource type="ArrayMesh" uid="uid://dbsq0y331d5u6" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-doorway.obj" id="80_wk4xy"]
+[ext_resource type="ArrayMesh" uid="uid://2x6bj7xm06pw" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-doorway-wide.obj" id="81_o1aby"]
+[ext_resource type="ArrayMesh" uid="uid://eur8gvm7o2dq" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-corner-outer.obj" id="82_2eyr2"]
+[ext_resource type="ArrayMesh" uid="uid://xj4710ylhgw8" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/structure-window-wide.obj" id="83_ut36i"]
+[ext_resource type="ArrayMesh" uid="uid://dora5u3sa7c3j" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/top-large-checkerboard.obj" id="84_mkrox"]
+[ext_resource type="ArrayMesh" uid="uid://ct38fyver04lh" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/top-large.obj" id="85_tj8j2"]
+[ext_resource type="ArrayMesh" uid="uid://bm2qwtndg7afa" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/top.obj" id="86_irsy0"]
+[ext_resource type="ArrayMesh" uid="uid://57a548s5i4ig" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/warning-orange.obj" id="87_wbf1m"]
+[ext_resource type="ArrayMesh" uid="uid://b6qivfqxpbh8o" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/warning-traffic.obj" id="88_edp8k"]
+[ext_resource type="ArrayMesh" uid="uid://ctdfhp6mn11xj" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/cog-e.obj" id="89_qqf3h"]
+[ext_resource type="ArrayMesh" uid="uid://cvs56nsf8xaoj" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/cog-d.obj" id="90_fdb3t"]
+[ext_resource type="ArrayMesh" uid="uid://sjht2c3vnap7" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/cog-c.obj" id="91_5ibl5"]
+[ext_resource type="ArrayMesh" uid="uid://bw668t8da72uw" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/cog-b.obj" id="92_smic0"]
+[ext_resource type="ArrayMesh" uid="uid://ddioe7bnxon06" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/cog-a.obj" id="93_8xsjn"]
+[ext_resource type="ArrayMesh" uid="uid://cx3qib4yu1jox" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-straight.obj" id="94_1q88t"]
+[ext_resource type="ArrayMesh" uid="uid://btir5fasajp4m" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-stairs.obj" id="95_wusma"]
+[ext_resource type="ArrayMesh" uid="uid://biidt54na7a3b" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-stairs-loop.obj" id="96_0qrlq"]
+[ext_resource type="ArrayMesh" uid="uid://ci6lkho62mnpn" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-junction.obj" id="97_yfx28"]
+[ext_resource type="ArrayMesh" uid="uid://oh66ygjteumc" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-cross.obj" id="98_42na0"]
+[ext_resource type="ArrayMesh" uid="uid://75krsdajxrmi" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/catwalk-corner.obj" id="99_0hje2"]
+[ext_resource type="ArrayMesh" uid="uid://4fds8j3i6oqo" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/button-floor-square.obj" id="100_kp3jf"]
+[ext_resource type="ArrayMesh" uid="uid://fdqvjq8jyh7b" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/button-floor-square-small.obj" id="101_4phdn"]
+[ext_resource type="ArrayMesh" uid="uid://cnjmx2odaa72m" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/button-floor-round.obj" id="102_3emlg"]
+[ext_resource type="ArrayMesh" uid="uid://csyfu0apoc0b" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/button-floor-round-small.obj" id="103_7kkyv"]
+[ext_resource type="ArrayMesh" uid="uid://cikqlhmaalcjg" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/box-wide.obj" id="104_lmhjg"]
+[ext_resource type="ArrayMesh" uid="uid://bry7tbve64v3" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/box-small.obj" id="105_yot8r"]
+[ext_resource type="ArrayMesh" uid="uid://kdh2jle8hms7" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/box-long.obj" id="106_hye26"]
+[ext_resource type="ArrayMesh" uid="uid://d1ixrxq3tk4r6" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/arrow-rounded.obj" id="107_v73f7"]
+[ext_resource type="ArrayMesh" uid="uid://danxxlmpgvm3c" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/arrow-basic.obj" id="108_6p7qf"]
+[ext_resource type="ArrayMesh" uid="uid://cka4go1kose4t" path="res://Assets/kenney_factory-kit_3.0/Models/OBJ format/arrow-basic-rounded.obj" id="109_m7oru"]
+
+[node name="FactoryObjects" type="Node3D" unique_id=1355645443]
+
+[node name="PipeGlassLargeBend" type="MeshInstance3D" parent="." unique_id=1485843309]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5224783, 0.100239106, 3.7521331)
+mesh = ExtResource("1_5paht")
+
+[node name="PipeGlassLargeCurve" type="MeshInstance3D" parent="." unique_id=783030002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5885197, 0.10023925, 5.0279303)
+mesh = ExtResource("2_bjl1y")
+
+[node name="PipeLargeCross" type="MeshInstance3D" parent="." unique_id=841980889]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21474367, 0.6000001, 5.3466797)
+mesh = ExtResource("3_nfa4r")
+
+[node name="PipeLargeValve" parent="." unique_id=841781098 instance=ExtResource("4_e0xoh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.688414, 0.099999905, 2.7460408)
+
+[node name="PipeLarge" type="MeshInstance3D" parent="." unique_id=361707779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4304004, 0.09999943, 7.69405)
+mesh = ExtResource("5_oh3u3")
+
+[node name="PipeLargeSide" type="MeshInstance3D" parent="." unique_id=957770001]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.193122, 0.099999905, 4.9271193)
+mesh = ExtResource("6_2mevu")
+
+[node name="PipeLargeLong" type="MeshInstance3D" parent="." unique_id=2026039396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.9899106, 0.099999905, 4.625013)
+mesh = ExtResource("7_o1df1")
+
+[node name="PipeLargeJunction" type="MeshInstance3D" parent="." unique_id=2081874980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67264, 0.099999905, 2.512289)
+mesh = ExtResource("8_0d5cb")
+
+[node name="PipeLargeCurve" type="MeshInstance3D" parent="." unique_id=343792206]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0460048, 0.10023913, 1.4500566)
+mesh = ExtResource("9_ub0jq")
+
+[node name="PipeLargeBend" type="MeshInstance3D" parent="." unique_id=966657388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.339201, 0.100239106, 2.8696995)
+mesh = ExtResource("10_52qc8")
+
+[node name="PipeGlassLarge" type="MeshInstance3D" parent="." unique_id=1220518764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79955435, 0.099999905, 3.685851)
+mesh = ExtResource("11_0o08d")
+
+[node name="PipeGlassLargeValve" type="MeshInstance3D" parent="." unique_id=432176560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.958147, 0.099999905, 2.5966444)
+mesh = ExtResource("12_5pmta")
+
+[node name="PipeGlassLargeSide" type="MeshInstance3D" parent="." unique_id=237657154]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3093853, 0.099999905, 2.1175618)
+mesh = ExtResource("13_3cg50")
+
+[node name="PipeGlassLargeLong" type="MeshInstance3D" parent="." unique_id=1408911975]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.079441, 0.099999905, 6.0068507)
+mesh = ExtResource("14_rsmrx")
+
+[node name="PipeGlassLargeJunction" type="MeshInstance3D" parent="." unique_id=2075246366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0587292, 0.099999905, 7.577649)
+mesh = ExtResource("15_sdqh0")
+
+[node name="PipeGlassLargeCurve2" type="MeshInstance3D" parent="." unique_id=1626773201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.376047, 0.100239605, 7.6913767)
+mesh = ExtResource("2_bjl1y")
+
+[node name="PipeGlassLargeCross" type="MeshInstance3D" parent="." unique_id=1768642291]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6050651, 0.60000056, 8.742573)
+mesh = ExtResource("16_8wbfr")
+
+[node name="PipeGlassLargeBump" type="MeshInstance3D" parent="." unique_id=326565908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2485037, 0.10000038, 4.400516)
+mesh = ExtResource("17_euxmi")
+
+[node name="PipeGlassLargeBend2" type="MeshInstance3D" parent="." unique_id=1301641057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.938506, 0.100239106, 1.3257546)
+mesh = ExtResource("1_5paht")
+
+[node name="Oopi" type="MeshInstance3D" parent="." unique_id=1122975008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3739386, 0.100001335, 5.2090936)
+mesh = ExtResource("18_3mcrx")
+
+[node name="Machine" type="MeshInstance3D" parent="." unique_id=1231602451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.579748, 0.099999905, 2.5055833)
+mesh = ExtResource("19_yppgh")
+
+[node name="MachineWindow" type="MeshInstance3D" parent="." unique_id=350533670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.125838, 0.099999905, 5.030098)
+mesh = ExtResource("20_0sl2b")
+
+[node name="MachineWindowBar" type="MeshInstance3D" parent="." unique_id=177588451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.620119, 0.10000038, 7.092692)
+mesh = ExtResource("21_8ff2y")
+
+[node name="IndicatorSpecialLines" type="MeshInstance3D" parent="." unique_id=1167051072]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.424617, 0.100001335, 0.30340505)
+mesh = ExtResource("22_u0a2y")
+
+[node name="IndicatorSpecialArea" type="MeshInstance3D" parent="." unique_id=1918097662]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.15972, 0.10000038, 2.050576)
+mesh = ExtResource("23_eupba")
+
+[node name="IndicatorSpecialCross" type="MeshInstance3D" parent="." unique_id=964301256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.337639, 0.10000038, 3.3822932)
+mesh = ExtResource("24_1jev5")
+
+[node name="IndicatorSpecialArrow" type="MeshInstance3D" parent="." unique_id=1862433193]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.57735, 0.100001335, 4.7979302)
+mesh = ExtResource("25_hkldb")
+
+[node name="HopperSquare" type="MeshInstance3D" parent="." unique_id=481640690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.641496, 0.10000038, 6.4952493)
+mesh = ExtResource("26_4878y")
+
+[node name="HopperRound" type="MeshInstance3D" parent="." unique_id=898985046]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.993355, 0.10000038, 9.133047)
+mesh = ExtResource("27_8djod")
+
+[node name="HopperHighSquare" type="MeshInstance3D" parent="." unique_id=522951643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.539394, 0.10000038, 9.000939)
+mesh = ExtResource("28_dpv74")
+
+[node name="HopperHighRound" type="MeshInstance3D" parent="." unique_id=1015060695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.013859, 0.10000038, 8.672912)
+mesh = ExtResource("29_cq60o")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1986935578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.337872, 0.10000038, -1.6397161)
+mesh = ExtResource("30_ykbf7")
+
+[node name="FloorLarge" type="MeshInstance3D" parent="." unique_id=558993519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0784645, 0.10000038, -2.1301327)
+mesh = ExtResource("31_ryiic")
+
+[node name="Door" type="MeshInstance3D" parent="." unique_id=799181339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.1315928, 0.10000038, -3.5921583)
+mesh = ExtResource("32_j0y8l")
+
+[node name="DoorWideOpen" type="MeshInstance3D" parent="." unique_id=580625983]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5960426, 0.10000038, -5.0188684)
+mesh = ExtResource("33_dvujh")
+
+[node name="DoorWideHalf" type="MeshInstance3D" parent="." unique_id=1438822512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.0756226, 0.10000038, -6.452183)
+mesh = ExtResource("34_tsc73")
+
+[node name="DoorWideClosed" type="MeshInstance3D" parent="." unique_id=269904946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.8461075, 0.100001335, -5.746789)
+mesh = ExtResource("35_qjvco")
+
+[node name="Crane" type="MeshInstance3D" parent="." unique_id=683673166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6593688, 0.10000038, -5.538767)
+mesh = ExtResource("36_gy4g8")
+
+[node name="CraneMagnet" type="MeshInstance3D" parent="." unique_id=2020851402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4571095, 0, -6.1294355)
+mesh = ExtResource("37_e0xoh")
+
+[node name="CraneLift" type="MeshInstance3D" parent="." unique_id=627959005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9401584, 2.5297735, -10.237838)
+mesh = ExtResource("38_f4jka")
+
+[node name="Conveyor" type="MeshInstance3D" parent="." unique_id=50892481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4066825, 0, -6.385891)
+mesh = ExtResource("39_fcwqu")
+
+[node name="ConveyorStripe" type="MeshInstance3D" parent="." unique_id=38831687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.050171614, 0, -7.8818207)
+mesh = ExtResource("40_pgawr")
+
+[node name="ConveyorStripeSides" type="MeshInstance3D" parent="." unique_id=1160801305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0594132, 0, -8.341628)
+mesh = ExtResource("41_klo3b")
+
+[node name="ConveyorStripeSidesJunctionT" type="MeshInstance3D" parent="." unique_id=1490854095]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0312784, 0, -10.614792)
+mesh = ExtResource("42_v6mt5")
+
+[node name="ConveyorStripeSidesCross" type="MeshInstance3D" parent="." unique_id=822787893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030542374, 0, -10.845369)
+mesh = ExtResource("43_evqtr")
+
+[node name="ConveyorStripePartMiddle" type="MeshInstance3D" parent="." unique_id=1080905912]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3015434, 0, -12.888603)
+mesh = ExtResource("44_achpm")
+
+[node name="ConveyorStripePartEnd" type="MeshInstance3D" parent="." unique_id=729489589]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.909214, 0, -11.450399)
+mesh = ExtResource("45_okbyo")
+
+[node name="ConveyorBarsFenceSlope" type="MeshInstance3D" parent="." unique_id=801681691]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7597232, 0, -15.215424)
+mesh = ExtResource("46_r4gg3")
+
+[node name="ConveyorBarsFence" type="MeshInstance3D" parent="." unique_id=260492499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6348295, 0, -15.215424)
+mesh = ExtResource("47_2eya5")
+
+[node name="ConveyorBarsHighSlope" type="MeshInstance3D" parent="." unique_id=1585097192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4248757, 0, -15.215424)
+mesh = ExtResource("48_lsfxj")
+
+[node name="ConveyorBarsHigh" type="MeshInstance3D" parent="." unique_id=2038790367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.923894, 0, -15.215424)
+mesh = ExtResource("49_cx3yr")
+
+[node name="ConveyorBarsSides" type="MeshInstance3D" parent="." unique_id=1611242994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.2684145, 0, -15.215424)
+mesh = ExtResource("50_5agq7")
+
+[node name="ConveyorBarsStripeFenceSlope" type="MeshInstance3D" parent="." unique_id=1890890672]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.037353, 0, -15.215424)
+mesh = ExtResource("51_amlf3")
+
+[node name="ConveyorBarsStripeFence" type="MeshInstance3D" parent="." unique_id=1047991557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.495144, 0, -15.215424)
+mesh = ExtResource("52_52fny")
+
+[node name="ConveyorBarsStripeHighSlope" type="MeshInstance3D" parent="." unique_id=239658943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.113452, 0, -15.215424)
+mesh = ExtResource("53_tn3if")
+
+[node name="ConveyorBarsStripeHigh" type="MeshInstance3D" parent="." unique_id=1166010534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9159656, 0, -15.215424)
+mesh = ExtResource("54_65gkh")
+
+[node name="ConveyorBarsStripeSide" type="MeshInstance3D" parent="." unique_id=1731751388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.097218, 0, -15.215424)
+mesh = ExtResource("55_x4vhb")
+
+[node name="ConveyorBarsStripe" type="MeshInstance3D" parent="." unique_id=1525663670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.018621, 0, -15.215424)
+mesh = ExtResource("56_wdxga")
+
+[node name="ConveyorBars" type="MeshInstance3D" parent="." unique_id=340305350]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.357776, 0, -15.215424)
+mesh = ExtResource("57_wgki4")
+
+[node name="ConveyorCorner" type="MeshInstance3D" parent="." unique_id=1737449763]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.530418, 0, -15.215424)
+mesh = ExtResource("58_a7bw7")
+
+[node name="ConveyorCross" type="MeshInstance3D" parent="." unique_id=300338780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.963984, 0, -15.215424)
+mesh = ExtResource("59_tui03")
+
+[node name="ConveyorJunctionT" type="MeshInstance3D" parent="." unique_id=422650288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.614874, 0, -15.215424)
+mesh = ExtResource("60_0y8wc")
+
+[node name="ConveyorLongPartEnd" type="MeshInstance3D" parent="." unique_id=708936726]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.311773, 0, -15.215424)
+mesh = ExtResource("61_54f5f")
+
+[node name="ConveyorLongPartMiddle" type="MeshInstance3D" parent="." unique_id=909124050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.638233, 0, -15.215424)
+mesh = ExtResource("62_mpt46")
+
+[node name="ConveyorLongSidesPartEnd" type="MeshInstance3D" parent="." unique_id=1060687422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3285313, 0, -17.031857)
+mesh = ExtResource("63_jecfl")
+
+[node name="ConveyorLongSidesPartMiddle" type="MeshInstance3D" parent="." unique_id=475341402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3285313, 0, -19.016289)
+mesh = ExtResource("64_6cw2u")
+
+[node name="ConveyorLongSides" type="MeshInstance3D" parent="." unique_id=571665654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3285313, 0, -21.880531)
+mesh = ExtResource("65_aiv76")
+
+[node name="ConveyorLongStripeSidesPartEnd" type="MeshInstance3D" parent="." unique_id=462196275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3285313, 0, -25.393684)
+mesh = ExtResource("66_w2vda")
+
+[node name="ConveyorLongStripeSidesPartMiddle" type="MeshInstance3D" parent="." unique_id=950495024]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2660904, 0, -17.101723)
+mesh = ExtResource("67_qpmbs")
+
+[node name="ConveyorLongStripeSides" type="MeshInstance3D" parent="." unique_id=873316611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3331447, 0, -17.101723)
+mesh = ExtResource("68_okwaq")
+
+[node name="ConveyorLongStripe" type="MeshInstance3D" parent="." unique_id=610228250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5083714, 0, -17.101723)
+mesh = ExtResource("69_j8gti")
+
+[node name="ConveyorLong" type="MeshInstance3D" parent="." unique_id=1467475354]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.440247, 0, -17.101723)
+mesh = ExtResource("70_u2yvd")
+
+[node name="ConveyorSidesCross" type="MeshInstance3D" parent="." unique_id=1059179519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.226998, 0, -17.101723)
+mesh = ExtResource("71_jwupt")
+
+[node name="ConveyorSidesJunctionT" type="MeshInstance3D" parent="." unique_id=1278411255]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.684614, 0, -17.101723)
+mesh = ExtResource("72_mbxrc")
+
+[node name="ConveyorSides" type="MeshInstance3D" parent="." unique_id=1542691315]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.24485, 0, -17.101723)
+mesh = ExtResource("73_r2qii")
+
+[node name="ConveyorStripeCorner" type="MeshInstance3D" parent="." unique_id=1973120972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.940714, 0, -17.101723)
+mesh = ExtResource("74_7xo51")
+
+[node name="ConveyorStripeCross" type="MeshInstance3D" parent="." unique_id=1877433839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.950718, 0, -17.101723)
+mesh = ExtResource("75_v4lja")
+
+[node name="ConveyorStripeJunctionT" type="MeshInstance3D" parent="." unique_id=155436358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3285313, 0, -15.215424)
+mesh = ExtResource("76_pauih")
+
+[node name="ScreenHangingSmall" type="MeshInstance3D" parent="." unique_id=125096971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5374885, 0, -20.479465)
+mesh = ExtResource("77_2sc8m")
+
+[node name="StructureHigh" type="MeshInstance3D" parent="." unique_id=1746593506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0939147, 0, -22.164095)
+mesh = ExtResource("78_eulsf")
+
+[node name="StructureShort" type="MeshInstance3D" parent="." unique_id=1215222372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.719874, 0, -22.067856)
+mesh = ExtResource("79_cm7d6")
+
+[node name="StructureDoorway" type="MeshInstance3D" parent="." unique_id=557201578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9718475, 0, -21.923084)
+mesh = ExtResource("80_wk4xy")
+
+[node name="StructureDoorwayWide" type="MeshInstance3D" parent="." unique_id=1240266406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.738015, 0, -22.908754)
+mesh = ExtResource("81_o1aby")
+
+[node name="StructureCornerOuter" type="MeshInstance3D" parent="." unique_id=1734218839]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8293204, 0, -24.655888)
+mesh = ExtResource("82_2eyr2")
+
+[node name="StructureWindowWide" type="MeshInstance3D" parent="." unique_id=352822511]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.722759, 0, -22.325214)
+mesh = ExtResource("83_ut36i")
+
+[node name="TopLargeCheckerboard" type="MeshInstance3D" parent="." unique_id=493030689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.399845, 0, -21.501713)
+mesh = ExtResource("84_mkrox")
+
+[node name="TopLarge" type="MeshInstance3D" parent="." unique_id=1590021280]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.150576, 0, -20.914516)
+mesh = ExtResource("85_tj8j2")
+
+[node name="Top" type="MeshInstance3D" parent="." unique_id=1620236147]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.272057, 0, -20.534857)
+mesh = ExtResource("86_irsy0")
+
+[node name="WarningOrange" type="MeshInstance3D" parent="." unique_id=1332606835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.36116, 0, -22.622086)
+mesh = ExtResource("87_wbf1m")
+
+[node name="WarningTraffic" type="MeshInstance3D" parent="." unique_id=298192080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.920681, 0, -23.378456)
+mesh = ExtResource("88_edp8k")
+
+[node name="CogE" type="MeshInstance3D" parent="." unique_id=950881534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.714607, 0, -24.43282)
+mesh = ExtResource("89_qqf3h")
+
+[node name="CogD" type="MeshInstance3D" parent="." unique_id=1084347818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.210897, 0, -24.494968)
+mesh = ExtResource("90_fdb3t")
+
+[node name="CogC" type="MeshInstance3D" parent="." unique_id=1226837249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.948442, 0, -24.67021)
+mesh = ExtResource("91_5ibl5")
+
+[node name="CogB" type="MeshInstance3D" parent="." unique_id=717240874]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.420422, 0, -24.599932)
+mesh = ExtResource("92_smic0")
+
+[node name="CogA" type="MeshInstance3D" parent="." unique_id=640997115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.123592, 0, -25.241085)
+mesh = ExtResource("93_8xsjn")
+
+[node name="CatwalkStraight" type="MeshInstance3D" parent="." unique_id=1312390771]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.219117, 0, -26.436743)
+mesh = ExtResource("94_1q88t")
+
+[node name="CatwalkStairs" type="MeshInstance3D" parent="." unique_id=549023980]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.331339, 0, -28.115547)
+mesh = ExtResource("95_wusma")
+
+[node name="CatwalkStairsLoop" type="MeshInstance3D" parent="." unique_id=453383883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.902766, 0, -28.001366)
+mesh = ExtResource("96_0qrlq")
+
+[node name="CatwalkJunction" type="MeshInstance3D" parent="." unique_id=354195298]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.877322, 0, -27.961876)
+mesh = ExtResource("97_yfx28")
+
+[node name="CatwalkCross" type="MeshInstance3D" parent="." unique_id=1503119303]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.500988, 0, -27.546154)
+mesh = ExtResource("98_42na0")
+
+[node name="CatwalkCorner" type="MeshInstance3D" parent="." unique_id=114420013]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.048641, 0, -25.795397)
+mesh = ExtResource("99_0hje2")
+
+[node name="ButtonFloorSquare" type="MeshInstance3D" parent="." unique_id=606551254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.635265, 0, -27.595324)
+mesh = ExtResource("100_kp3jf")
+
+[node name="ButtonFloorSquareSmall" type="MeshInstance3D" parent="." unique_id=779442479]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.14392, 0, -28.990862)
+mesh = ExtResource("101_4phdn")
+
+[node name="ButtonFloorRound" type="MeshInstance3D" parent="." unique_id=2044557068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.53363, 0, -29.430616)
+mesh = ExtResource("102_3emlg")
+
+[node name="ButtonFloorRoundSmall" type="MeshInstance3D" parent="." unique_id=1758658638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.416743, 0, -29.36232)
+mesh = ExtResource("103_7kkyv")
+
+[node name="BoxWide" type="MeshInstance3D" parent="." unique_id=1094074226]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.513764, 0, -30.296385)
+mesh = ExtResource("104_lmhjg")
+
+[node name="BoxSmall" type="MeshInstance3D" parent="." unique_id=1954067673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.140433, 0, -30.650488)
+mesh = ExtResource("105_yot8r")
+
+[node name="BoxLong" type="MeshInstance3D" parent="." unique_id=1097770002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.953118, 0, -30.283648)
+mesh = ExtResource("106_hye26")
+
+[node name="ArrowRounded" type="MeshInstance3D" parent="." unique_id=320172887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.782721, 0, -30.29356)
+mesh = ExtResource("107_v73f7")
+
+[node name="ArrowBasic" type="MeshInstance3D" parent="." unique_id=811872695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.334762, 0, -30.259375)
+mesh = ExtResource("108_6p7qf")
+
+[node name="ArrowBasicRounded" type="MeshInstance3D" parent="." unique_id=39465163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.0359206, 0, -30.27779)
+mesh = ExtResource("109_m7oru")
