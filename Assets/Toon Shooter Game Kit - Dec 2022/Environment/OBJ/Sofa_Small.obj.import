@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://fwomtggt7lga"
+path="res://.godot/imported/Sofa_Small.obj-95df898c71b8bbdcd38bb1ebbb6df57e.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sofa_Small.obj-95df898c71b8bbdcd38bb1ebbb6df57e.mesh"]
+
+source_file="res://Assets/Toon Shooter Game Kit - Dec 2022/Environment/OBJ/Sofa_Small.obj"
+dest_files=["res://.godot/imported/Sofa_Small.obj-95df898c71b8bbdcd38bb1ebbb6df57e.mesh", "res://.godot/imported/Sofa_Small.obj-95df898c71b8bbdcd38bb1ebbb6df57e.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

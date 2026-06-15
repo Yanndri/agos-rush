@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bfweymio3bget"
+path="res://.godot/imported/Sniper.obj-b2fc1181677f385926560277cd72cdbb.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Sniper.obj-b2fc1181677f385926560277cd72cdbb.mesh"]
+
+source_file="res://Assets/Toon Shooter Game Kit - Dec 2022/Guns/OBJ/Sniper.obj"
+dest_files=["res://.godot/imported/Sniper.obj-b2fc1181677f385926560277cd72cdbb.mesh", "res://.godot/imported/Sniper.obj-b2fc1181677f385926560277cd72cdbb.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

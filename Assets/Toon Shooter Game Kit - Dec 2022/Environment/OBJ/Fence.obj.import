@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c2hcwksgks0y5"
+path="res://.godot/imported/Fence.obj-0b835fb3806a744dc392f5cf11669eac.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Fence.obj-0b835fb3806a744dc392f5cf11669eac.mesh"]
+
+source_file="res://Assets/Toon Shooter Game Kit - Dec 2022/Environment/OBJ/Fence.obj"
+dest_files=["res://.godot/imported/Fence.obj-0b835fb3806a744dc392f5cf11669eac.mesh", "res://.godot/imported/Fence.obj-0b835fb3806a744dc392f5cf11669eac.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
