@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://kdmv8gesh8hy"]
+
+[ext_resource type="Script" uid="uid://dyi7hsfexivbo" path="res://scripts/control_milestone.gd" id="1_milestone"]
+
+[node name="TextChat" type="Control" unique_id=487340569]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -142.0
+offset_right = 320.0
+grow_vertical = 0
+script = ExtResource("1_milestone")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1994866892]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=1047924685]
+layout_mode = 2
+
+[node name="HistoryLabel" type="RichTextLabel" parent="Panel/VBoxContainer" unique_id=1401561908]
+custom_minimum_size = Vector2(300, 96)
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+
+[node name="InputRow" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=391741857]
+layout_mode = 2
+
+[node name="MessageEdit" type="LineEdit" parent="Panel/VBoxContainer/InputRow" unique_id=115912134]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Type message..."
+
+[node name="SendButton" type="Button" parent="Panel/VBoxContainer/InputRow" unique_id=366477040]
+layout_mode = 2
+text = "Send"
+
+[connection signal="text_submitted" from="Panel/VBoxContainer/InputRow/MessageEdit" to="." method="_on_message_edit_text_submitted"]
+[connection signal="pressed" from="Panel/VBoxContainer/InputRow/SendButton" to="." method="_on_send_button_pressed"]

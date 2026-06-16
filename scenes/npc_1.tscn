@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ymbvonsthmn4" path="res://Assets/BlenderExports/LayingBlacksmith_Villagers_Texture.png" id="1_8dm1u"]
 [ext_resource type="Texture2D" uid="uid://cj33oy4tm5sgb" path="res://Assets/SketchfabExports/hospital_stretcher_trolley_0.png" id="2_ttshn"]
 [ext_resource type="Script" uid="uid://cwke03stwkk82" path="res://scripts/npc_rescue_interact.gd" id="3_npc_interact"]
+[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/prompt_area.tscn" id="4_3w2wa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gcbg"]
 resource_name = "Material.001"
@@ -305,11 +306,13 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y4rbg")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_prompt"]
-radius = 1.6
+[sub_resource type="SphereShape3D" id="SphereShape3D_xr7qm"]
+radius = 3.603
 
 [node name="NPC1" type="CharacterBody3D" unique_id=1994827218]
 script = ExtResource("3_npc_interact")
+interact_key = null
+carry_offset = null
 
 [node name="LayingBlacksmith" type="Node3D" parent="." unique_id=483049784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074483395, -0.72062004, 0.12550318)
@@ -531,16 +534,9 @@ debug_color = Color(0.9764706, 0, 0.40784314, 1)
 transform = Transform3D(0.009396926, -0.0034202023, -5.7901427e-11, 0, -4.3711387e-10, 0.0038729582, -0.0034202023, -0.009396926, -1.5908279e-10, -2.3279192, -0.56240773, 1.4936739)
 mesh = SubResource("ArrayMesh_63iaj")
 
-[node name="PromptArea" type="Area3D" parent="." unique_id=251792264]
+[node name="PromptArea" parent="." unique_id=989733329 instance=ExtResource("4_3w2wa")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PromptArea" unique_id=1919662505]
-shape = SubResource("SphereShape3D_prompt")
+[node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
+shape = SubResource("SphereShape3D_xr7qm")
 
-[node name="PromptLabel" type="Label3D" parent="PromptArea" unique_id=367202107]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8700633, 0)
-billboard = 1
-no_depth_test = true
-text = "Press E to rescue"
-
-[connection signal="body_entered" from="PromptArea" to="." method="_on_prompt_area_body_entered"]
-[connection signal="body_exited" from="PromptArea" to="." method="_on_prompt_area_body_exited"]
+[editable path="PromptArea"]

@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var interact_key := KEY_E
 @export var carry_offset := Vector3(0.0, 2.25, 0.0)
 
+@onready var prompt_area: Area3D = $PromptArea
 @onready var prompt: Label3D = $PromptArea/PromptLabel
 
 var nearby_player: Node3D
@@ -10,6 +11,9 @@ var carried := false
 
 func _ready() -> void:
 	prompt.visible = false
+
+	prompt_area.body_entered.connect(_on_prompt_area_body_entered)
+	prompt_area.body_exited.connect(_on_prompt_area_body_exited)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if carried or nearby_player == null:

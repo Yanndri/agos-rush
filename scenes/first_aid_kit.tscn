@@ -1,6 +1,10 @@
 [gd_scene format=4 uid="uid://cfkev6orpfvm8"]
 
-[ext_resource type="Script" uid="uid://duhky5f20fdij" path="res://scripts/pickable_first_aid_kit.gd" id="1_pickup"]
+[ext_resource type="Script" uid="uid://cy4271wekj4wt" path="res://scripts/first_aid_kit.gd" id="1_3od7p"]
+[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/prompt_area.tscn" id="2_2q3br"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xhlam"]
+radius = 3.603
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmo04"]
 resource_name = "Red.001"
@@ -95,26 +99,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_0rpb8")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
-radius = 1.25
-
 [node name="FirstAidKit" type="Node3D" unique_id=541162600]
-script = ExtResource("1_pickup")
+script = ExtResource("1_3od7p")
 
-[node name="MeshMaterial" type="MeshInstance3D" parent="." unique_id=2111747728]
+[node name="PromptArea" parent="." unique_id=989733329 instance=ExtResource("2_2q3br")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -0.1671061)
+
+[node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
+shape = SubResource("SphereShape3D_xhlam")
+
+[node name="PromptLabel" parent="PromptArea" index="1" unique_id=987523048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1701932, 0.34010327)
+
+[node name="Visual" type="Node3D" parent="." unique_id=377762775]
+
+[node name="Mesh" type="MeshInstance3D" parent="Visual" unique_id=2111747728]
 transform = Transform3D(0.4, 0, 0, 0, -1.7484556e-08, -0.4, 0, 0.4, -1.7484556e-08, 0, 0, -0.1671061)
 mesh = SubResource("ArrayMesh_nqdp5")
 
-[node name="PromptArea" type="Area3D" parent="MeshMaterial" unique_id=1144312092]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshMaterial/PromptArea" unique_id=1726411972]
-shape = SubResource("SphereShape3D_pickup")
-
-[node name="PromptLabel" type="Label3D" parent="MeshMaterial" unique_id=1181253766]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
-billboard = 1
-no_depth_test = true
-text = "Press E to pick up"
-
-[connection signal="body_entered" from="MeshMaterial/PromptArea" to="." method="_on_prompt_area_body_entered"]
-[connection signal="body_exited" from="MeshMaterial/PromptArea" to="." method="_on_prompt_area_body_exited"]
+[editable path="PromptArea"]

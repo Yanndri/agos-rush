@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dcw6j0q81hgeg" path="res://scenes/surfaceNormalB.tres" id="4_1iba3"]
 [ext_resource type="Texture2D" uid="uid://b2kaq458ei8iu" path="res://scenes/waveA.tres" id="5_yxlcp"]
 [ext_resource type="Texture2D" uid="uid://cr7j51dcas6n2" path="res://scenes/waveB.tres" id="6_ebg2g"]
+[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
 [ext_resource type="PackedScene" uid="uid://bm1iehwpwp0dn" path="res://scenes/water_valve.tscn" id="9_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://p3fk4onmffgi" path="res://scenes/npc_1.tscn" id="10_lhr70"]
 [ext_resource type="Script" uid="uid://c4yv3itqsy04x" path="res://scripts/flood_water.gd" id="15_water"]
@@ -127,6 +128,8 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "sadasd"
 horizontal_alignment = 2
+
+[node name="Milestone" parent="." unique_id=1661914291 instance=ExtResource("8_bjd11")]
 
 [node name="PipeLargeValve2" parent="." unique_id=841781098 instance=ExtResource("9_q8u5g")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.1615586, 0.038482845, -0.59978414)
