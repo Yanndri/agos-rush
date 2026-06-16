@@ -148,4 +148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1815623, 0.311167, 7.294381
 [node name="FirstAidKit" parent="." unique_id=541162600 instance=ExtResource("17_first_aid")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2125998, 0.7750004, 4.5567474)
 
+[node name="FirstAidKit2" parent="." unique_id=640317658 instance=ExtResource("17_first_aid")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7199726, 0.7750004, 4.5567474)
+
 [editable path="building-type-a2"]

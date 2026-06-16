@@ -46,10 +46,7 @@ func try_pick_up() -> void:
 		push_warning("Hand path is wrong: " + str(hand_path))
 		return
 
-	held_item = nearby_pickable
-	nearby_pickable = null
-
-	held_item.pick_up(player, hand)
+	nearby_pickable.request_pick_up(player)
 
 
 func try_use_item() -> void:
