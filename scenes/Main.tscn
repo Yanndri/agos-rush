@@ -113,6 +113,7 @@ shadow_opacity = 0.8
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1913361862]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9705625, 0)
+visible = false
 mesh = SubResource("BoxMesh_2ofn6")
 surface_material_override/0 = SubResource("ShaderMaterial_xa025")
 script = ExtResource("15_water")
@@ -143,7 +144,10 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.16
 [node name="building-type-a2" parent="." unique_id=1140573710 instance=ExtResource("1_elqb8")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -2.8645802, 0.099999905, -3.9368505)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="building-type-a2/building-type-a" parent_id_path=PackedInt32Array(1140573710, 732113354) index="0" unique_id=2024804987]
+[node name="building-type-a" parent="building-type-a2" index="0" unique_id=732113354]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="building-type-a2/building-type-a" index="0" unique_id=2024804987]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="building-type-a2/building-type-a/StaticBody3D" unique_id=2042088440]
 shape = SubResource("ConcavePolygonShape3D_q8u5g")
@@ -173,6 +177,7 @@ visible = false
 mesh = SubResource("QuadMesh_mwfav")
 
 [node name="Grass" type="MultiMeshInstance3D" parent="Node3D" unique_id=1158814068]
+visible = false
 material_override = ExtResource("14_3p2gp")
 cast_shadow = 0
 multimesh = SubResource("MultiMesh_h2yge")

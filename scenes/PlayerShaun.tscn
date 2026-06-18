@@ -7648,13 +7648,10 @@ xfade_time = 0.2
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_upn66"]
-xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rco17"]
-xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ejq5t"]
-xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dlu7n"]
 xfade_time = 0.2
@@ -7678,7 +7675,7 @@ states/Run/position = Vector2(670, 19)
 states/Walk/node = SubResource("AnimationNodeAnimation_ujfix")
 states/Walk/position = Vector2(452, -50)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_g0cyp"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_r4813"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_1wv8j"), "Walk", "Jump", SubResource("AnimationNodeStateMachineTransition_4lcu0"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_wo7pk"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_a8ex0"), "Walk", "Run", SubResource("AnimationNodeStateMachineTransition_n3tul"), "Run", "Walk", SubResource("AnimationNodeStateMachineTransition_0tcv4"), "Jump_Land", "Run", SubResource("AnimationNodeStateMachineTransition_upn66"), "Jump_Land", "Walk", SubResource("AnimationNodeStateMachineTransition_rco17"), "Jump_Land", "Idle", SubResource("AnimationNodeStateMachineTransition_ejq5t"), "Jump", "Jump_Idle", SubResource("AnimationNodeStateMachineTransition_dlu7n"), "Jump_Idle", "Jump_Land", SubResource("AnimationNodeStateMachineTransition_5s17i")]
-graph_offset = Vector2(0, 23.343748)
+graph_offset = Vector2(14, -58.65625)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_y3w4x"]
 radius = 0.21191406
@@ -7686,6 +7683,7 @@ height = 1.25
 
 [node name="Player" type="CharacterBody3D" unique_id=90105915]
 script = ExtResource("2_shaun_controller")
+jump_velocity = 8.0
 
 [node name="PlayerModel" type="Node3D" parent="." unique_id=1209893110]
 

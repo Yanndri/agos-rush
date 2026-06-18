@@ -4,6 +4,9 @@ class_name PickableItem
 @export var held_position := Vector3.ZERO
 @export var held_rotation_degrees := Vector3.ZERO
 @export var held_scale := Vector3.ONE
+@export var drop_glide_duration := 0.35
+@export var drop_glide_height := 0.65
+@export var drop_forward_distance := 1.15
 
 @export var spin_when_available := true
 @export var spin_speed_degrees := 90.0
@@ -16,6 +19,7 @@ class_name PickableItem
 
 var picked_up := false
 var holder: Node3D
+var drop_tween: Tween
 
 var spin_node_start_transform: Transform3D
 
@@ -95,6 +99,21 @@ func _get_hand_for_player(player: CharacterBody3D) -> Node3D:
 			return hand
 
 	return player.get_node_or_null("PlayerModel/CharacterArmature/Skeleton3D/Middle1_L") as Node3D
+func _get_player_facing_direction(player: CharacterBody3D) -> Vector3:
+	var model := player.get_node_or_null("PlayerModel/CharacterArmature") as Node3D
+	var facing := Vector3.ZERO
+
+	if model != null:
+		facing = model.global_basis.z
+	else:
+		facing = -player.global_basis.z
+
+	facing.y = 0.0
+
+	if facing.length_squared() == 0.0:
+		return -Vector3.FORWARD
+
+	return facing.normalized()
 
 
 func pick_up(player: Node3D, hand: Node3D) -> void:
@@ -167,3 +186,57 @@ func _on_prompt_area_body_exited(body: Node3D) -> void:
 		interactor.nearby_pickable = null
 
 	prompt.visible = false
+
+func request_drop(player: CharacterBody3D) -> void:
+	if not picked_up or player == null:
+		return
+	var drop_transform := global_transform
+	drop_transform.origin = player.global_position + Vector3.UP * 0.35 + _get_player_facing_direction(player) * drop_forward_distance
+
+	if multiplayer.multiplayer_peer == null:
+		_apply_drop(player.name, drop_transform)
+	elif multiplayer.is_server():
+		_apply_drop.rpc(player.name, drop_transform)
+	else:
+		_request_drop.rpc_id(1, player.name, drop_transform)
+
+
+@rpc("any_peer", "reliable")
+func _request_drop(player_name: StringName, drop_transform: Transform3D) -> void:
+	if not multiplayer.is_server():
+		return
+	_apply_drop.rpc(player_name, drop_transform)
+
+
+@rpc("authority", "call_local", "reliable")
+func _apply_drop(player_name: StringName, drop_transform: Transform3D) -> void:
+	if not picked_up:
+		return
+	var player := get_tree().current_scene.get_node_or_null(String(player_name)) as CharacterBody3D
+	if player:
+		var interactor := player.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
+		if interactor:
+			interactor.clear_held_item(self)
+
+	picked_up = false
+	holder = null
+	prompt.visible = false
+	prompt_area.monitoring = false
+	prompt_area.monitorable = false
+
+	var start_transform := global_transform
+	reparent(get_tree().current_scene, true)
+	global_transform = start_transform
+
+	if drop_tween:
+		drop_tween.kill()
+
+	var glide_start := start_transform.origin + Vector3.UP * drop_glide_height
+	global_position = glide_start
+	drop_tween = create_tween()
+	drop_tween.tween_property(self, "global_position", drop_transform.origin, drop_glide_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	drop_tween.finished.connect(_finish_drop_glide)
+
+func _finish_drop_glide() -> void:
+	prompt_area.monitoring = true
+	prompt_area.monitorable = true

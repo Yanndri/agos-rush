@@ -108,9 +108,6 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -0.1671061)
 [node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
 shape = SubResource("SphereShape3D_xhlam")
 
-[node name="PromptLabel" parent="PromptArea" index="1" unique_id=987523048]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1701932, 0.34010327)
-
 [node name="Visual" type="Node3D" parent="." unique_id=377762775]
 
 [node name="Mesh" type="MeshInstance3D" parent="Visual" unique_id=2111747728]

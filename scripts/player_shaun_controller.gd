@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var walk_speed := 3.5
 @export var run_speed := 6.0
 @export var jump_velocity := 5.0
+@export var low_jump_velocity_multiplier := 0.45
+@export var jump_buffer_time := 0.15
 @export var gravity := 18.0
 @export var turn_speed := 8.0
 @export var land_animation_time := 0.25
@@ -20,6 +22,8 @@ var land_time_left := 0.0
 
 var was_jump_key_down := false
 var jump_just_started := false
+var jump_buffer_left := 0.0
+var jump_cut_applied := false
 
 
 func _ready() -> void:
@@ -44,22 +48,26 @@ func _physics_process(delta: float) -> void:
 	var jump_key_down := Input.is_key_pressed(KEY_SPACE)
 	var jump_pressed := jump_key_down and not was_jump_key_down
 	was_jump_key_down = jump_key_down
+	if jump_key_down:
+		jump_buffer_left = jump_buffer_time
+	else:
+		jump_buffer_left = max(jump_buffer_left - delta, 0.0)
+		if velocity.y > 0.0 and not jump_cut_applied:
+			velocity.y = min(velocity.y, jump_velocity * low_jump_velocity_multiplier)
+			jump_cut_applied = true
 
 	velocity.x = direction.x * current_speed
 	velocity.z = direction.z * current_speed
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif jump_pressed:
-		velocity.y = jump_velocity
-		jump_just_started = true
-		land_time_left = 0.0
+	elif jump_buffer_left > 0.0:
+		_start_jump_from_buffer()
 	else:
 		velocity.y = 0.0
 
 	if direction != Vector3.ZERO:
 		var target_y := atan2(-direction.x, -direction.z) + deg_to_rad(model_yaw_offset_degrees)
-
 		character_armature.rotation.y = lerp_angle(
 			character_armature.rotation.y,
 			target_y,
@@ -70,13 +78,12 @@ func _physics_process(delta: float) -> void:
 
 	if is_on_floor() and not was_on_floor_last_frame:
 		land_time_left = land_animation_time
+		if jump_buffer_left > 0.0:
+			_start_jump_from_buffer()
 
 	_update_animation(input_dir, is_running, delta)
-
 	was_on_floor_last_frame = is_on_floor()
-
 	_sync_state.rpc(global_transform, character_armature.rotation.y, last_animation)
-
 
 @rpc("any_peer", "unreliable")
 func _sync_state(remote_transform: Transform3D, remote_model_y: float, remote_animation: StringName) -> void:
@@ -87,6 +94,13 @@ func _sync_state(remote_transform: Transform3D, remote_model_y: float, remote_an
 	character_armature.rotation.y = remote_model_y
 	_play_animation(remote_animation)
 
+
+func _start_jump_from_buffer() -> void:
+	velocity.y = jump_velocity
+	jump_buffer_left = 0.0
+	jump_just_started = true
+	jump_cut_applied = false
+	land_time_left = 0.0
 
 func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
 	if input_dir == Vector2.ZERO:
