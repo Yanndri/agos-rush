@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AGOS : PVP Rescue Rush"
-run/main_scene="uid://do8bg3mk7rjy8"
+run/main_scene="uid://dean2k5noao13"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,10 +21,11 @@ NetworkManager="*res://scripts/network_manager.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
-window/stretch/mode="canvas_items"
-window/stretch/scale=0.5
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=640
+window/size/window_height_override=360
+window/stretch/mode="viewport"
 
 [filesystem]
 

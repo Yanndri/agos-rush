@@ -1,7 +1,7 @@
 extends Control
 
-@onready var code_edit: LineEdit = $PanelContainer/VBoxContainer/CodeEdit
-@onready var status_label: Label = $PanelContainer/VBoxContainer/StatusLabel
+@onready var code_edit: LineEdit = %CodeEdit
+@onready var status_label: Label = %StatusLabel
 
 func _ready() -> void:
 	NetworkManager.status_changed.connect(_on_network_status_changed)

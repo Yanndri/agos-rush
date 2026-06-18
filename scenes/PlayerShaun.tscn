@@ -8070,7 +8070,7 @@ player = NodePath("../..")
 camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerModel/CameraPivot" unique_id=917838462]
-transform = Transform3D(1, 0, 0, 0, 0.74243206, 0.6699214, 0, -0.6699214, 0.74243206, 0, 4.9624124, 4.5)
+transform = Transform3D(0.79367197, -0.407544, 0.45165557, 0, 0.74243206, 0.6699214, -0.608346, -0.5316978, 0.5892475, 3.2461336, 4.9624124, 4.5)
 current = true
 fov = 55.0
 

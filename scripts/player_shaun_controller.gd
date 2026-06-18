@@ -37,7 +37,7 @@ func _physics_process(delta: float) -> void:
 	input_dir.y = int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W))
 	input_dir = input_dir.normalized()
 
-	var direction := Vector3(input_dir.x, 0.0, input_dir.y).normalized()
+	var direction := _get_camera_relative_direction(input_dir)
 	var is_running := Input.is_key_pressed(KEY_SHIFT)
 	var current_speed := run_speed if is_running else walk_speed
 
@@ -87,6 +87,20 @@ func _sync_state(remote_transform: Transform3D, remote_model_y: float, remote_an
 	character_armature.rotation.y = remote_model_y
 	_play_animation(remote_animation)
 
+
+func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
+	if input_dir == Vector2.ZERO:
+		return Vector3.ZERO
+
+	var forward := -camera.global_basis.z
+	forward.y = 0.0
+	forward = forward.normalized()
+
+	var right := camera.global_basis.x
+	right.y = 0.0
+	right = right.normalized()
+
+	return (right * input_dir.x + forward * -input_dir.y).normalized()
 
 func _update_animation(input_dir: Vector2, is_running: bool, delta: float) -> void:
 	# Jump start should play once, not every frame.

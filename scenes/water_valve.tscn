@@ -96,9 +96,9 @@ shape = SubResource("ConcavePolygonShape3D_8rx85")
 [node name="WaterTower2" parent="." unique_id=1159174304 instance=ExtResource("3_gwu31")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.0070924163, 0, 0.020481586)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="WaterTower2/WaterTower" parent_id_path=PackedInt32Array(1159174304, 170764790) index="0" unique_id=1908340412]
+[node name="StaticBody3D" type="StaticBody3D" parent="WaterTower2" unique_id=1908340412]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterTower2/WaterTower/StaticBody3D" unique_id=278390216]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterTower2/StaticBody3D" unique_id=278390216]
 shape = SubResource("ConcavePolygonShape3D_pdrsm")
 
 [node name="PipeLargeLong2" type="MeshInstance3D" parent="." unique_id=328046655]
