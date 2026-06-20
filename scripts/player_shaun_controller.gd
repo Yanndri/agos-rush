@@ -26,6 +26,8 @@ var jump_buffer_left := 0.0
 var jump_cut_applied := false
 
 
+
+var is_driving_vehicle := false
 func _ready() -> void:
 	animation_tree.active = true
 	camera.current = is_multiplayer_authority()
@@ -36,6 +38,11 @@ func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 
+	
+	if is_driving_vehicle:
+		velocity = Vector3.ZERO
+		_play_animation(&"Idle")
+		return
 	var input_dir := Vector2.ZERO
 	input_dir.x = int(Input.is_key_pressed(KEY_D)) - int(Input.is_key_pressed(KEY_A))
 	input_dir.y = int(Input.is_key_pressed(KEY_S)) - int(Input.is_key_pressed(KEY_W))

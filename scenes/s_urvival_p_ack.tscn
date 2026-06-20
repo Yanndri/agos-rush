@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://c5sqsrnb54dyq"]
-
-[ext_resource type="PackedScene" uid="uid://bqkhcn4528p1x" path="res://Assets/sURVIVAL pACK.glb" id="1_ntxll"]
-
-[node name="sURVIVAL pACK" unique_id=1053794665 instance=ExtResource("1_ntxll")]
