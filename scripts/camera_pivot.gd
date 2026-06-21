@@ -5,17 +5,35 @@ extends Node3D
 @export var transparent_alpha := 0.25
 @export var max_hits := 8
 @export var debug_hits := false
+@export var vehicle_zoom_multiplier := 2.5
+@export var vehicle_zoom_speed := 5.0
 
 var faded_meshes: Array[MeshInstance3D] = []
 var original_materials := {}
+var normal_camera_position := Vector3.ZERO
 
 
-func _process(_delta: float) -> void:
+func _ready() -> void:
+	if camera != null:
+		normal_camera_position = camera.position
+
+
+func _process(delta: float) -> void:
 	if player == null or camera == null:
 		return
 
+	_update_vehicle_zoom(delta)
 	_restore_faded_meshes()
 	_fade_blocking_objects()
+
+
+func _update_vehicle_zoom(delta: float) -> void:
+	var target_position := normal_camera_position
+
+	if player.get("is_driving_vehicle") == true:
+		target_position = normal_camera_position * vehicle_zoom_multiplier
+
+	camera.position = camera.position.lerp(target_position, min(vehicle_zoom_speed * delta, 1.0))
 
 
 func _fade_blocking_objects() -> void:

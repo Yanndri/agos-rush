@@ -6,9 +6,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
 size = Vector3(6.8, 2.2, 2.8)
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_driver_area"]
 size = Vector3(8, 3, 5)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p2fd8"]
 resource_name = "PolyPack_Vehicles"
 cull_mode = 2
@@ -185,11 +185,10 @@ script = ExtResource("2_ambulance_controller")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("BoxShape3D_ambulance")
 
-[node name="DriverArea" type="Area3D" parent="."]
+[node name="DriverArea" type="Area3D" parent="." unique_id=1100026922]
 collision_layer = 0
-collision_mask = 1
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DriverArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DriverArea" unique_id=779612324]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("BoxShape3D_driver_area")
 
@@ -199,17 +198,38 @@ shape = SubResource("BoxShape3D_driver_area")
 transform = Transform3D(0.03, 0, 0, 0, -1.3113416e-09, -0.03, 0, 0.03, -1.3113416e-09, 2.6462178, 0.37403703, 1.0397165)
 mesh = SubResource("ArrayMesh_sun6l")
 
-[node name="Ambulance-Truck_TireBL" type="MeshInstance3D" parent="Model/Ambulance-Truck" unique_id=1506768705]
+[node name="BackWheels" type="Node3D" parent="Model/Ambulance-Truck" unique_id=1001689598]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, -3.5527137e-15, 0, 3.5527137e-15, 1, 0, -30.834526, 1.9073486e-06)
+
+[node name="Ambulance-Truck_TireBL" type="Node3D" parent="Model/Ambulance-Truck/BackWheels" unique_id=1577270706]
+transform = Transform3D(1, 0, 0, 0, 1, -2.1316282e-14, 0, 2.1316282e-14, 1, 0, 31.01566, -2.861023e-06)
+
+[node name="Ambulance-Truck_TireBL" type="MeshInstance3D" parent="Model/Ambulance-Truck/BackWheels/Ambulance-Truck_TireBL" unique_id=1506768705]
+transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0.7582855, 0, 0)
 mesh = SubResource("ArrayMesh_wmd5g")
 
-[node name="Ambulance-Truck_TireBR" type="MeshInstance3D" parent="Model/Ambulance-Truck" unique_id=714624426]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -67.94272, 0)
+[node name="Ambulance-Truck_TireBR" type="Node3D" parent="Model/Ambulance-Truck/BackWheels" unique_id=984708437]
+transform = Transform3D(1, 0, 0, 0, 1, -2.1316282e-14, 0, 2.1316282e-14, 1, 0, -36.927357, 0)
+
+[node name="Ambulance-Truck_TireBR" type="MeshInstance3D" parent="Model/Ambulance-Truck/BackWheels/Ambulance-Truck_TireBR" unique_id=714624426]
+transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, -1.1903152, 0, 0)
 mesh = SubResource("ArrayMesh_241m8")
 
-[node name="Ambulance-Truck_TireFL" type="MeshInstance3D" parent="Model/Ambulance-Truck" unique_id=914796918]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.31596, -6.3056946, 0)
+[node name="FrontWheels" type="Node3D" parent="Model/Ambulance-Truck" unique_id=1175796399]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, -165.70926, -34.211964, 1.9073486e-06)
+
+[node name="Ambulance-Truck_TireFL" type="Node3D" parent="Model/Ambulance-Truck/FrontWheels" unique_id=1270150947]
+transform = Transform3D(1, 0, 0, 0, 1, -4.973799e-14, 0, 4.973799e-14, 1, 0.12284851, 27.54067, -1.0561924)
+
+[node name="Ambulance-Truck_TireFL" type="MeshInstance3D" parent="Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL" unique_id=914796918]
+transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0.70612335, 0, 0)
 mesh = SubResource("ArrayMesh_m73k3")
 
-[node name="Ambulance-Truck_TireFR" type="MeshInstance3D" parent="Model/Ambulance-Truck" unique_id=1603982868]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.31596, -61.637115, 0)
+[node name="Ambulance-Truck_TireFR" type="Node3D" parent="Model/Ambulance-Truck/FrontWheels" unique_id=1026618416]
+transform = Transform3D(1, 0, 0, 0, 1, -5.3290705e-14, 0, 5.3290705e-14, 1, 0.19615173, -27.790365, -0.6692028)
+
+[node name="Ambulance-Truck_TireFR" type="MeshInstance3D" parent="Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFR" unique_id=1603982868]
+transform = Transform3D(1, 0, 0, 0, 1, -7.1054274e-15, 0, 7.1054274e-15, 1, 0.7367096, 0, 0)
 mesh = SubResource("ArrayMesh_xwmr6")
