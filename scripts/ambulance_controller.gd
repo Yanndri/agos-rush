@@ -40,7 +40,6 @@ func _ready() -> void:
 	driver_area.body_entered.connect(_on_driver_area_body_entered)
 	driver_area.body_exited.connect(_on_driver_area_body_exited)
 
-
 func _unhandled_input(event: InputEvent) -> void:
 	if not event is InputEventKey:
 		return
@@ -191,7 +190,6 @@ func _on_driver_area_body_entered(body: Node3D) -> void:
 func _on_driver_area_body_exited(body: Node3D) -> void:
 	if body == nearby_player:
 		nearby_player = null
-
 
 func _is_local_player(player: CharacterBody3D) -> bool:
 	if multiplayer.multiplayer_peer == null:

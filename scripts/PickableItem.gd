@@ -98,7 +98,7 @@ func _get_hand_for_player(player: CharacterBody3D) -> Node3D:
 		if hand != null:
 			return hand
 
-	return player.get_node_or_null("PlayerModel/CharacterArmature/Skeleton3D/Middle1_L") as Node3D
+	return player.get_node_or_null("PlayerModel/CharacterArmature/Skeleton3D/Middle1_L2") as Node3D
 func _get_player_facing_direction(player: CharacterBody3D) -> Vector3:
 	var model := player.get_node_or_null("PlayerModel/CharacterArmature") as Node3D
 	var facing := Vector3.ZERO
@@ -127,7 +127,13 @@ func pick_up(player: Node3D, hand: Node3D) -> void:
 	prompt_area.monitoring = false
 	prompt_area.monitorable = false
 
-	# Reset the spinning visual before attaching to hand.
+	if drop_tween:
+		drop_tween.kill()
+		drop_tween = null
+
+	# Reset the item before attaching to hand.
+	global_transform = Transform3D(Basis(), global_position)
+
 	if spin_node != null:
 		spin_node.transform = spin_node_start_transform
 
@@ -190,8 +196,7 @@ func _on_prompt_area_body_exited(body: Node3D) -> void:
 func request_drop(player: CharacterBody3D) -> void:
 	if not picked_up or player == null:
 		return
-	var drop_transform := global_transform
-	drop_transform.origin = player.global_position + Vector3.UP * 0.35 + _get_player_facing_direction(player) * drop_forward_distance
+	var drop_transform := Transform3D(Basis(), player.global_position + Vector3.UP * 0.35 + _get_player_facing_direction(player) * drop_forward_distance)
 
 	if multiplayer.multiplayer_peer == null:
 		_apply_drop(player.name, drop_transform)
@@ -224,14 +229,18 @@ func _apply_drop(player_name: StringName, drop_transform: Transform3D) -> void:
 	prompt_area.monitoring = false
 	prompt_area.monitorable = false
 
-	var start_transform := global_transform
+	var start_position := global_position
 	reparent(get_tree().current_scene, true)
-	global_transform = start_transform
+	global_transform = drop_transform
+	global_position = start_position
+
+	if spin_node != null:
+		spin_node.transform = spin_node_start_transform
 
 	if drop_tween:
 		drop_tween.kill()
 
-	var glide_start := start_transform.origin + Vector3.UP * drop_glide_height
+	var glide_start := start_position + Vector3.UP * drop_glide_height
 	global_position = glide_start
 	drop_tween = create_tween()
 	drop_tween.tween_property(self, "global_position", drop_transform.origin, drop_glide_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)

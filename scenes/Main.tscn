@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://c5k6x2664ohp4" path="res://scenes/ambulance.tscn" id="16_cvmbd"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="Texture2D" uid="uid://co5sp06yppnpi" path="res://Imports/BinbunGrass/src/texture/basic/grass_basic_02.png" id="16_nfivy"]
-[ext_resource type="PackedScene" uid="uid://cfkev6orpfvm8" path="res://scenes/first_aid_kit.tscn" id="17_first_aid"]
+[ext_resource type="PackedScene" uid="uid://cfkev6orpfvm8" path="res://scenes/Interactables/first_aid_kit.tscn" id="17_first_aid"]
+[ext_resource type="PackedScene" uid="uid://bnopqr6dnpqo1" path="res://scenes/Interactables/food_supply.tscn" id="17_ft6cd"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -194,7 +195,7 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.16
 [node name="building-type-a2" parent="." unique_id=1140573710 instance=ExtResource("1_elqb8")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, -2.8645802, 0.099999905, -3.9368505)
 
-[node name="building-type-a" parent="building-type-a2" index="0" unique_id=732113354]
+[node name="building-type-a" parent="building-type-a2" index="0" unique_id=368131825]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="building-type-a2/building-type-a" index="0" unique_id=2024804987]
@@ -235,5 +236,8 @@ multimesh = SubResource("MultiMesh_h2yge")
 
 [node name="Ambulance" parent="." unique_id=658099606 instance=ExtResource("16_cvmbd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10.858795)
+
+[node name="FoodSupply" parent="." unique_id=1660509066 instance=ExtResource("17_ft6cd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5278468, 0.1279999, 4.367224)
 
 [editable path="building-type-a2"]

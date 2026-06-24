@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cajl4h4b0ob1m"
+path="res://.godot/imported/wall_window_closed.obj-ed8d8c8d9eb5ed5fe24ab2a339642bbc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/wall_window_closed.obj-ed8d8c8d9eb5ed5fe24ab2a339642bbc.mesh"]
+
+source_file="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/wall_window_closed.obj"
+dest_files=["res://.godot/imported/wall_window_closed.obj-ed8d8c8d9eb5ed5fe24ab2a339642bbc.mesh", "res://.godot/imported/wall_window_closed.obj-ed8d8c8d9eb5ed5fe24ab2a339642bbc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

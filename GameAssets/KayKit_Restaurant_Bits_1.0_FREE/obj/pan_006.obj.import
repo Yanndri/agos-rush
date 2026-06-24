@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bb8jv7o8wml80"
+path="res://.godot/imported/pan_006.obj-96a4683e55da2c20f00cbc0cc783421f.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pan_006.obj-96a4683e55da2c20f00cbc0cc783421f.mesh"]
+
+source_file="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/pan_006.obj"
+dest_files=["res://.godot/imported/pan_006.obj-96a4683e55da2c20f00cbc0cc783421f.mesh", "res://.godot/imported/pan_006.obj-96a4683e55da2c20f00cbc0cc783421f.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

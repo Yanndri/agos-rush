@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c3ek3k6xwj8ke"
+path="res://.godot/imported/pot_A_stew.obj-fdf3b6ed71c6e656f6f1fd74be71a896.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pot_A_stew.obj-fdf3b6ed71c6e656f6f1fd74be71a896.mesh"]
+
+source_file="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/pot_A_stew.obj"
+dest_files=["res://.godot/imported/pot_A_stew.obj-fdf3b6ed71c6e656f6f1fd74be71a896.mesh", "res://.godot/imported/pot_A_stew.obj-fdf3b6ed71c6e656f6f1fd74be71a896.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
