@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgyl4cx4hlskx" path="res://Imports/Zombie Apocalypse Kit - March 2024/Characters/glTF/Characters_Shaun_Zombie_Atlas.png" id="2_y3w4x"]
 [ext_resource type="Script" uid="uid://dn8frt2374hyx" path="res://scripts/camera_pivot.gd" id="3_rh33p"]
 [ext_resource type="Script" uid="uid://bagokiuolhgue" path="res://scripts/PlayerPickupInteractor.gd" id="3_rqnvt"]
+[ext_resource type="Script" uid="uid://dv7j54sodd8oa" path="res://scripts/ambulance_locator.gd" id="4_locator"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4l0o5"]
 resource_name = "Atlas"
@@ -8069,15 +8070,28 @@ camera = NodePath("Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="PlayerModel/CameraPivot" unique_id=917838462]
 transform = Transform3D(0.79367197, -0.407544, 0.45165557, 0, 0.74243206, 0.6699214, -0.608346, -0.5316978, 0.5892475, 3.2461336, 4.9624124, 4.5)
-current = true
+current = false
 fov = 55.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=571313772]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
 shape = SubResource("CapsuleShape3D_y3w4x")
 
+[node name="AmbulanceLocator" type="CanvasLayer" parent="." unique_id=1892407721]
+script = ExtResource("4_locator")
+
+[node name="IndicatorLabel" type="Label" parent="AmbulanceLocator" unique_id=1892407722]
+visible = false
+offset_left = -70.0
+offset_top = -24.0
+offset_right = 70.0
+offset_bottom = 24.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="PlayerPickupInteractor" type="Node" parent="." unique_id=329820540]
 script = ExtResource("3_rqnvt")
 interact_key = null
 use_key = null
 hand_path = NodePath("../PlayerModel/CharacterArmature/Skeleton3D/Middle1_L")
+

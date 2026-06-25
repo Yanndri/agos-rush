@@ -13,8 +13,7 @@ class_name PickableItem
 
 @export var spin_node_path: NodePath = NodePath("Visual")
 
-@onready var prompt_area: Area3D = $PromptArea
-@onready var prompt: Label3D = $PromptArea/PromptLabel
+@onready var prompt_area: PromptArea = $PromptArea
 @onready var spin_node: Node3D = get_node_or_null(spin_node_path) as Node3D
 
 var picked_up := false
@@ -25,16 +24,15 @@ var spin_node_start_transform: Transform3D
 
 
 func _ready() -> void:
-	prompt.visible = false
 
 	if spin_node != null:
 		spin_node_start_transform = spin_node.transform
 
-	if not prompt_area.body_entered.is_connected(_on_prompt_area_body_entered):
-		prompt_area.body_entered.connect(_on_prompt_area_body_entered)
+	if not prompt_area.local_player_entered.is_connected(_on_prompt_area_local_player_entered):
+		prompt_area.local_player_entered.connect(_on_prompt_area_local_player_entered)
 
-	if not prompt_area.body_exited.is_connected(_on_prompt_area_body_exited):
-		prompt_area.body_exited.connect(_on_prompt_area_body_exited)
+	if not prompt_area.local_player_exited.is_connected(_on_prompt_area_local_player_exited):
+		prompt_area.local_player_exited.connect(_on_prompt_area_local_player_exited)
 
 
 func _process(delta: float) -> void:
@@ -123,9 +121,7 @@ func pick_up(player: Node3D, hand: Node3D) -> void:
 	picked_up = true
 	holder = player
 
-	prompt.visible = false
-	prompt_area.monitoring = false
-	prompt_area.monitorable = false
+	prompt_area.set_prompt_enabled(false)
 
 	if drop_tween:
 		drop_tween.kill()
@@ -166,32 +162,19 @@ func on_used(_player: Node3D) -> void:
 	pass
 
 
-func _on_prompt_area_body_entered(body: Node3D) -> void:
+func _on_prompt_area_local_player_entered(player: CharacterBody3D) -> void:
 	if picked_up:
 		return
 
-	var interactor := body.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
-
-	if interactor == null:
-		return
-
-	if not interactor.is_local_player():
-		return
-
-	interactor.nearby_pickable = self
-	prompt.visible = true
+	var interactor := player.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
+	if interactor != null:
+		interactor.nearby_pickable = self
 
 
-func _on_prompt_area_body_exited(body: Node3D) -> void:
-	var interactor := body.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
-
-	if interactor == null:
-		return
-
-	if interactor.nearby_pickable == self:
+func _on_prompt_area_local_player_exited(player: CharacterBody3D) -> void:
+	var interactor := player.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
+	if interactor != null and interactor.nearby_pickable == self:
 		interactor.nearby_pickable = null
-
-	prompt.visible = false
 
 func request_drop(player: CharacterBody3D) -> void:
 	if not picked_up or player == null:
@@ -225,9 +208,7 @@ func _apply_drop(player_name: StringName, drop_transform: Transform3D) -> void:
 
 	picked_up = false
 	holder = null
-	prompt.visible = false
-	prompt_area.monitoring = false
-	prompt_area.monitorable = false
+	prompt_area.set_prompt_enabled(false)
 
 	var start_position := global_position
 	reparent(get_tree().current_scene, true)
@@ -245,7 +226,22 @@ func _apply_drop(player_name: StringName, drop_transform: Transform3D) -> void:
 	drop_tween = create_tween()
 	drop_tween.tween_property(self, "global_position", drop_transform.origin, drop_glide_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	drop_tween.finished.connect(_finish_drop_glide)
+func store_in_ambulance(storage_parent: Node3D) -> void:
+	if drop_tween:
+		drop_tween.kill()
+		drop_tween = null
+
+	picked_up = true
+	holder = null
+	visible = false
+	process_mode = Node.PROCESS_MODE_DISABLED
+	prompt_area.set_prompt_enabled(false)
+
+	if get_parent() != storage_parent:
+		reparent(storage_parent, false)
+
+	position = Vector3.ZERO
+	rotation = Vector3.ZERO
 
 func _finish_drop_glide() -> void:
-	prompt_area.monitoring = true
-	prompt_area.monitorable = true
+	prompt_area.set_prompt_enabled(true)

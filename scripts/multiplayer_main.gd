@@ -1,12 +1,9 @@
 extends Node3D
 
 @export var PLAYER_SCENE := preload("res://scenes/PlayerShaun.tscn")
-const SPAWN_POINTS := [
-	Vector3(-4.8, 0.8, 2.2),
-	Vector3(-2.8, 0.8, 2.2),
-	Vector3(-4.8, 0.8, 0.2),
-	Vector3(-2.8, 0.8, 0.2),
-]
+@export var AMBULANCE_SCENE := preload("res://scenes/Interactables/ambulance.tscn")
+@export var spawn_node_path: NodePath = NodePath("Spawn")
+@export var waiting_players_path: NodePath = NodePath("WaitingPlayers")
 
 func _ready() -> void:
 	_update_room_code_label("LAN Code: %s" % NetworkManager.host_code if multiplayer.multiplayer_peer and multiplayer.is_server() and not NetworkManager.host_code.is_empty() else "")
@@ -40,16 +37,66 @@ func _on_peer_disconnected(peer_id: int) -> void:
 	if player:
 		player.queue_free()
 
+	var ambulance := find_child("Ambulance_%s" % peer_id, true, false)
+	if ambulance:
+		ambulance.queue_free()
+
 @rpc("authority", "call_local", "reliable")
 func _spawn_player(peer_id: int) -> void:
 	if has_node(str(peer_id)):
 		return
+	var spawn_index := get_tree().get_nodes_in_group("players").size()
 	var player := PLAYER_SCENE.instantiate()
 	player.name = str(peer_id)
 	player.add_to_group("players")
 	player.set_multiplayer_authority(peer_id)
 	add_child(player)
-	player.global_position = SPAWN_POINTS[abs(peer_id) % SPAWN_POINTS.size()]
+	player.global_position = _get_spawn_position(spawn_index)
+	_assign_ambulance_to_player(peer_id)
+
+func _assign_ambulance_to_player(peer_id: int) -> void:
+	if find_child("Ambulance_%s" % peer_id, true, false) != null:
+		return
+
+	var slot := _get_waiting_player_slot(peer_id)
+	if slot == null:
+		push_warning("No WaitingPlayers slot for player: " + str(peer_id))
+		return
+
+	var ambulance := AMBULANCE_SCENE.instantiate()
+	ambulance.name = "Ambulance_%s" % peer_id
+	ambulance.set_multiplayer_authority(peer_id)
+	ambulance.set("ambulance_owner", str(peer_id))
+	slot.add_child(ambulance)
+	ambulance.global_transform = slot.global_transform
+
+func _get_waiting_player_slot(peer_id: int) -> Node3D:
+	var waiting_players := get_node_or_null(waiting_players_path)
+	if waiting_players == null:
+		waiting_players = find_child("WaitingPlayers", true, false)
+
+	if waiting_players == null:
+		return null
+
+	var slots := waiting_players.get_children()
+	var slot_index := peer_id - 1
+	if slot_index < 0 or slot_index >= slots.size():
+		return null
+
+	return slots[slot_index] as Node3D
+
+func _get_spawn_position(spawn_index: int) -> Vector3:
+	var spawn := get_node_or_null(spawn_node_path) as Node3D
+	if spawn == null:
+		spawn = find_child("Spawn", true, false) as Node3D
+
+	var base_position := Vector3(-4.8, 1.25, 2.2)
+	if spawn != null:
+		base_position.x = spawn.global_position.x
+		base_position.z = spawn.global_position.z
+	var offset := Vector3(float(spawn_index) * 0.0, 1.5, 0.0)
+	return base_position + offset
+
 func _show_host_code_label() -> void:
 	if multiplayer.multiplayer_peer == null or not multiplayer.is_server():
 		return

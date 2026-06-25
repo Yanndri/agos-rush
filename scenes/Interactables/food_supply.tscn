@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cy4271wekj4wt" path="res://scripts/first_aid_kit.gd" id="1_rnaao"]
 [ext_resource type="ArrayMesh" uid="uid://krirm2td1db7" path="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/crate_tomatoes.obj" id="2_d56oc"]
-[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/prompt_area.tscn" id="3_qb21m"]
+[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="3_qb21m"]
 
 [node name="FoodSupply" type="Node3D" unique_id=1660509066]
 script = ExtResource("1_rnaao")

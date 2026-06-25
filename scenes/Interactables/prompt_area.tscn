@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cajrqtke5twpp"]
+
+[ext_resource type="Script" uid="uid://bvcfrowyy8hd" path="res://scripts/prompt_area.gd" id="1_7rv2a"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pickup"]
+radius = 3.603
+
+[node name="PromptArea" type="Area3D" unique_id=989733329]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+script = ExtResource("1_7rv2a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1844716175]
+shape = SubResource("SphereShape3D_pickup")
+
+[node name="PromptLabel" type="Label3D" parent="." unique_id=987523048]
+billboard = 1
+no_depth_test = true
+fixed_size = true
+texture_filter = 2
+render_priority = 2
+outline_render_priority = 1
+modulate = Color(1, 0, 0, 1)
+outline_modulate = Color(1, 1, 1, 1)
+text = "E"
+font_size = 20

@@ -29,10 +29,19 @@ var jump_cut_applied := false
 
 var is_driving_vehicle := false
 func _ready() -> void:
+	visible = true
 	animation_tree.active = true
-	camera.current = is_multiplayer_authority()
+	camera.current = false
+	call_deferred("_update_local_camera")
 	_play_animation(&"Idle")
 
+
+func _update_local_camera() -> void:
+	camera.current = is_multiplayer_authority()
+
+func _process(_delta: float) -> void:
+	if is_multiplayer_authority() and not camera.current:
+		camera.current = true
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():

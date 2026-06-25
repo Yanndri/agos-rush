@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+@export var ambulance_owner := "Player1"
 @export var acceleration := 10.0
 @export var reverse_acceleration := 7.0
 @export var max_forward_speed := 11.0
@@ -116,6 +117,8 @@ func _update_wheel_steering(steering: float, delta: float) -> void:
 
 
 func enter_vehicle(player: CharacterBody3D) -> void:
+	if not _is_owner_player(player):
+		return
 	_sync_driver_entered.rpc(int(player.name))
 
 
@@ -184,12 +187,17 @@ func _on_driver_area_body_entered(body: Node3D) -> void:
 		return
 	if not _is_local_player(player):
 		return
+	if not _is_owner_player(player):
+		return
 	nearby_player = player
 
 
 func _on_driver_area_body_exited(body: Node3D) -> void:
 	if body == nearby_player:
 		nearby_player = null
+
+func _is_owner_player(player: CharacterBody3D) -> bool:
+	return ambulance_owner.is_empty() or ambulance_owner == str(player.name)
 
 func _is_local_player(player: CharacterBody3D) -> bool:
 	if multiplayer.multiplayer_peer == null:

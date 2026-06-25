@@ -1,10 +1,11 @@
-extends MeshInstance3D
+extends Node3D
 
 @export var reduce_amount := 0.75
 @export var interact_key := KEY_E
 @export var hold_duration := 1.5
 
-@onready var prompt: Label3D = $PromptLabel
+@onready var prompt: Label3D = $PromptArea/PromptLabel
+@onready var prompt_area = $PromptArea
 var water: Node
 var nearby_player: Node3D
 var hold_time := 0.0
@@ -14,6 +15,12 @@ func _ready() -> void:
 	water = %Water
 	prompt.visible = false
 	_update_prompt()
+	
+	if not prompt_area.local_player_entered.is_connected(_on_prompt_area_local_player_entered):
+		prompt_area.local_player_entered.connect(_on_prompt_area_local_player_entered)
+
+	if not prompt_area.local_player_exited.is_connected(_on_prompt_area_local_player_exited):
+		prompt_area.local_player_exited.connect(_on_prompt_area_local_player_exited)
 
 func _process(delta: float) -> void:
 	if nearby_player == null or not is_holding:
@@ -65,14 +72,14 @@ func _reduce_water() -> void:
 	if water and water.has_method("reduce_water"):
 		water.reduce_water(reduce_amount)
 
-func _on_prompt_area_body_entered(body: Node3D) -> void:
+func _on_prompt_area_local_player_entered(body: Node3D) -> void:
 	if not _is_local_player(body):
 		return
 	nearby_player = body
 	prompt.visible = true
 	_update_prompt()
 
-func _on_prompt_area_body_exited(body: Node3D) -> void:
+func _on_prompt_area_local_player_exited(body: Node3D) -> void:
 	if body != nearby_player:
 		return
 	nearby_player = null

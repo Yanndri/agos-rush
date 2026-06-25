@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ymbvonsthmn4" path="res://Imports/BlenderExports/LayingBlacksmith_Villagers_Texture.png" id="1_8dm1u"]
 [ext_resource type="Texture2D" uid="uid://cj33oy4tm5sgb" path="res://GameAssets/SketchfabExports/hospital_stretcher_trolley_0.png" id="2_ttshn"]
 [ext_resource type="Script" uid="uid://cwke03stwkk82" path="res://scripts/npc_rescue_interact.gd" id="3_npc_interact"]
-[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/prompt_area.tscn" id="4_3w2wa"]
+[ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="4_3w2wa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gcbg"]
 resource_name = "Material.001"
