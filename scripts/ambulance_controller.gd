@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambulance_material.tres")
+
 @export var ambulance_owner := "Player1"
 @export var acceleration := 10.0
 @export var reverse_acceleration := 7.0
@@ -16,7 +18,7 @@ extends CharacterBody3D
 @export var wheel_steer_speed := 12.0
 
 @onready var driver_area: Area3D = $DriverArea
-@onready var truck: Node3D = $"Model/Ambulance-Truck"
+@onready var truck: MeshInstance3D = $"Model/Ambulance-Truck"
 @onready var front_left_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL"
 @onready var front_right_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFR"
 @onready var front_left_wheel_mesh: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL/Ambulance-Truck_TireFL"
@@ -33,9 +35,13 @@ var driver: CharacterBody3D
 var driver_collision_layer := 0
 var driver_collision_mask := 0
 var remote_driver_peer_id := 0
+var normal_truck_material: Material
+var last_owner_visual_state := ""
 
 
 func _ready() -> void:
+	normal_truck_material = truck.material_override
+	_update_owner_material()
 	front_left_base_rotation = front_left_wheel.rotation
 	front_right_base_rotation = front_right_wheel.rotation
 	driver_area.body_entered.connect(_on_driver_area_body_entered)
@@ -54,6 +60,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif driver == null and nearby_player != null and _is_local_player(nearby_player):
 		enter_vehicle(nearby_player)
 
+
+func _process(_delta: float) -> void:
+	_update_owner_material()
 
 func _physics_process(delta: float) -> void:
 	if driver != null and not _is_local_player(driver):
@@ -98,6 +107,25 @@ func _physics_process(delta: float) -> void:
 		_sync_vehicle_state.rpc(global_transform, drive_speed, wheel_steer_angle)
 
 
+func _update_owner_material() -> void:
+	var owner_state := ambulance_owner + ":" + str(multiplayer.get_unique_id() if multiplayer.multiplayer_peer != null else 1)
+	if owner_state == last_owner_visual_state:
+		return
+
+	last_owner_visual_state = owner_state
+	if _is_owned_by_local_player():
+		truck.material_override = normal_truck_material
+	else:
+		truck.material_override = TRANSPARENT_AMBULANCE_MATERIAL
+
+
+func _is_owned_by_local_player() -> bool:
+	if ambulance_owner.is_empty():
+		return true
+	if multiplayer.multiplayer_peer == null:
+		return ambulance_owner == "1" or ambulance_owner == "Player1"
+	return ambulance_owner == str(multiplayer.get_unique_id())
+
 func _spin_wheels(delta: float) -> void:
 	if abs(drive_speed) <= 0.01:
 		return
@@ -118,6 +146,7 @@ func _update_wheel_steering(steering: float, delta: float) -> void:
 
 func enter_vehicle(player: CharacterBody3D) -> void:
 	if not _is_owner_player(player):
+		_print_not_owner_interaction(player, "enter_vehicle")
 		return
 	_sync_driver_entered.rpc(int(player.name))
 
@@ -188,6 +217,7 @@ func _on_driver_area_body_entered(body: Node3D) -> void:
 	if not _is_local_player(player):
 		return
 	if not _is_owner_player(player):
+		_print_not_owner_interaction(player, "driver_area_entered")
 		return
 	nearby_player = player
 
@@ -196,6 +226,11 @@ func _on_driver_area_body_exited(body: Node3D) -> void:
 	if body == nearby_player:
 		nearby_player = null
 
+func _print_not_owner_interaction(player: CharacterBody3D, where: String) -> void:
+	var local_peer := 1
+	if multiplayer.multiplayer_peer != null:
+		local_peer = multiplayer.get_unique_id()
+	print("AMBULANCE NOT OWNED | where=", where, " | ambulance=", name, " | ambulance_owner=", ambulance_owner, " | player=", player.name, " | local_peer=", local_peer)
 func _is_owner_player(player: CharacterBody3D) -> bool:
 	return ambulance_owner.is_empty() or ambulance_owner == str(player.name)
 

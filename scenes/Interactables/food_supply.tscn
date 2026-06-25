@@ -15,5 +15,7 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 mesh = ExtResource("2_d56oc")
 
 [node name="PromptArea" parent="." unique_id=989733329 instance=ExtResource("3_qb21m")]
+collision_layer = 8
+collision_mask = 16
 
 [editable path="PromptArea"]

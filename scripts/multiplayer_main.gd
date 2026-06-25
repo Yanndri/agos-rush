@@ -52,13 +52,13 @@ func _spawn_player(peer_id: int) -> void:
 	player.set_multiplayer_authority(peer_id)
 	add_child(player)
 	player.global_position = _get_spawn_position(spawn_index)
-	_assign_ambulance_to_player(peer_id)
+	_assign_ambulance_to_player(peer_id, spawn_index)
 
-func _assign_ambulance_to_player(peer_id: int) -> void:
+func _assign_ambulance_to_player(peer_id: int, spawn_index: int) -> void:
 	if find_child("Ambulance_%s" % peer_id, true, false) != null:
 		return
 
-	var slot := _get_waiting_player_slot(peer_id)
+	var slot := _get_waiting_player_slot(spawn_index)
 	if slot == null:
 		push_warning("No WaitingPlayers slot for player: " + str(peer_id))
 		return
@@ -70,7 +70,7 @@ func _assign_ambulance_to_player(peer_id: int) -> void:
 	slot.add_child(ambulance)
 	ambulance.global_transform = slot.global_transform
 
-func _get_waiting_player_slot(peer_id: int) -> Node3D:
+func _get_waiting_player_slot(slot_index: int) -> Node3D:
 	var waiting_players := get_node_or_null(waiting_players_path)
 	if waiting_players == null:
 		waiting_players = find_child("WaitingPlayers", true, false)
@@ -79,7 +79,6 @@ func _get_waiting_player_slot(peer_id: int) -> Node3D:
 		return null
 
 	var slots := waiting_players.get_children()
-	var slot_index := peer_id - 1
 	if slot_index < 0 or slot_index >= slots.size():
 		return null
 
