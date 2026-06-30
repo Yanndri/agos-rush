@@ -350,6 +350,7 @@ radius = 3.603
 
 [node name="NPC1" type="CharacterBody3D" unique_id=1994827218]
 script = ExtResource("1_kccxt")
+need_item_text = "Food Supply"
 
 [node name="LayingBlacksmith" type="Node3D" parent="." unique_id=483049784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074483395, -0.853299, -0.300703)

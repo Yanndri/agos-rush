@@ -2,13 +2,17 @@ extends CharacterBody3D
 
 @export var interact_action := "interact"
 @export var carry_offset := Vector3(0.0, 2.25, 0.0)
+@export var need_item_text := ""
+@export var need_label_height := 2.4
 
 @onready var prompt_area: PromptArea = $PromptArea
 
 var nearby_player: Node3D
 var carried := false
+var need_label: Label3D
 
 func _ready() -> void:
+	_create_need_label()
 	prompt_area._hide_prompt()
 
 	prompt_area.body_entered.connect(_on_prompt_area_body_entered)
@@ -26,6 +30,7 @@ func _interact() -> void:
 	if not _is_local_player(nearby_player):
 		nearby_player = null
 		prompt_area._hide_prompt()
+		_hide_need_gui()
 		return
 	if multiplayer.multiplayer_peer == null:
 		_carry_for_player(nearby_player.name)
@@ -49,6 +54,7 @@ func _carry_for_player(player_name: StringName) -> void:
 	carried = true
 	nearby_player = null
 	prompt_area._hide_prompt()
+	_hide_need_gui()
 	_disable_collision_shapes(self)
 	reparent(player, false)
 	position = carry_offset
@@ -59,12 +65,14 @@ func _on_prompt_area_body_entered(body: Node3D) -> void:
 		return
 	nearby_player = body
 	prompt_area._show_prompt()
+	_show_need_gui()
 
 func _on_prompt_area_body_exited(body: Node3D) -> void:
 	if body != nearby_player:
 		return
 	nearby_player = null
 	prompt_area._hide_prompt()
+	_hide_need_gui()
 
 func _is_local_player(body: Node) -> bool:
 	if body == null or body == self:
@@ -82,3 +90,29 @@ func _disable_collision_shapes(node: Node) -> void:
 		node.disabled = true
 	for child in node.get_children():
 		_disable_collision_shapes(child)
+
+func _create_need_label() -> void:
+	if need_item_text.is_empty():
+		return
+
+	need_label = Label3D.new()
+	need_label.name = "NeedItemLabel"
+	need_label.text = "I need this: " + need_item_text
+	need_label.position = Vector3(0.0, need_label_height, 0.0)
+	need_label.font_size = 48
+	need_label.modulate = Color(1.0, 0.95, 0.35, 1.0)
+	need_label.outline_size = 8
+	need_label.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
+	need_label.no_depth_test = true
+	need_label.visible = false
+	add_child(need_label)
+
+
+func _show_need_gui() -> void:
+	if need_label != null:
+		need_label.visible = true
+
+
+func _hide_need_gui() -> void:
+	if need_label != null:
+		need_label.visible = false

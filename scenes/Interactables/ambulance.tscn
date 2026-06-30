@@ -7,7 +7,7 @@
 [ext_resource type="ArrayMesh" uid="uid://krirm2td1db7" path="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/crate_tomatoes.obj" id="5_f63ls"]
 [ext_resource type="ArrayMesh" uid="uid://cfepx3hpjkc2x" path="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/crate_lid.obj" id="6_hl6l6"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="7_3fhhq"]
-[ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/storage.tscn" id="7_y57d8"]
+[ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/Interactables/storage.tscn" id="7_y57d8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
 size = Vector3(6.8, 2.2, 2.8)
