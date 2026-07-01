@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
+[ext_resource type="PackedScene" uid="uid://bmly4u1ykq4lq" path="res://scenes/camp.tscn" id="6_c01mt"]
 [ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://byxwtg6ixky0p" path="res://scenes/main_map.tscn" id="17_1nqs0"]
@@ -99,3 +100,6 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="MainMap" parent="." unique_id=373502355 instance=ExtResource("17_1nqs0")]
+
+[node name="Camp" parent="." unique_id=257249513 instance=ExtResource("6_c01mt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 7)

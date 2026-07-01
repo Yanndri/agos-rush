@@ -3,6 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cbc0k025jfsk1" path="res://GameAssets/Icons/medicine-and-thematic-things-pixel-art-3232-icon-pack/1 Icons/Icon2_13.png" id="1_0qai8"]
 [ext_resource type="Script" uid="uid://dvmhrnv27wcm6" path="res://scripts/help_requirement.gd" id="1_8hqq3"]
 [ext_resource type="Texture2D" uid="uid://51spu5f5bikd" path="res://GameAssets/Icons/medicine-and-thematic-things-pixel-art-3232-icon-pack/1 Icons/Icon2_05.png" id="3_hhl15"]
+[ext_resource type="Texture2D" uid="uid://d20v6alumbud3" path="res://GameAssets/Icons/Free 39 Portraits Pixel Art/1 Portraits/Icons_17.png" id="4_wd62e"]
+[ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="5_xs35j"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xr7qm"]
 radius = 1.8
@@ -36,6 +38,7 @@ texture_filter = 2
 texture = SubResource("GradientTexture2D_ptkwr")
 
 [node name="Medkit" type="Sprite3D" parent="Requirements" unique_id=2141076987]
+visible = false
 pixel_size = 0.015
 billboard = 1
 texture_filter = 2
@@ -49,3 +52,28 @@ billboard = 1
 texture_filter = 2
 render_priority = 3
 texture = ExtResource("3_hhl15")
+
+[node name="Resident" type="Sprite3D" parent="Requirements" unique_id=197879242]
+pixel_size = 0.015
+billboard = 1
+texture_filter = 2
+render_priority = 3
+texture = ExtResource("4_wd62e")
+
+[node name="Label3D" type="Label3D" parent="Requirements" unique_id=1612969445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+billboard = 1
+render_priority = 3
+outline_render_priority = 2
+outline_modulate = Color(1, 0.30980393, 0, 1)
+text = "Give"
+font = ExtResource("5_xs35j")
+
+[node name="PointsAmount" type="Label3D" parent="Requirements" unique_id=2133084465]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+billboard = 1
+render_priority = 3
+outline_render_priority = 2
+outline_modulate = Color(1, 0.30980393, 0, 1)
+text = "+100 pts"
+font = ExtResource("5_xs35j")

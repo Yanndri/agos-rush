@@ -584,4 +584,11 @@ mesh = SubResource("ArrayMesh_63iaj")
 
 [node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("5_8tp1l")]
 
+[node name="Medkit" parent="HelpRequirement/Requirements" parent_id_path=PackedInt32Array(556880010, 1746257932) index="1" unique_id=2141076987]
+visible = true
+
+[node name="Resident" parent="HelpRequirement/Requirements" parent_id_path=PackedInt32Array(556880010, 1746257932) index="3" unique_id=197879242]
+visible = false
+
 [editable path="PromptArea"]
+[editable path="HelpRequirement"]

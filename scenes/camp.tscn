@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bmly4u1ykq4lq"]
+
+[ext_resource type="PackedScene" uid="uid://p2n5pvstsd58" path="res://scenes/Interactables/help_requirement.tscn" id="1_nfbfs"]
+
+[node name="Camp" type="Node3D" unique_id=257249513]
+
+[node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("1_nfbfs")]
+
+[node name="Requirements" parent="HelpRequirement" index="1" unique_id=1746257932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Medkit" parent="HelpRequirement/Requirements" index="1" unique_id=2141076987]
+visible = false
+
+[editable path="HelpRequirement"]

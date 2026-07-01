@@ -568,5 +568,11 @@ shape = SubResource("SphereShape3D_xr7qm")
 [node name="Requirements" parent="HelpRequirement" index="1" unique_id=1746257932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
+[node name="Medkit" parent="HelpRequirement/Requirements" index="1" unique_id=2141076987]
+visible = true
+
+[node name="Resident" parent="HelpRequirement/Requirements" index="3" unique_id=197879242]
+visible = false
+
 [editable path="PromptArea"]
 [editable path="HelpRequirement"]
