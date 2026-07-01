@@ -48,11 +48,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		_cancel_drop_hold()
 		return
 
-	if event.is_action_pressed(interact_action):
+	if event.is_action_pressed(interact_action) and nearby_pickable != null:
+		get_viewport().set_input_as_handled()
 		try_pick_up()
+		return
 
-	if not use_action.is_empty() and event.is_action_pressed(use_action):
+	if not use_action.is_empty() and event.is_action_pressed(use_action) and held_item != null:
+		get_viewport().set_input_as_handled()
 		try_use_item()
+		return
 
 
 func _start_drop_hold() -> void:

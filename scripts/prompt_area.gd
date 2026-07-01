@@ -20,8 +20,8 @@ func _ready() -> void:
 
 
 func set_prompt_enabled(enabled: bool) -> void:
-	monitoring = enabled
-	monitorable = enabled
+	set_deferred("monitoring", enabled)
+	set_deferred("monitorable", enabled)
 
 	if not enabled:
 		current_local_player = null

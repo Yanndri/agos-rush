@@ -1,7 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dxf1ac0pdol7e"]
 
-[ext_resource type="FontFile" uid="uid://bv45i2vdnpn27" path="res://Theme/Fonts/miskan/Miskan.otf" id="1_3kgdn"]
-[ext_resource type="FontFile" uid="uid://dhu2hbpas0apj" path="res://Theme/Fonts/lonely_study/Lonely Study.otf" id="2_3kgdn"]
+[ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="1_3yihd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qu2c6"]
 
@@ -16,14 +15,15 @@
 [resource]
 Button/colors/font_color = Color(0.4313522, 0.46110195, 0.46108735, 1)
 Button/colors/font_hover_color = Color(0.2, 0.2, 0.09803922, 1)
-Button/fonts/font = ExtResource("2_3kgdn")
+Button/fonts/font = null
 Button/styles/disabled = SubResource("StyleBoxEmpty_qu2c6")
 Button/styles/focus = SubResource("StyleBoxEmpty_ti8mq")
 Button/styles/hover = SubResource("StyleBoxEmpty_fccoc")
 Button/styles/normal = SubResource("StyleBoxEmpty_3kgdn")
 Button/styles/pressed = SubResource("StyleBoxEmpty_v4as0")
+Label/fonts/font = ExtResource("1_3yihd")
 RichTextLabel/colors/default_color = Color(0.14509805, 0.16078432, 0.16078432, 1)
 RichTextLabel/font_sizes/bold_font_size = 24
 RichTextLabel/font_sizes/normal_font_size = 20
-RichTextLabel/fonts/bold_font = ExtResource("1_3kgdn")
-RichTextLabel/fonts/normal_font = ExtResource("2_3kgdn")
+RichTextLabel/fonts/bold_font = null
+RichTextLabel/fonts/normal_font = null

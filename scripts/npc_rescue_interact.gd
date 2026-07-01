@@ -2,18 +2,19 @@ extends CharacterBody3D
 
 @export var interact_action := "interact"
 @export var carry_offset := Vector3(0.0, 2.25, 0.0)
-@export var need_item_text := ""
 @export var need_label_height := 2.4
+@export var help_requirement_path: NodePath
 
 @onready var prompt_area: PromptArea = $PromptArea
+@onready var help_requirement: HelpRequirement = _get_help_requirement()
 
 var nearby_player: Node3D
 var carried := false
 var need_label: Label3D
 
 func _ready() -> void:
-	_create_need_label()
 	prompt_area._hide_prompt()
+	_show_need_gui()
 
 	prompt_area.body_entered.connect(_on_prompt_area_body_entered)
 	prompt_area.body_exited.connect(_on_prompt_area_body_exited)
@@ -24,9 +25,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.echo:
 		return
 	if event.is_action_pressed(interact_action):
+		get_viewport().set_input_as_handled()
 		_interact()
+		return
 
 func _interact() -> void:
+	if not _can_be_carried():
+		_show_requirement_blocked_prompt()
+		return
+
 	if not _is_local_player(nearby_player):
 		nearby_player = null
 		prompt_area._hide_prompt()
@@ -65,7 +72,6 @@ func _on_prompt_area_body_entered(body: Node3D) -> void:
 		return
 	nearby_player = body
 	prompt_area._show_prompt()
-	_show_need_gui()
 
 func _on_prompt_area_body_exited(body: Node3D) -> void:
 	if body != nearby_player:
@@ -91,23 +97,6 @@ func _disable_collision_shapes(node: Node) -> void:
 	for child in node.get_children():
 		_disable_collision_shapes(child)
 
-func _create_need_label() -> void:
-	if need_item_text.is_empty():
-		return
-
-	need_label = Label3D.new()
-	need_label.name = "NeedItemLabel"
-	need_label.text = "I need this: " + need_item_text
-	need_label.position = Vector3(0.0, need_label_height, 0.0)
-	need_label.font_size = 48
-	need_label.modulate = Color(1.0, 0.95, 0.35, 1.0)
-	need_label.outline_size = 8
-	need_label.outline_modulate = Color(0.0, 0.0, 0.0, 1.0)
-	need_label.no_depth_test = true
-	need_label.visible = false
-	add_child(need_label)
-
-
 func _show_need_gui() -> void:
 	if need_label != null:
 		need_label.visible = true
@@ -116,3 +105,24 @@ func _show_need_gui() -> void:
 func _hide_need_gui() -> void:
 	if need_label != null:
 		need_label.visible = false
+
+func _can_be_carried() -> bool:
+	return help_requirement == null or help_requirement.requirement_fulfilled
+
+
+func _get_help_requirement() -> HelpRequirement:
+	if not help_requirement_path.is_empty():
+		return get_node_or_null(help_requirement_path) as HelpRequirement
+
+	for child in get_children():
+		var requirement := child as HelpRequirement
+		if requirement != null:
+			return requirement
+
+	return null
+
+func _show_requirement_blocked_prompt() -> void:
+	if nearby_player != null and nearby_player.has_method("show_dialogue_message"):
+		nearby_player.show_dialogue_message("I can't carry them yet it's too risky.")
+	if prompt_area != null:
+		prompt_area._show_prompt()

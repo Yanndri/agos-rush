@@ -36,8 +36,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.echo:
 		return
 	if event.is_action_pressed(interact_action):
+		get_viewport().set_input_as_handled()
 		_start_hold_interact()
 	elif event.is_action_released(interact_action):
+		get_viewport().set_input_as_handled()
 		_cancel_hold_interact()
 
 func _start_hold_interact() -> void:

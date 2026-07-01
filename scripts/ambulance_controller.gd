@@ -59,8 +59,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 
 	if driver != null and _is_local_player(driver):
+		get_viewport().set_input_as_handled()
 		exit_vehicle()
 	elif driver == null and nearby_player != null and _is_local_player(nearby_player):
+		get_viewport().set_input_as_handled()
 		enter_vehicle(nearby_player)
 
 

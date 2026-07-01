@@ -13,11 +13,19 @@ extends CharacterBody3D
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var dialogue_container_path: NodePath = NodePath("PlayerUI/DialogueContainer")
+@export var dialogue_label_path: NodePath = NodePath("PlayerUI/DialogueContainer/VBoxContainer/MarginContainer/DialogueLabel")
+@export var dialogue_type_interval := 0.025
+@export var dialogue_hold_time := 1.0
+@export var dialogue_show_tween_time := 0.18
+@export var dialogue_hide_tween_time := 0.18
 
 @onready var animation_tree: AnimationTree = $PlayerModel/AnimationTree
 @onready var animation_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var character_armature: Node3D = $PlayerModel/CharacterArmature
 @onready var camera: Camera3D = $PlayerModel/CameraPivot/Camera3D
+@onready var dialogue_container: CanvasItem = get_node_or_null(dialogue_container_path) as CanvasItem
+@onready var dialogue_label: Label = get_node_or_null(dialogue_label_path) as Label
 
 var last_animation: StringName = &"Idle"
 
@@ -28,11 +36,17 @@ var was_jump_key_down := false
 var jump_just_started := false
 var jump_buffer_left := 0.0
 var jump_cut_applied := false
+var dialogue_message_id := 0
+var dialogue_tween: Tween
+var dialogue_start_position := Vector2.ZERO
 
 
 
 var is_driving_vehicle := false
 func _ready() -> void:
+	if dialogue_container != null:
+		dialogue_start_position = dialogue_container.position
+	_hide_dialogue()
 	visible = true
 	animation_tree.active = true
 	camera.current = false
@@ -185,3 +199,70 @@ func _play_animation(animation_name: StringName) -> void:
 		animation_playback.travel(animation_name)
 
 	last_animation = animation_name
+
+func show_dialogue_message(message: String) -> void:
+	if not is_multiplayer_authority():
+		return
+	if dialogue_container == null or dialogue_label == null:
+		return
+
+	dialogue_message_id += 1
+	var current_message_id := dialogue_message_id
+	_show_dialogue_panel()
+	dialogue_label.text = ""
+
+	for index in message.length():
+		if current_message_id != dialogue_message_id:
+			return
+		dialogue_label.text = message.substr(0, index + 1)
+		await get_tree().create_timer(dialogue_type_interval).timeout
+
+	await get_tree().create_timer(dialogue_hold_time).timeout
+
+	if current_message_id == dialogue_message_id:
+		await _hide_dialogue_with_tween()
+
+
+func _hide_dialogue() -> void:
+	if dialogue_label != null:
+		dialogue_label.text = ""
+	if dialogue_container != null:
+		dialogue_container.visible = false
+		dialogue_container.modulate.a = 0.0
+		dialogue_container.scale = Vector2.ONE
+		dialogue_container.position = dialogue_start_position
+func _show_dialogue_panel() -> void:
+	if dialogue_container == null:
+		return
+
+	_kill_dialogue_tween()
+	dialogue_container.visible = true
+	dialogue_container.modulate.a = 0.0
+	dialogue_container.scale = Vector2(0.96, 0.96)
+	dialogue_container.position = dialogue_start_position + Vector2(0.0, 12.0)
+
+	dialogue_tween = create_tween()
+	dialogue_tween.set_parallel(true)
+	dialogue_tween.tween_property(dialogue_container, "modulate:a", 1.0, dialogue_show_tween_time)
+	dialogue_tween.tween_property(dialogue_container, "scale", Vector2.ONE, dialogue_show_tween_time).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	dialogue_tween.tween_property(dialogue_container, "position", dialogue_start_position, dialogue_show_tween_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+func _hide_dialogue_with_tween() -> void:
+	if dialogue_container == null:
+		return
+
+	_kill_dialogue_tween()
+	dialogue_tween = create_tween()
+	dialogue_tween.set_parallel(true)
+	dialogue_tween.tween_property(dialogue_container, "modulate:a", 0.0, dialogue_hide_tween_time)
+	dialogue_tween.tween_property(dialogue_container, "scale", Vector2(0.96, 0.96), dialogue_hide_tween_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	dialogue_tween.tween_property(dialogue_container, "position", dialogue_start_position + Vector2(0.0, 8.0), dialogue_hide_tween_time).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	await dialogue_tween.finished
+	_hide_dialogue()
+
+
+func _kill_dialogue_tween() -> void:
+	if dialogue_tween != null:
+		dialogue_tween.kill()
+		dialogue_tween = null

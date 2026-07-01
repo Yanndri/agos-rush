@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwke03stwkk82" path="res://scripts/npc_rescue_interact.gd" id="1_kccxt"]
 [ext_resource type="Texture2D" uid="uid://ds6h2dkjkiaer" path="res://Imports/BlenderExports/KidNPC_Villagers_Texture.png" id="3_gqnby"]
 [ext_resource type="Texture2D" uid="uid://cj33oy4tm5sgb" path="res://GameAssets/SketchfabExports/hospital_stretcher_trolley_0.png" id="4_ligsn"]
+[ext_resource type="PackedScene" uid="uid://p2n5pvstsd58" path="res://scenes/Interactables/help_requirement.tscn" id="5_8tp1l"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="5_si5vl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3aeqa"]
@@ -345,12 +346,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y4rbg")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_xr7qm"]
-radius = 3.603
-
 [node name="NPC1" type="CharacterBody3D" unique_id=1994827218]
 script = ExtResource("1_kccxt")
-need_item_text = "Food Supply"
 
 [node name="LayingBlacksmith" type="Node3D" parent="." unique_id=483049784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074483395, -0.853299, -0.300703)
@@ -585,7 +582,6 @@ mesh = SubResource("ArrayMesh_63iaj")
 
 [node name="PromptArea" parent="." unique_id=989733329 instance=ExtResource("5_si5vl")]
 
-[node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
-shape = SubResource("SphereShape3D_xr7qm")
+[node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("5_8tp1l")]
 
 [editable path="PromptArea"]

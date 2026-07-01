@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c7rsl7qr2kce0" path="res://Imports/BlenderExports/FatherNPC_Villagers_Texture.png" id="2_xr7qm"]
 [ext_resource type="Script" uid="uid://cwke03stwkk82" path="res://scripts/npc_rescue_interact.gd" id="3_npc_interact"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="4_3w2wa"]
+[ext_resource type="PackedScene" uid="uid://p2n5pvstsd58" path="res://scenes/Interactables/help_requirement.tscn" id="5_x34vv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6nu6"]
 resource_name = "Material.003"
@@ -330,7 +331,6 @@ radius = 3.603
 
 [node name="NPC1" type="CharacterBody3D" unique_id=1994827218]
 script = ExtResource("3_npc_interact")
-carry_offset = null
 
 [node name="LayingBlacksmith" type="Node3D" parent="." unique_id=483049784]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.074483395, -0.72062004, 0.12550318)
@@ -563,4 +563,10 @@ mesh = SubResource("ArrayMesh_63iaj")
 [node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
 shape = SubResource("SphereShape3D_xr7qm")
 
+[node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("5_x34vv")]
+
+[node name="Requirements" parent="HelpRequirement" index="1" unique_id=1746257932]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
 [editable path="PromptArea"]
+[editable path="HelpRequirement"]
