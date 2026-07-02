@@ -151,6 +151,12 @@ requirement_type = "Battery"
 [node name="Requirements" parent="HelpRequirement" index="0" unique_id=1746257932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5055461, 0)
 
+[node name="Medkit" parent="HelpRequirement/Requirements" index="1" unique_id=2141076987]
+visible = false
+
+[node name="Battery" parent="HelpRequirement/Requirements" index="4" unique_id=1349686619]
+visible = true
+
 [editable path="WaterTower2"]
 [editable path="HelpRequirement"]
 [editable path="HelpRequirement/PromptArea"]

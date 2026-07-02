@@ -5,6 +5,7 @@ extends CharacterBody3D
 @export var need_label_height := 2.4
 @export var help_requirement_path: NodePath
 @export var carry_prompt_text := "[F] to Carry Resident"
+@export var completed_requirement_type := "Hospital"
 
 @onready var prompt_area: PromptArea = $HelpRequirement/PromptArea
 @onready var help_requirement: HelpRequirement = _get_help_requirement()
@@ -22,6 +23,8 @@ func _ready() -> void:
 
 	if help_requirement != null and not help_requirement.fulfilled.is_connected(_on_help_requirement_fulfilled):
 		help_requirement.fulfilled.connect(_on_help_requirement_fulfilled)
+	if help_requirement != null and help_requirement.requirement_fulfilled:
+		_set_completed_requirement_display()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if carried or nearby_player == null:
@@ -127,9 +130,17 @@ func _update_prompt() -> void:
 
 
 func _on_help_requirement_fulfilled(_item: PickableItem) -> void:
+	_set_completed_requirement_display()
 	_update_prompt()
 	if nearby_player != null and prompt_area != null:
 		prompt_area._show_prompt()
+
+
+func _set_completed_requirement_display() -> void:
+	if help_requirement == null or completed_requirement_type.is_empty():
+		return
+
+	help_requirement.show_fulfilled_requirement(completed_requirement_type)
 
 
 func _nearby_player_has_required_item() -> bool:

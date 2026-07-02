@@ -16,6 +16,10 @@ const AVAILABLE_REQUIREMENTS := {
 		"item_name": "Battery",
 		"visual_node": "Battery",
 	},
+	"Hospital": {
+		"item_name": "",
+		"visual_node": "Hospital",
+	},
 }
 
 @export_enum("Medkit", "FoodSupply", "Battery") var requirement_type := "Medkit":
@@ -37,6 +41,7 @@ var required_item_name := ""
 @export var use_progress_text := "Using... %d%%"
 
 var _requirement_fulfilled := false
+var _show_fulfilled_requirement_visual := false
 var nearby_player: CharacterBody3D
 var hold_time := 0.0
 var is_holding := false
@@ -223,6 +228,18 @@ func _fulfill(item: PickableItem) -> void:
 
 func _set_fulfilled(value: bool) -> void:
 	_requirement_fulfilled = value
+	if not value:
+		_show_fulfilled_requirement_visual = false
+	_update_visuals()
+
+
+func show_fulfilled_requirement(requirement_key: String) -> void:
+	if not AVAILABLE_REQUIREMENTS.has(requirement_key):
+		push_warning("Unknown fulfilled requirement display: " + requirement_key)
+		return
+
+	requirement_type = requirement_key
+	_show_fulfilled_requirement_visual = true
 	_update_visuals()
 
 
@@ -243,7 +260,7 @@ func _consume_item(item: PickableItem) -> void:
 
 func _update_visuals() -> void:
 	if requirements_visual != null:
-		requirements_visual.visible = not _requirement_fulfilled
+		requirements_visual.visible = not _requirement_fulfilled or _show_fulfilled_requirement_visual
 		_update_requirement_visuals()
 
 
@@ -261,7 +278,7 @@ func _update_requirement_visuals() -> void:
 	var selected_visual_name := String(selected_requirement.get("visual_node", ""))
 	var selected_visual := requirements_visual.get_node_or_null(selected_visual_name) as Node3D
 	if selected_visual != null:
-		selected_visual.visible = not _requirement_fulfilled
+		selected_visual.visible = not _requirement_fulfilled or _show_fulfilled_requirement_visual
 
 
 func _get_requirement_data() -> Dictionary:

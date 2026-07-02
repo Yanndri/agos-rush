@@ -106,6 +106,4 @@ mouse_filter = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 7)
 
 [node name="Battery" parent="." unique_id=704979953 instance=ExtResource("7_nxtc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.403776, 0.12294439, 10.317879)
-held_position = Vector3(1, 0, 0)
-held_rotation_degrees = Vector3(0, 0, -90)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8823233, 0.09088302, 10.901298)

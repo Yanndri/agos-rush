@@ -7,18 +7,19 @@
 [ext_resource type="Texture2D" uid="uid://3cwrud2itirr" path="res://GameAssets/Icons/Free 39 Portraits Pixel Art/1 Portraits/Icons_19.png" id="5_tx240"]
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="5_xs35j"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="6_bwioj"]
+[ext_resource type="Texture2D" uid="uid://dyt6jxkhe0r2b" path="res://GameAssets/Icons/Free 39 Portraits Pixel Art/1 Portraits/Icons_26.png" id="6_t1gx7"]
 
 [sub_resource type="Gradient" id="Gradient_8tp1l"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0.6603774, 0.7169811, 0.7735849, 0.8113208, 1)
-colors = PackedColorArray(1, 1, 1, 0.5254902, 0, 0, 0, 0.34117648, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.4392157, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ptkwr"]
 gradient = SubResource("Gradient_8tp1l")
 width = 128
 fill = 1
 fill_from = Vector2(0.5117647, 0.5235294)
-fill_to = Vector2(0.88235295, 0.21176471)
+fill_to = Vector2(0.85882354, 0.34117648)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tx240"]
 radius = 1.802
@@ -36,7 +37,6 @@ texture_filter = 2
 texture = SubResource("GradientTexture2D_ptkwr")
 
 [node name="Medkit" type="Sprite3D" parent="Requirements" unique_id=2141076987]
-visible = false
 pixel_size = 0.015
 billboard = 1
 texture_filter = 2
@@ -60,11 +60,20 @@ render_priority = 3
 texture = ExtResource("4_wd62e")
 
 [node name="Battery" type="Sprite3D" parent="Requirements" unique_id=1349686619]
+visible = false
 pixel_size = 0.015
 billboard = 1
 texture_filter = 2
 render_priority = 3
 texture = ExtResource("5_tx240")
+
+[node name="Hospital" type="Sprite3D" parent="Requirements" unique_id=850142040]
+visible = false
+pixel_size = 0.015
+billboard = 1
+texture_filter = 2
+render_priority = 3
+texture = ExtResource("6_t1gx7")
 
 [node name="PointsAmount" type="Label3D" parent="Requirements" unique_id=2133084465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)

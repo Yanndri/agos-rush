@@ -99,6 +99,8 @@ shadow_mesh = SubResource("ArrayMesh_u1xj1")
 
 [node name="Battery" type="Node3D" unique_id=704979953]
 script = ExtResource("1_rijul")
+held_position = Vector3(0, 0, -0.2)
+held_rotation_degrees = Vector3(0, 0, 270)
 
 [node name="PromptArea" parent="." unique_id=989733329 instance=ExtResource("1_ccvp6")]
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, -0.1671061)
