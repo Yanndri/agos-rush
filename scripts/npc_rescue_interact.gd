@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node3D
 
 @export var interact_action := "interact"
 @export var carry_offset := Vector3(0.0, 2.25, 0.0)
@@ -129,7 +129,7 @@ func _update_prompt() -> void:
 		prompt_area._set_prompt(carry_prompt_text)
 
 
-func _on_help_requirement_fulfilled(_item: PickableItem) -> void:
+func _on_help_requirement_fulfilled(_requirement_node: Node) -> void:
 	_set_completed_requirement_display()
 	_update_prompt()
 	if nearby_player != null and prompt_area != null:
@@ -166,7 +166,23 @@ func _get_help_requirement() -> HelpRequirement:
 	return null
 
 func _show_requirement_blocked_prompt() -> void:
-	if nearby_player != null and nearby_player.has_method("show_dialogue_message"):
-		nearby_player.show_dialogue_message("I need to tend his wounds before carrying him.")
+	if help_requirement != null:
+		help_requirement.show_requirement_dialogue(nearby_player)
 	if prompt_area != null:
 		prompt_area._show_prompt()
+
+
+func is_carried_resident() -> bool:
+	return carried
+
+
+func complete_rescue() -> void:
+	carried = false
+	nearby_player = null
+	_hide_need_gui()
+	if prompt_area != null:
+		prompt_area._hide_prompt()
+	_disable_collision_shapes(self)
+	visible = false
+	process_mode = Node.PROCESS_MODE_DISABLED
+	call_deferred("queue_free")

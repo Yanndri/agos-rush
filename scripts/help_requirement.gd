@@ -1,28 +1,42 @@
 extends Node3D
 class_name HelpRequirement
 
-signal fulfilled(item: PickableItem)
+signal fulfilled(requirement_node: Node)
 
 const AVAILABLE_REQUIREMENTS := {
 	"Medkit": {
 		"item_name": "FirstAidKit",
 		"visual_node": "Medkit",
+		"points_amount": 100,
+		"help_dialogue": "I need to apply First Aid first before evacuating"
 	},
 	"FoodSupply": {
 		"item_name": "FoodSupply",
 		"visual_node": "FoodSupply",
+		"points_amount": 123213,
+		"help_dialogue": "I should provide some food"
 	},
 	"Battery": {
 		"item_name": "Battery",
 		"visual_node": "Battery",
+		"points_amount": 123213,
+		"help_dialogue": "This needs battery to function"
 	},
 	"Hospital": {
 		"item_name": "",
 		"visual_node": "Hospital",
+		"points_amount": 123213,
+		"help_dialogue": "I have to get them to the Evacuation Center"
+	},
+	"Resident": {
+		"item_name": "",
+		"visual_node": "Resident",
+		"points_amount": 123213,
+		"help_dialogue": "I need to find Residents to evacuate here"
 	},
 }
 
-@export_enum("Medkit", "FoodSupply", "Battery") var requirement_type := "Medkit":
+@export_enum("Medkit", "FoodSupply", "Battery", "Resident") var requirement_type := "Medkit":
 	set(value):
 		requirement_type = value
 		_update_visuals()
@@ -30,10 +44,12 @@ const AVAILABLE_REQUIREMENTS := {
 # Kept so older scene data using a typed item name still loads.
 var required_item_name := ""
 
+@export var is_consumed := true
 @export var consume_item_when_fulfilled := true
 @export var interact_action := "interact"
 @export var hold_duration := 2.0
 @export var requirements_visual_path: NodePath = NodePath("Requirements")
+@export var points_amount_label_path: NodePath = NodePath("Requirements/PointsAmount")
 @export var prompt_area_path: NodePath = NodePath("PromptArea")
 @export var progress_label_path: NodePath = NodePath("PromptArea/Control/PromptLabel")
 @export var default_prompt_text := "[F] to Interact"
@@ -53,6 +69,7 @@ var is_holding := false
 		return _requirement_fulfilled
 
 @onready var requirements_visual: Node3D = get_node_or_null(requirements_visual_path) as Node3D
+@onready var points_amount_label: Label3D = get_node_or_null(points_amount_label_path) as Label3D
 @onready var prompt_area: PromptArea = get_node_or_null(prompt_area_path) as PromptArea
 @onready var progress_label: Label = get_node_or_null(progress_label_path) as Label
 
@@ -82,7 +99,9 @@ func _process(delta: float) -> void:
 		_hide_progress_label()
 		return
 
-	if not _player_has_required_item(nearby_player):
+	if not _player_has_requirement_source(nearby_player):
+		if Input.is_action_just_pressed(interact_action):
+			show_requirement_dialogue(nearby_player)
 		_cancel_hold_interact()
 		return
 
@@ -156,9 +175,12 @@ func _find_pickable_item(node: Node) -> PickableItem:
 
 
 func _is_required_item(item: PickableItem) -> bool:
+	if requirement_type == "Resident":
+		return false
+
 	var item_requirement_name := _get_required_item_name()
 	if item_requirement_name.is_empty():
-		return true
+		return false
 
 	var item_name := String(item.name)
 	return item_name == item_requirement_name or item_name.begins_with(item_requirement_name)
@@ -177,53 +199,57 @@ func _cancel_hold_interact() -> void:
 
 
 func _finish_hold_interact() -> void:
-	var item := _get_player_required_item(nearby_player)
-	if item == null:
+	var requirement_node := _get_player_requirement_source(nearby_player)
+	if requirement_node == null:
 		_cancel_hold_interact()
 		return
 
 	_cancel_hold_interact()
 
 	if multiplayer.multiplayer_peer == null:
-		_fulfill(item)
+		_fulfill(requirement_node)
 	elif multiplayer.is_server():
-		_apply_fulfill.rpc(item.get_path())
+		_apply_fulfill.rpc(requirement_node.get_path())
 	else:
-		_request_fulfill.rpc_id(1, item.get_path())
+		_request_fulfill.rpc_id(1, requirement_node.get_path())
 
 
 @rpc("any_peer", "reliable")
-func _request_fulfill(item_path: NodePath) -> void:
+func _request_fulfill(requirement_node_path: NodePath) -> void:
 	if not multiplayer.is_server():
 		return
 
-	var item := get_node_or_null(item_path) as PickableItem
-	if item == null or not _is_required_item(item):
+	var requirement_node := get_node_or_null(requirement_node_path)
+	if requirement_node == null or not _is_required_node(requirement_node):
 		return
 
-	_apply_fulfill.rpc(item_path)
+	_apply_fulfill.rpc(requirement_node_path)
 
 
 @rpc("authority", "call_local", "reliable")
-func _apply_fulfill(item_path: NodePath) -> void:
-	var item := get_node_or_null(item_path) as PickableItem
-	if item == null:
+func _apply_fulfill(requirement_node_path: NodePath) -> void:
+	var requirement_node := get_node_or_null(requirement_node_path)
+	if requirement_node == null:
 		return
 
-	_fulfill(item)
+	_fulfill(requirement_node)
 
 
-func _fulfill(item: PickableItem) -> void:
-	if requirement_fulfilled:
+func _fulfill(requirement_node: Node) -> void:
+	if requirement_fulfilled and is_consumed:
 		return
 
-	_set_fulfilled(true)
-	print("HELP REQUIREMENT FULFILLED | requirement=", name, " | item=", item.name)
+	if is_consumed:
+		_set_fulfilled(true)
+	else:
+		_update_visuals()
+
+	print("HELP REQUIREMENT FULFILLED | requirement=", name, " | node=", requirement_node.name)
 
 	if consume_item_when_fulfilled:
-		_consume_item(item)
+		_consume_requirement_node(requirement_node)
 
-	fulfilled.emit(item)
+	fulfilled.emit(requirement_node)
 
 
 func _set_fulfilled(value: bool) -> void:
@@ -243,6 +269,15 @@ func show_fulfilled_requirement(requirement_key: String) -> void:
 	_update_visuals()
 
 
+func _consume_requirement_node(requirement_node: Node) -> void:
+	var item := requirement_node as PickableItem
+	if item != null:
+		_consume_item(item)
+		return
+
+	_consume_resident(requirement_node)
+
+
 func _consume_item(item: PickableItem) -> void:
 	var holder := item.holder
 	if holder != null:
@@ -258,10 +293,22 @@ func _consume_item(item: PickableItem) -> void:
 		item.prompt_area.set_prompt_enabled(false)
 
 
+func _consume_resident(resident: Node) -> void:
+	if resident.has_method("complete_rescue"):
+		resident.complete_rescue()
+		return
+
+	if resident is Node3D:
+		(resident as Node3D).visible = false
+	resident.process_mode = Node.PROCESS_MODE_DISABLED
+	resident.call_deferred("queue_free")
+
+
 func _update_visuals() -> void:
 	if requirements_visual != null:
 		requirements_visual.visible = not _requirement_fulfilled or _show_fulfilled_requirement_visual
 		_update_requirement_visuals()
+	_update_points_amount_label()
 
 
 func _update_requirement_visuals() -> void:
@@ -279,6 +326,14 @@ func _update_requirement_visuals() -> void:
 	var selected_visual := requirements_visual.get_node_or_null(selected_visual_name) as Node3D
 	if selected_visual != null:
 		selected_visual.visible = not _requirement_fulfilled or _show_fulfilled_requirement_visual
+
+
+func _update_points_amount_label() -> void:
+	if points_amount_label == null:
+		return
+
+	var points_amount := int(_get_requirement_data().get("points_amount", 0))
+	points_amount_label.text = "+%d pts" % points_amount
 
 
 func _get_requirement_data() -> Dictionary:
@@ -305,7 +360,7 @@ func _update_progress_label() -> void:
 	if is_holding:
 		var percent := int(clamp(hold_time / hold_duration, 0.0, 1.0) * 100.0)
 		progress_label.text = use_progress_text % percent
-	elif _player_has_held_item(nearby_player):
+	elif _player_has_requirement_source(nearby_player):
 		progress_label.text = idle_prompt_text
 	else:
 		progress_label.text = default_prompt_text
@@ -324,8 +379,23 @@ func player_has_required_item(player: CharacterBody3D) -> bool:
 	return _player_has_required_item(player)
 
 
+func show_requirement_dialogue(player: Node) -> void:
+	if player == null or not player.has_method("show_dialogue_message"):
+		return
+
+	var message := _get_help_dialogue()
+	if message.is_empty():
+		return
+
+	player.show_dialogue_message(message)
+
+
 func _player_has_held_item(player: CharacterBody3D) -> bool:
 	return _get_player_held_item(player) != null
+
+
+func _player_has_requirement_source(player: CharacterBody3D) -> bool:
+	return _get_player_requirement_source(player) != null
 
 
 func _get_player_held_item(player: CharacterBody3D) -> PickableItem:
@@ -344,6 +414,9 @@ func _get_player_held_item(player: CharacterBody3D) -> PickableItem:
 
 
 func _get_player_required_item(player: CharacterBody3D) -> PickableItem:
+	if requirement_type == "Resident":
+		return null
+
 	var item := _get_player_held_item(player)
 	if item == null:
 		return null
@@ -352,6 +425,40 @@ func _get_player_required_item(player: CharacterBody3D) -> PickableItem:
 		return null
 
 	return item
+
+
+func _get_player_requirement_source(player: CharacterBody3D) -> Node:
+	if requirement_type == "Resident":
+		return _get_player_carried_resident(player)
+
+	return _get_player_required_item(player)
+
+
+func _get_player_carried_resident(player: CharacterBody3D) -> Node:
+	if player == null:
+		return null
+
+	for child in player.get_children():
+		if child == self:
+			continue
+		if child.get_script() == null:
+			continue
+		if child.has_method("is_carried_resident") and child.is_carried_resident():
+			return child
+
+	return null
+
+
+func _is_required_node(requirement_node: Node) -> bool:
+	if requirement_type == "Resident":
+		return requirement_node != null and requirement_node.has_method("is_carried_resident") and requirement_node.is_carried_resident()
+
+	var item := requirement_node as PickableItem
+	return item != null and _is_required_item(item)
+
+
+func _get_help_dialogue() -> String:
+	return String(_get_requirement_data().get("help_dialogue", ""))
 
 
 func _is_local_player(body: Node) -> bool:

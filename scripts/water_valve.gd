@@ -19,7 +19,7 @@ func _ready() -> void:
 		_drain_flooded_water()
 
 
-func _on_help_requirement_fulfilled(_item: PickableItem) -> void:
+func _on_help_requirement_fulfilled(_requirement_node: Node) -> void:
 	_drain_flooded_water()
 
 
