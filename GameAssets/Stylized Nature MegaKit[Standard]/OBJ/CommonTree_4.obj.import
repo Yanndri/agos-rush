@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c0qejilih7weq"
+path="res://.godot/imported/CommonTree_4.obj-4d97418196abd038db44ba771ff9f469.mesh"
+
+[deps]
+
+files=["res://.godot/imported/CommonTree_4.obj-4d97418196abd038db44ba771ff9f469.mesh"]
+
+source_file="res://GameAssets/Stylized Nature MegaKit[Standard]/OBJ/CommonTree_4.obj"
+dest_files=["res://.godot/imported/CommonTree_4.obj-4d97418196abd038db44ba771ff9f469.mesh", "res://.godot/imported/CommonTree_4.obj-4d97418196abd038db44ba771ff9f469.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b4jm2uhuiikvc"
+path="res://.godot/imported/plant.obj-3984623de027e859780e707661cff4aa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/plant.obj-3984623de027e859780e707661cff4aa.mesh"]
+
+source_file="res://GameAssets/kenney_platformer-kit/Models/OBJ format/plant.obj"
+dest_files=["res://.godot/imported/plant.obj-3984623de027e859780e707661cff4aa.mesh", "res://.godot/imported/plant.obj-3984623de027e859780e707661cff4aa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
