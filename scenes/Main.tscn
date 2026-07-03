@@ -80,23 +80,6 @@ transform = Transform3D(-0.96871954, -0.07970491, 0.2350105, 0.23902103, -0.0450
 light_specular = 0.0
 shadow_opacity = 0.8
 
-[node name="Control" type="Control" parent="." unique_id=1183849945]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 166.0
-offset_bottom = 80.0
-
-[node name="Top" type="PanelContainer" parent="Control" unique_id=1460799005]
-layout_mode = 0
-offset_right = 124.0
-offset_bottom = 40.0
-
-[node name="RoomCodeLabel" type="Label" parent="Control/Top" unique_id=903696863]
-unique_name_in_owner = true
-layout_mode = 2
-text = "sadasd"
-horizontal_alignment = 2
-
 [node name="Milestone" parent="." unique_id=1661914291 instance=ExtResource("8_bjd11")]
 
 [node name="Spawn" type="Node3D" parent="." unique_id=733550696]
@@ -130,6 +113,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="DotDitherEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=266258354]
 material = SubResource("ShaderMaterial_qbhb6")
@@ -140,6 +124,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="VHSEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=170530037]
 visible = false

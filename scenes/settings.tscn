@@ -1,0 +1,212 @@
+[gd_scene format=3 uid="uid://cpawix47rc7f6"]
+
+[ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="1_r6d6q"]
+[ext_resource type="Texture2D" uid="uid://dnxfwh0n38pk" path="res://GameAssets/Icons/Gear 2 Outline 256.png" id="2_6wm04"]
+[ext_resource type="Script" uid="uid://cxou3d86en2su" path="res://scripts/settings.gd" id="3_settings"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxdc4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp2id"]
+bg_color = Color(1, 0.6313726, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.33333334, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 24.0
+expand_margin_right = 24.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e06cx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqllb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1x75n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4qtl"]
+
+[node name="Settings" type="PanelContainer" unique_id=379776143]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r6d6q")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oxdc4")
+script = ExtResource("3_settings")
+
+[node name="SettingsButton" type="Button" parent="." unique_id=1116225783]
+z_index = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+offset_transform_enabled = true
+offset_transform_position = Vector2(12, 12)
+mouse_default_cursor_shape = 2
+icon = ExtResource("2_6wm04")
+icon_alignment = 1
+expand_icon = true
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=1331290814]
+visible = false
+layout_mode = 2
+
+[node name="PanelContainer" type="MarginContainer" parent="SettingsPanel" unique_id=1189677123]
+custom_minimum_size = Vector2(480, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer" unique_id=541381421]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/PanelContainer" unique_id=921731967]
+layout_mode = 2
+
+[node name="Top" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer" unique_id=1834250960]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Top" unique_id=1475515066]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6313726, 0, 1)
+text = "Settings"
+
+[node name="Main" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer" unique_id=456193223]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main" unique_id=366872976]
+layout_mode = 2
+
+[node name="BackToMainMenu" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=451025168]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/BackToMainMenu" unique_id=674283682]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
+
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/BackToMainMenu" unique_id=1885183283]
+layout_mode = 2
+text = "Back to Main Menu"
+
+[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/BackToMainMenu" unique_id=1476046954]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
+
+[node name="MasterVolume" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=1554414249]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume" unique_id=667724512]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
+
+[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume" unique_id=342103677]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume" unique_id=1840557719]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume/HBoxContainer" unique_id=1514974648]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume/HBoxContainer" unique_id=270498349]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 20.0
+
+[node name="MasterVolume2" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=418325061]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=1927290804]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
+
+[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=214415128]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=1511832916]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2/HBoxContainer" unique_id=958461052]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2/HBoxContainer" unique_id=1148827285]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 20.0
+
+[node name="MasterVolume3" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=938212722]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=930731668]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
+
+[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=2023887424]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=2047895694]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3/HBoxContainer" unique_id=1871502151]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3/HBoxContainer" unique_id=680230456]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+value = 20.0
