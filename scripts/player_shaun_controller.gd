@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var walk_speed := 3.5
 @export var run_speed := 6.0
+@export var carrying_speed_multiplier := 0.5
 @export var jump_velocity := 5.0
 @export var low_jump_velocity_multiplier := 0.45
 @export var jump_buffer_time := 0.15
@@ -39,6 +40,7 @@ var jump_cut_applied := false
 var dialogue_message_id := 0
 var dialogue_tween: Tween
 var dialogue_start_position := Vector2.ZERO
+var map_view_active := false
 
 
 
@@ -55,9 +57,13 @@ func _ready() -> void:
 
 
 func _update_local_camera() -> void:
-	camera.current = is_multiplayer_authority()
+	camera.current = is_multiplayer_authority() and not map_view_active
 
 func _process(_delta: float) -> void:
+	if map_view_active:
+		camera.current = false
+		return
+
 	if is_multiplayer_authority() and not camera.current:
 		camera.current = true
 
@@ -65,7 +71,6 @@ func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
 		return
 
-	
 	if is_driving_vehicle:
 		velocity = Vector3.ZERO
 		_play_animation(&"Idle")
@@ -78,6 +83,8 @@ func _physics_process(delta: float) -> void:
 	var direction := _get_camera_relative_direction(input_dir)
 	var is_running := Input.is_key_pressed(KEY_SHIFT)
 	var current_speed := run_speed if is_running else walk_speed
+	if is_carrying_resident():
+		current_speed *= carrying_speed_multiplier
 
 	var jump_key_down := Input.is_key_pressed(KEY_SPACE)
 	var jump_pressed := jump_key_down and not was_jump_key_down
@@ -150,6 +157,15 @@ func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
 
 	return (right * input_dir.x + forward * -input_dir.y).normalized()
 
+
+func is_carrying_resident() -> bool:
+	for child in get_children():
+		if child.has_method("is_carried_resident") and child.is_carried_resident():
+			return true
+
+	return false
+
+
 func _update_animation(input_dir: Vector2, is_running: bool, delta: float) -> void:
 	# Jump start should play once, not every frame.
 	if jump_just_started:
@@ -221,6 +237,12 @@ func show_dialogue_message(message: String) -> void:
 
 	if current_message_id == dialogue_message_id:
 		await _hide_dialogue_with_tween()
+
+
+func set_map_view_active(value: bool) -> void:
+	map_view_active = value
+	if camera != null:
+		camera.current = is_multiplayer_authority() and not map_view_active
 
 
 func _hide_dialogue() -> void:

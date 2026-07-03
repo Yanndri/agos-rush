@@ -618,5 +618,8 @@ mesh = SubResource("ArrayMesh_63iaj")
 
 [node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("5_8tp1l")]
 
+[node name="GlowLight" parent="HelpRequirement/PromptArea" parent_id_path=PackedInt32Array(556880010, 989733329) index="2" unique_id=1060909871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.043492466, 0.42499927)
+
 [editable path="HelpRequirement"]
 [editable path="HelpRequirement/PromptArea"]

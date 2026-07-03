@@ -133,8 +133,8 @@ size = Vector3(11.106445, 12.308594, 10.324443)
 
 [node name="HelpRequirement" parent="." unique_id=556880010 instance=ExtResource("1_nfbfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7354461, 2.8190284)
-is_consumed = false
 requirement_type = "Resident"
+is_consumed = false
 
 [node name="Requirements" parent="HelpRequirement" index="0" unique_id=1746257932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -144,6 +144,9 @@ visible = false
 
 [node name="Resident" parent="HelpRequirement/Requirements" index="3" unique_id=197879242]
 visible = true
+
+[node name="GlowLight" parent="HelpRequirement/PromptArea" parent_id_path=PackedInt32Array(556880010, 989733329) index="2" unique_id=1060909871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.33229375, 0.32630014)
 
 [node name="Tent_Cylinder_020" type="Node3D" parent="." unique_id=734790806]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

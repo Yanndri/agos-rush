@@ -47,3 +47,8 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "[F] to Interact"
 vertical_alignment = 2
+
+[node name="GlowLight" type="OmniLight3D" parent="." unique_id=1060909871]
+light_color = Color(1, 0.74509805, 0.21960784, 1)
+light_energy = 2.0
+omni_range = 1.0

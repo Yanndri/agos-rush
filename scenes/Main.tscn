@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
+[ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://bmly4u1ykq4lq" path="res://scenes/camp.tscn" id="6_c01mt"]
 [ext_resource type="PackedScene" uid="uid://b0quu4snikcgt" path="res://scenes/Interactables/battery.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
+[ext_resource type="PackedScene" uid="uid://ul4yntffksph" path="res://scenes/Interactables/upgrade_shop.tscn" id="10_lhr70"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://byxwtg6ixky0p" path="res://scenes/main_map.tscn" id="17_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="20_1iba3"]
+[ext_resource type="Script" uid="uid://dykda81dtyd4i" path="res://scripts/map_view_controller.gd" id="21_map_view"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -37,6 +40,30 @@ shader_parameter/color_levels = 6.0
 shader_parameter/dither_strength = 0.1
 shader_parameter/darkest_color = Color(0.13996774, 8.513728e-05, 0.19209597, 1)
 shader_parameter/lightest_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r7cih"]
+shader = ExtResource("5_q8u5g")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.3
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 0.5
+shader_parameter/roll_size = 1.0000000475
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.10000000475
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.1
+shader_parameter/vignette_opacity = 0.5
 
 [node name="Main" type="Node3D" unique_id=631280010]
 script = ExtResource("16_main")
@@ -91,8 +118,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.583887, 0, 15.656448)
 [node name="VHSCanvas" type="CanvasLayer" parent="." unique_id=1280741231]
 layer = -1
 
-[node name="DotDitherEffect" type="ColorRect" parent="VHSCanvas" unique_id=266258354]
+[node name="FilterCanvas" type="Control" parent="VHSCanvas" unique_id=127942053]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DotDitherEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=266258354]
 material = SubResource("ShaderMaterial_qbhb6")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VHSEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=170530037]
+visible = false
+material = SubResource("ShaderMaterial_r7cih")
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -107,3 +155,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 7)
 
 [node name="Battery" parent="." unique_id=704979953 instance=ExtResource("7_nxtc6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8823233, 0.09088302, 10.901298)
+
+[node name="MapViewController" type="Node3D" parent="." unique_id=924281948]
+script = ExtResource("21_map_view")
+
+[node name="MapCamera3D" type="Camera3D" parent="MapViewController" unique_id=916434691]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+projection = 1
+size = 40.0
+
+[node name="UpgradeShop" parent="." unique_id=1855759488 instance=ExtResource("10_lhr70")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1099205, 0, 9.731138)

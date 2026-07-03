@@ -246,6 +246,8 @@ func _fulfill(requirement_node: Node) -> void:
 
 	print("HELP REQUIREMENT FULFILLED | requirement=", name, " | node=", requirement_node.name)
 
+	_award_points(requirement_node)
+
 	if consume_item_when_fulfilled:
 		_consume_requirement_node(requirement_node)
 
@@ -332,8 +334,12 @@ func _update_points_amount_label() -> void:
 	if points_amount_label == null:
 		return
 
-	var points_amount := int(_get_requirement_data().get("points_amount", 0))
+	var points_amount := get_points_amount()
 	points_amount_label.text = "+%d pts" % points_amount
+
+
+func get_points_amount() -> int:
+	return int(_get_requirement_data().get("points_amount", 0))
 
 
 func _get_requirement_data() -> Dictionary:
@@ -455,6 +461,41 @@ func _is_required_node(requirement_node: Node) -> bool:
 
 	var item := requirement_node as PickableItem
 	return item != null and _is_required_item(item)
+
+
+func _award_points(requirement_node: Node) -> void:
+	var points := get_points_amount()
+	if points <= 0:
+		return
+
+	var player := _get_player_from_requirement_node(requirement_node)
+	if player == null:
+		player = nearby_player
+	if player == null:
+		return
+
+	var player_score := player.get_node_or_null("PlayerScore") as PlayerScore
+	if player_score == null:
+		return
+
+	player_score.add_score(points)
+
+
+func _get_player_from_requirement_node(requirement_node: Node) -> CharacterBody3D:
+	if requirement_node == null:
+		return null
+
+	var item := requirement_node as PickableItem
+	if item != null and item.holder is CharacterBody3D:
+		return item.holder as CharacterBody3D
+
+	var parent := requirement_node.get_parent()
+	while parent != null:
+		if parent is CharacterBody3D and parent.is_in_group("players"):
+			return parent as CharacterBody3D
+		parent = parent.get_parent()
+
+	return null
 
 
 func _get_help_dialogue() -> String:

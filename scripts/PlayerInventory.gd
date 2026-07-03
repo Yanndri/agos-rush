@@ -4,6 +4,7 @@ class_name PlayerInventory
 signal selected_item_changed(item: PickableItem)
 
 @export var hotbar_path: NodePath = NodePath("../PlayerUI/Hotbar")
+@export var max_hotbar_slots := 5
 
 var held_item: PickableItem
 var hotbar_slots: Array[Control] = []
@@ -35,6 +36,31 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func has_free_slot() -> bool:
 	return _get_first_free_slot_index() != -1
+
+
+func increase_hotbar_slots(amount: int = 1) -> bool:
+	if amount <= 0:
+		return false
+
+	_cache_hotbar_slots()
+
+	var added := false
+	for index in range(amount):
+		if hotbar_slots.size() >= max_hotbar_slots:
+			break
+
+		var new_slot := _create_hotbar_slot(hotbar_slots.size())
+		if new_slot == null:
+			break
+
+		hotbar_slots.append(new_slot)
+		added = true
+
+	if added:
+		_ensure_inventory_size()
+		_update_hotbar()
+
+	return added
 
 
 func add_item(item: PickableItem) -> bool:
@@ -116,6 +142,34 @@ func _cache_hotbar_slots() -> void:
 			hotbar_slots.append(slot)
 
 	_ensure_inventory_size()
+
+
+func _create_hotbar_slot(slot_index: int) -> Control:
+	if hotbar_slots.is_empty():
+		return null
+
+	var slot_parent := hotbar_slots[0].get_parent()
+	if slot_parent == null:
+		return null
+
+	var source_slot := hotbar_slots[hotbar_slots.size() - 1]
+	var new_slot := source_slot.duplicate() as Control
+	if new_slot == null:
+		return null
+
+	new_slot.name = "Slot%d" % (slot_index + 1)
+	slot_parent.add_child(new_slot)
+
+	var label := new_slot.get_node_or_null("SlotLabel") as Label
+	if label != null:
+		label.text = str(slot_index + 1)
+
+	var icon := _get_slot_icon(new_slot)
+	if icon != null:
+		icon.texture = null
+		icon.visible = false
+
+	return new_slot
 
 
 func _update_hotbar() -> void:
