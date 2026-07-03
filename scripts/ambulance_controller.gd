@@ -21,9 +21,16 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @export var move_back_action := "move_down"
 @export var steer_left_action := "move_left"
 @export var steer_right_action := "move_right"
+@export var left_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorL")
+@export var right_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorR")
+@export var left_door_closed_z_degrees := -140.0
+@export var right_door_closed_z_degrees := 140.0
+@export var door_close_duration := 1.0
 
 @onready var driver_area: Area3D = $DriverArea
 @onready var truck: MeshInstance3D = $"Model/Ambulance-Truck"
+@onready var left_door: Node3D = get_node_or_null(left_door_path) as Node3D
+@onready var right_door: Node3D = get_node_or_null(right_door_path) as Node3D
 @onready var front_left_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL"
 @onready var front_right_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFR"
 @onready var front_left_wheel_mesh: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL/Ambulance-Truck_TireFL"
@@ -42,6 +49,9 @@ var driver_collision_mask := 0
 var remote_driver_peer_id := 0
 var normal_truck_material: Material
 var last_owner_visual_state := ""
+var door_tween: Tween
+var left_door_open_z_degrees := 0.0
+var right_door_open_z_degrees := 0.0
 
 
 func _ready() -> void:
@@ -49,6 +59,10 @@ func _ready() -> void:
 	_update_owner_material()
 	front_left_base_rotation = front_left_wheel.rotation
 	front_right_base_rotation = front_right_wheel.rotation
+	if left_door != null:
+		left_door_open_z_degrees = left_door.rotation_degrees.z
+	if right_door != null:
+		right_door_open_z_degrees = right_door.rotation_degrees.z
 	driver_area.body_entered.connect(_on_driver_area_body_entered)
 	driver_area.body_exited.connect(_on_driver_area_body_exited)
 
@@ -171,6 +185,7 @@ func _sync_driver_entered(peer_id: int) -> void:
 	player.collision_mask = 0
 	player.visible = false
 	player.set("is_driving_vehicle", true)
+	_close_doors()
 
 
 func exit_vehicle() -> void:
@@ -196,6 +211,7 @@ func _sync_driver_exited(peer_id: int, exit_position: Vector3) -> void:
 	player.collision_mask = driver_collision_mask
 	player.global_position = exit_position
 	player.set("is_driving_vehicle", false)
+	_open_doors()
 
 @rpc("any_peer", "unreliable")
 func _sync_vehicle_state(remote_transform: Transform3D, remote_drive_speed: float, remote_wheel_steer_angle: float) -> void:
@@ -207,6 +223,28 @@ func _sync_vehicle_state(remote_transform: Transform3D, remote_drive_speed: floa
 	wheel_steer_angle = remote_wheel_steer_angle
 	front_left_wheel.rotation = front_left_base_rotation + Vector3(0.0, 0.0, -wheel_steer_angle)
 	front_right_wheel.rotation = front_right_base_rotation + Vector3(0.0, 0.0, -wheel_steer_angle)
+
+
+func _close_doors() -> void:
+	_tween_doors(left_door_closed_z_degrees, right_door_closed_z_degrees)
+
+
+func _open_doors() -> void:
+	_tween_doors(left_door_open_z_degrees, right_door_open_z_degrees)
+
+
+func _tween_doors(left_z_degrees: float, right_z_degrees: float) -> void:
+	if door_tween != null and door_tween.is_valid():
+		door_tween.kill()
+
+	door_tween = create_tween()
+	door_tween.set_parallel(true)
+
+	if left_door != null:
+		door_tween.tween_property(left_door, "rotation_degrees:z", left_z_degrees, door_close_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	if right_door != null:
+		door_tween.tween_property(right_door, "rotation_degrees:z", right_z_degrees, door_close_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():

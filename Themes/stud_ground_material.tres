@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://btitk5ffi0enf"]
+
+[ext_resource type="Texture2D" uid="uid://q3f30jd3i4s3" path="res://GameAssets/Icons/image (23).png" id="1_2bmd3"]
+
+[resource]
+albedo_color = Color(0, 1, 0.34901962, 1)
+albedo_texture = ExtResource("1_2bmd3")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true

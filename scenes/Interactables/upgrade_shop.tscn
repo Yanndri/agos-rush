@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b6nx2awaqwnfs" path="res://GameAssets/Icons/Star Gem/Star Gem Yellow Outline 64.png" id="5_rvjn5"]
 [ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="6_dk8ov"]
 [ext_resource type="Texture2D" uid="uid://4qbd0gdarfg6" path="res://GameAssets/Icons/Shoe Yellow Outline 256.png" id="7_carv0"]
+[ext_resource type="Texture2D" uid="uid://chd2palpoomde" path="res://GameAssets/Icons/X Button Outline 64.png" id="7_eqgco"]
 [ext_resource type="Texture2D" uid="uid://dqmlykt70va3o" path="res://GameAssets/Icons/Backpack Outline 256.png" id="8_edxqe"]
 [ext_resource type="Texture2D" uid="uid://b62aaps1gkkn3" path="res://GameAssets/Icons/Paper Outline 256.png" id="9_eqgco"]
 
@@ -7645,7 +7646,7 @@ _data = {
 &"Yes": SubResource("Animation_xcf5i")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_pvis0"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y57d8"]
 radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q810m"]
@@ -7713,6 +7714,8 @@ corner_radius_bottom_left = 12
 expand_margin_left = 12.0
 expand_margin_right = 12.0
 expand_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ptkwr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dk8ov"]
 bg_color = Color(1, 0.6313726, 0, 1)
@@ -8113,7 +8116,12 @@ autoplay = &"Idle"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0232386, 1.0784063)
 
 [node name="CollisionShape3D" parent="PromptArea" index="0" unique_id=1844716175]
-shape = SubResource("SphereShape3D_pvis0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6283965, 0)
+shape = SubResource("CylinderShape3D_y57d8")
+
+[node name="GlowLight" parent="PromptArea" index="2" unique_id=1060909871]
+light_energy = 5.0
+omni_range = 2.0
 
 [node name="circle_visual" type="MeshInstance3D" parent="PromptArea" unique_id=1647190475]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.007645011)
@@ -8221,6 +8229,11 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.3764706, 0, 1)
 text = "Upgrades"
+
+[node name="Close" type="Button" parent="UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=1705975047]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ptkwr")
+icon = ExtResource("7_eqgco")
 
 [node name="Main" type="MarginContainer" parent="UpgradeUI/MarginContainer/VBoxContainer" unique_id=347143246]
 custom_minimum_size = Vector2(0, 64)

@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://1pld6m8vm05t"]
+
+[ext_resource type="Texture2D" uid="uid://bic8m3brjfwla" path="res://GameAssets/Icons/seamless-textured-grass-natural-grass-pattern_172107-1308.png" id="1_6gfna"]
+
+[resource]
+albedo_color = Color(2.5027991e-06, 0.8259265, 0.5017088, 1)
+albedo_texture = ExtResource("1_6gfna")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true

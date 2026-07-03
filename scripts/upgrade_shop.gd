@@ -4,6 +4,8 @@ extends Node3D
 @export var animation_player_path: NodePath = NodePath("AnimationPlayer")
 @export var prompt_area_path: NodePath = NodePath("PromptArea")
 @export var upgrade_ui_path: NodePath = NodePath("UpgradeUI")
+@export var upgrade_panel_path: NodePath = NodePath("UpgradeUI/MarginContainer")
+@export var close_button_path: NodePath = NodePath("UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer/Close")
 @export var points_amount_path: NodePath = NodePath("UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer/PointsAmount")
 @export var speed_label_path: NodePath = NodePath("UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Speed/HBoxContainer/Label")
 @export var speed_button_path: NodePath = NodePath("UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Speed/HBoxContainer/Buy")
@@ -14,10 +16,14 @@ extends Node3D
 @export var idle_animation := &"Idle"
 @export var wave_animation := &"Wave"
 @export var wave_interval := 4.0
+@export var panel_show_time := 0.18
+@export var panel_hide_time := 0.14
 
 @onready var animation_player: AnimationPlayer = get_node_or_null(animation_player_path) as AnimationPlayer
 @onready var prompt_area: PromptArea = get_node_or_null(prompt_area_path) as PromptArea
 @onready var upgrade_ui: Control = get_node_or_null(upgrade_ui_path) as Control
+@onready var upgrade_panel: Control = get_node_or_null(upgrade_panel_path) as Control
+@onready var close_button: Button = get_node_or_null(close_button_path) as Button
 @onready var points_amount_label: RichTextLabel = get_node_or_null(points_amount_path) as RichTextLabel
 @onready var speed_label: Label = get_node_or_null(speed_label_path) as Label
 @onready var speed_button: Button = get_node_or_null(speed_button_path) as Button
@@ -45,6 +51,8 @@ var hotbar_upgrade_index := 0
 var map_upgrade_index := 0
 var previous_mouse_mode := Input.MOUSE_MODE_VISIBLE
 var upgrade_canvas_layer: CanvasLayer
+var upgrade_panel_tween: Tween
+var upgrade_ui_open := false
 
 
 func _ready() -> void:
@@ -72,6 +80,11 @@ func _setup_upgrade_ui() -> void:
 		upgrade_ui.mouse_filter = Control.MOUSE_FILTER_STOP
 		_set_child_mouse_filters(upgrade_ui)
 
+	if upgrade_panel != null:
+		upgrade_panel.visible = true
+		upgrade_panel.modulate.a = 1.0
+		upgrade_panel.scale = Vector2.ONE
+
 	if speed_button != null and not speed_button.pressed.is_connected(_on_speed_buy_pressed):
 		speed_button.pressed.connect(_on_speed_buy_pressed)
 
@@ -80,6 +93,9 @@ func _setup_upgrade_ui() -> void:
 
 	if map_button != null and not map_button.pressed.is_connected(_on_map_buy_pressed):
 		map_button.pressed.connect(_on_map_buy_pressed)
+
+	if close_button != null and not close_button.pressed.is_connected(_on_close_button_pressed):
+		close_button.pressed.connect(_on_close_button_pressed)
 
 	_update_shop_ui()
 
@@ -116,12 +132,31 @@ func _show_upgrade_ui() -> void:
 		previous_mouse_mode = Input.mouse_mode
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		upgrade_ui.visible = true
+		upgrade_ui_open = true
+		_kill_upgrade_panel_tween()
+
+		if upgrade_panel != null:
+			upgrade_panel_tween = YapperTweens.panel_in(upgrade_panel, panel_show_time)
 
 
 func _hide_upgrade_ui() -> void:
-	if upgrade_ui != null:
-		upgrade_ui.visible = false
-		Input.mouse_mode = previous_mouse_mode
+	if upgrade_ui == null or not upgrade_ui.visible:
+		return
+
+	upgrade_ui_open = false
+	Input.mouse_mode = previous_mouse_mode
+	_kill_upgrade_panel_tween()
+
+	if upgrade_panel != null:
+		upgrade_panel_tween = YapperTweens.panel_out(upgrade_panel, panel_hide_time)
+		if upgrade_panel_tween != null:
+			upgrade_panel_tween.finished.connect(func() -> void:
+				if not upgrade_ui_open and is_instance_valid(upgrade_ui):
+					upgrade_ui.visible = false
+			)
+			return
+
+	upgrade_ui.visible = false
 
 
 func _move_upgrade_ui_to_canvas_layer() -> void:
@@ -142,6 +177,13 @@ func _set_child_mouse_filters(root: Node) -> void:
 			control.mouse_filter = Control.MOUSE_FILTER_PASS
 
 		_set_child_mouse_filters(child)
+
+
+func _kill_upgrade_panel_tween() -> void:
+	if upgrade_panel_tween != null and upgrade_panel_tween.is_valid():
+		upgrade_panel_tween.kill()
+
+	upgrade_panel_tween = null
 
 
 func _on_prompt_area_local_player_entered(player: CharacterBody3D) -> void:
@@ -203,6 +245,10 @@ func _on_map_buy_pressed() -> void:
 
 	map_upgrade_index += 1
 	_update_shop_ui()
+
+
+func _on_close_button_pressed() -> void:
+	_hide_upgrade_ui()
 
 
 func _update_shop_ui() -> void:

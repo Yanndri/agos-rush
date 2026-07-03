@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://byxwtg6ixky0p"]
 
 [ext_resource type="MeshLibrary" uid="uid://chb7kf5o40f76" path="res://MeshLibrary/BlocksLib4.meshlib" id="1_whrjg"]
+[ext_resource type="Material" uid="uid://1pld6m8vm05t" path="res://Themes/grass_ground_material.tres" id="2_4vfpq"]
 [ext_resource type="Shader" uid="uid://jqrwa1d8fqbj" path="res://Imports/BinbunGrass/src/shader/grass.gdshader" id="2_kdyc3"]
 [ext_resource type="Texture2D" uid="uid://dv6g2qxppq3ec" path="res://Imports/BinbunGrass/src/texture/basic/grass_basic_atlas.png" id="3_4synu"]
 [ext_resource type="Texture2D" uid="uid://co5sp06yppnpi" path="res://Imports/BinbunGrass/src/texture/basic/grass_basic_02.png" id="4_cyf2o"]
@@ -16,9 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://b2kaq458ei8iu" path="res://scenes/waveA.tres" id="14_ol44e"]
 [ext_resource type="Texture2D" uid="uid://cr7j51dcas6n2" path="res://scenes/waveB.tres" id="15_5ubli"]
 [ext_resource type="Script" uid="uid://c4yv3itqsy04x" path="res://scripts/flood_water.gd" id="16_2wvi4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xk3c"]
-albedo_color = Color(0.07058824, 0.6156863, 0.2627451, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ulx81"]
 size = Vector2(1000, 1000)
@@ -160,7 +158,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="Ground" type="MeshInstance3D" parent="BaseGround" unique_id=451273777]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.009117365, 0)
-material_override = SubResource("StandardMaterial3D_2xk3c")
+material_override = ExtResource("2_4vfpq")
 mesh = SubResource("PlaneMesh_ulx81")
 
 [node name="GroundBody" type="StaticBody3D" parent="BaseGround/Ground" unique_id=523233781]
