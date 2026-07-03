@@ -6,7 +6,7 @@ extends Node3D
 @export var waiting_players_path: NodePath = NodePath("WaitingPlayers")
 
 func _ready() -> void:
-	_update_room_code_label("LAN Code: %s" % NetworkManager.host_code if multiplayer.multiplayer_peer and multiplayer.is_server() and not NetworkManager.host_code.is_empty() else "")
+	_update_room_code_label("%s" % NetworkManager.host_code if multiplayer.multiplayer_peer and multiplayer.is_server() and not NetworkManager.host_code.is_empty() else "")
 	
 	if multiplayer.multiplayer_peer == null:
 		_spawn_player(1)
@@ -106,7 +106,7 @@ func _show_host_code_label() -> void:
 	add_child(layer)
 	var label := Label.new()
 	label.name = "HostCodeLabel"
-	label.text = "LAN Code: %s" % NetworkManager.host_code
+	label.text = "%s" % NetworkManager.host_code
 	print("MultiplayerMain2: ", NetworkManager.host_code)
 	label.position = Vector2(12, 12)
 	label.add_theme_font_size_override("font_size", 22)

@@ -23,6 +23,7 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @export var steer_right_action := "move_right"
 @export var left_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorL")
 @export var right_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorR")
+@export var storage_path: NodePath = NodePath("Storage")
 @export var left_door_closed_z_degrees := -140.0
 @export var right_door_closed_z_degrees := 140.0
 @export var door_close_duration := 1.0
@@ -31,6 +32,7 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @onready var truck: MeshInstance3D = $"Model/Ambulance-Truck"
 @onready var left_door: Node3D = get_node_or_null(left_door_path) as Node3D
 @onready var right_door: Node3D = get_node_or_null(right_door_path) as Node3D
+@onready var storage: Node3D = get_node_or_null(storage_path) as Node3D
 @onready var front_left_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL"
 @onready var front_right_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFR"
 @onready var front_left_wheel_mesh: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL/Ambulance-Truck_TireFL"
@@ -63,6 +65,7 @@ func _ready() -> void:
 		left_door_open_z_degrees = left_door.rotation_degrees.z
 	if right_door != null:
 		right_door_open_z_degrees = right_door.rotation_degrees.z
+	_set_storage_visible(true)
 	driver_area.body_entered.connect(_on_driver_area_body_entered)
 	driver_area.body_exited.connect(_on_driver_area_body_exited)
 
@@ -226,11 +229,21 @@ func _sync_vehicle_state(remote_transform: Transform3D, remote_drive_speed: floa
 
 
 func _close_doors() -> void:
+	_set_storage_visible(false)
 	_tween_doors(left_door_closed_z_degrees, right_door_closed_z_degrees)
 
 
 func _open_doors() -> void:
+	_set_storage_visible(true)
 	_tween_doors(left_door_open_z_degrees, right_door_open_z_degrees)
+
+
+func _set_storage_visible(value: bool) -> void:
+	if storage == null:
+		return
+
+	storage.visible = value
+	storage.process_mode = Node.PROCESS_MODE_INHERIT if value else Node.PROCESS_MODE_DISABLED
 
 
 func _tween_doors(left_z_degrees: float, right_z_degrees: float) -> void:

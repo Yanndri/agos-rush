@@ -4,6 +4,7 @@ const PORT := 7777
 const DISCOVERY_PORT := 7778
 const MAX_PLAYERS := 8
 const MAIN_SCENE := "res://scenes/Main.tscn"
+const WAITING_LOBBY_SCENE := "res://scenes/waiting_lobby.tscn"
 const BROADCAST_INTERVAL := 0.5
 
 signal status_changed(message: String)
@@ -15,6 +16,7 @@ var broadcast_timer := 0.0
 var discovery_peer: PacketPeerUDP
 var is_hosting := false
 var is_searching := false
+var lobby_game_started := false
 
 func _process(delta: float) -> void:
 	if is_hosting:
@@ -37,6 +39,7 @@ func _process(delta: float) -> void:
 func host_game() -> bool:
 	_stop_discovery()
 	host_code = _make_host_code()
+	lobby_game_started = false
 	var peer := ENetMultiplayerPeer.new()
 	var error := peer.create_server(PORT, MAX_PLAYERS)
 	if error != OK:
@@ -44,10 +47,12 @@ func host_game() -> bool:
 		status_changed.emit(last_error)
 		return false
 	multiplayer.multiplayer_peer = peer
+	if not multiplayer.peer_connected.is_connected(_on_peer_connected):
+		multiplayer.peer_connected.connect(_on_peer_connected)
 	_start_broadcasting()
 	status_changed.emit("Hosting. Code: %s" % host_code)
 	print("network_manager: ", host_code)
-	get_tree().change_scene_to_file(MAIN_SCENE)
+	get_tree().change_scene_to_file(WAITING_LOBBY_SCENE)
 	return true
 
 func join_game(address: String) -> bool:
@@ -61,7 +66,7 @@ func join_game(address: String) -> bool:
 		status_changed.emit(last_error)
 		return false
 	multiplayer.multiplayer_peer = peer
-	get_tree().change_scene_to_file(MAIN_SCENE)
+	status_changed.emit("Joining game...")
 	return true
 
 func join_game_by_code(code: String) -> bool:
@@ -83,9 +88,23 @@ func join_game_by_code(code: String) -> bool:
 
 func leave_game() -> void:
 	_stop_discovery()
+	lobby_game_started = false
+	if multiplayer.peer_connected.is_connected(_on_peer_connected):
+		multiplayer.peer_connected.disconnect(_on_peer_connected)
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
+
+func _on_peer_connected(_peer_id: int) -> void:
+	if not multiplayer.is_server() or lobby_game_started:
+		return
+	lobby_game_started = true
+	_stop_discovery()
+	_load_main_scene.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func _load_main_scene() -> void:
+	get_tree().change_scene_to_file(MAIN_SCENE)
 
 func _start_broadcasting() -> void:
 	discovery_peer = PacketPeerUDP.new()
