@@ -155,6 +155,7 @@ shape = SubResource("BoxShape3D_taf4q")
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1121212336]
 
 [node name="StorageUI" type="Control" parent="CanvasLayer" unique_id=1471762048]
+visible = false
 custom_minimum_size = Vector2(300, 360)
 layout_mode = 3
 anchors_preset = 8

@@ -78,16 +78,48 @@ func _store_item(item: PickableItem, preferred_slot_index := -1) -> bool:
 	if storage_slot_index == -1:
 		return false
 
+	var item_path := item.get_path()
+	var player_name := StringName(nearby_player.name) if nearby_player != null else StringName("")
+	if multiplayer.multiplayer_peer != null:
+		_sync_store_item.rpc(item_path, storage_slot_index, player_name)
+		return true
+
+	_apply_store_item(item, storage_slot_index, player_name)
+	return true
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _sync_store_item(item_path: NodePath, storage_slot_index: int, player_name: StringName) -> void:
+	var item := get_node_or_null(item_path) as PickableItem
+	if item == null:
+		return
+
+	_apply_store_item(item, storage_slot_index, player_name)
+
+
+func _apply_store_item(item: PickableItem, storage_slot_index: int, player_name: StringName) -> void:
+	if item == null:
+		return
+
 	var inventory := _get_player_inventory()
 	if inventory != null:
 		inventory.remove_item(item)
 
 	_ensure_storage_size()
+	if storage_slot_index < 0 or storage_slot_index >= stored_items.size():
+		return
+
 	stored_items[storage_slot_index] = item
 	item.store_in_ambulance(stored_items_parent)
 	_update_storage_ui()
+
+	var player := get_tree().current_scene.get_node_or_null(String(player_name)) as CharacterBody3D
+	if player != null:
+		var interactor := player.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
+		if interactor != null:
+			interactor.clear_held_item(item)
+
 	print("STORAGE | stored item=", item.name, " | storage=", name)
-	return true
 
 
 func _toggle_storage_ui() -> void:
@@ -185,17 +217,6 @@ func get_storage_drag_data(slot_index: int) -> Dictionary:
 	if item == null:
 		return {}
 
-	var preview := TextureRect.new()
-	preview.texture = item.hotbar_icon
-	preview.custom_minimum_size = Vector2(48, 48)
-	preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	preview.modulate = Color(1, 1, 1, 0.8)
-
-	var slot_control := slot_controls[slot_index] if slot_index < slot_controls.size() else null
-	if slot_control != null:
-		slot_control.set_drag_preview(preview)
-
 	return {
 		"type": "storage_item",
 		"storage": self,
@@ -220,11 +241,43 @@ func retrieve_stored_item(data: Variant, inventory: PlayerInventory, hotbar_slot
 		return false
 	if not inventory.can_drop_storage_item(data, hotbar_slot_index):
 		return false
-	if not item.take_from_storage(nearby_player):
+
+	var item_path := item.get_path()
+	var player_name := StringName(nearby_player.name) if nearby_player != null else StringName("")
+	if multiplayer.multiplayer_peer != null:
+		_sync_retrieve_item.rpc(item_path, storage_slot_index, player_name, hotbar_slot_index)
+		return true
+
+	return _apply_retrieve_item(item, storage_slot_index, player_name, hotbar_slot_index)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func _sync_retrieve_item(item_path: NodePath, storage_slot_index: int, player_name: StringName, hotbar_slot_index: int) -> void:
+	var item := get_node_or_null(item_path) as PickableItem
+	if item == null:
+		return
+
+	_apply_retrieve_item(item, storage_slot_index, player_name, hotbar_slot_index)
+
+
+func _apply_retrieve_item(item: PickableItem, storage_slot_index: int, player_name: StringName, hotbar_slot_index: int) -> bool:
+	if item == null or not is_instance_valid(item):
 		return false
-	if not inventory.add_item_to_slot(item, hotbar_slot_index):
-		item.store_in_ambulance(stored_items_parent)
+	if _get_stored_item_at(storage_slot_index) != item:
 		return false
+
+	var player := get_tree().current_scene.get_node_or_null(String(player_name)) as CharacterBody3D
+	if player == null:
+		return false
+	if not item.take_from_storage(player):
+		return false
+
+	var interactor := player.get_node_or_null("PlayerPickupInteractor") as PlayerPickupInteractor
+	if interactor != null and interactor.is_local_player():
+		var inventory := player.get_node_or_null("PlayerInventory") as PlayerInventory
+		if inventory == null or not inventory.add_item_to_slot(item, hotbar_slot_index):
+			item.store_in_ambulance(stored_items_parent)
+			return false
 
 	stored_items[storage_slot_index] = null
 	_update_storage_ui()

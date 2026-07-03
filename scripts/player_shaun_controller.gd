@@ -14,6 +14,7 @@ extends CharacterBody3D
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var player_ui_path: NodePath = NodePath("PlayerUI")
 @export var dialogue_container_path: NodePath = NodePath("PlayerUI/DialogueContainer")
 @export var dialogue_label_path: NodePath = NodePath("PlayerUI/DialogueContainer/VBoxContainer/MarginContainer/DialogueLabel")
 @export var dialogue_type_interval := 0.025
@@ -25,6 +26,7 @@ extends CharacterBody3D
 @onready var animation_playback: AnimationNodeStateMachinePlayback = animation_tree.get("parameters/playback")
 @onready var character_armature: Node3D = $PlayerModel/CharacterArmature
 @onready var camera: Camera3D = $PlayerModel/CameraPivot/Camera3D
+@onready var player_ui: CanvasItem = get_node_or_null(player_ui_path) as CanvasItem
 @onready var dialogue_container: CanvasItem = get_node_or_null(dialogue_container_path) as CanvasItem
 @onready var dialogue_label: Label = get_node_or_null(dialogue_label_path) as Label
 
@@ -52,6 +54,7 @@ func _ready() -> void:
 	visible = true
 	animation_tree.active = true
 	camera.current = false
+	_update_local_ui()
 	call_deferred("_update_local_camera")
 	_play_animation(&"Idle")
 
@@ -59,7 +62,14 @@ func _ready() -> void:
 func _update_local_camera() -> void:
 	camera.current = is_multiplayer_authority() and not map_view_active
 
+
+func _update_local_ui() -> void:
+	if player_ui != null:
+		player_ui.visible = multiplayer.multiplayer_peer == null or is_multiplayer_authority()
+
 func _process(_delta: float) -> void:
+	_update_local_ui()
+
 	if map_view_active:
 		camera.current = false
 		return

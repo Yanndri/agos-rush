@@ -249,17 +249,6 @@ func get_hotbar_drag_data(slot_index: int) -> Dictionary:
 	if item == null or not is_instance_valid(item):
 		return {}
 
-	var preview := TextureRect.new()
-	preview.texture = item.hotbar_icon
-	preview.custom_minimum_size = Vector2(48, 48)
-	preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
-	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	preview.modulate = Color(1, 1, 1, 0.8)
-
-	var slot := hotbar_slots[slot_index] if slot_index < hotbar_slots.size() else null
-	if slot != null:
-		slot.set_drag_preview(preview)
-
 	return {
 		"type": "hotbar_item",
 		"inventory": self,
