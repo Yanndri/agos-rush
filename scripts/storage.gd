@@ -1,17 +1,23 @@
 extends Node3D
 
+const STORAGE_SLOT_DROP_TARGET_SCRIPT := preload("res://scripts/storage_slot_drop_target.gd")
+
 @export var interact_action := "interact"
 @export var store_radius := 1.5
 @export var stored_items_parent_path: NodePath = NodePath("StoredItems")
 @export var prompt_area_path: NodePath = NodePath("PromptArea")
+@export var ui_layer_path: NodePath = NodePath("CanvasLayer")
+@export var storage_ui_path: NodePath = NodePath("CanvasLayer/StorageUI")
 
 @onready var prompt_area: PromptArea = get_node_or_null(prompt_area_path) as PromptArea
 @onready var stored_items_parent: Node3D = _get_or_create_stored_items_parent()
+@onready var ui_layer: CanvasLayer = get_node_or_null(ui_layer_path) as CanvasLayer
+@onready var storage_ui: Control = get_node_or_null(storage_ui_path) as Control
 
 var nearby_player: CharacterBody3D
 var stored_items: Array[PickableItem] = []
-var ui_layer: CanvasLayer
-var item_list_label: Label
+var item_slots: Array[TextureRect] = []
+var slot_controls: Array[Control] = []
 
 
 func _ready() -> void:
@@ -19,7 +25,7 @@ func _ready() -> void:
 		prompt_area.local_player_entered.connect(_on_local_player_entered)
 		prompt_area.local_player_exited.connect(_on_local_player_exited)
 
-	_create_storage_ui()
+	_setup_storage_ui()
 	_update_storage_ui()
 
 
@@ -64,65 +70,215 @@ func _store_nearby_dropped_items() -> void:
 		_store_item(item)
 
 
-func _store_item(item: PickableItem) -> void:
-	stored_items.append(item)
+func _store_item(item: PickableItem, preferred_slot_index := -1) -> bool:
+	if item == null or item in stored_items:
+		return false
+
+	var storage_slot_index := _get_storage_slot_index(preferred_slot_index)
+	if storage_slot_index == -1:
+		return false
+
+	var inventory := _get_player_inventory()
+	if inventory != null:
+		inventory.remove_item(item)
+
+	_ensure_storage_size()
+	stored_items[storage_slot_index] = item
 	item.store_in_ambulance(stored_items_parent)
 	_update_storage_ui()
 	print("STORAGE | stored item=", item.name, " | storage=", name)
+	return true
 
 
 func _toggle_storage_ui() -> void:
-	if ui_layer == null:
+	if storage_ui == null:
 		return
-	ui_layer.visible = not ui_layer.visible
-	if ui_layer.visible:
+
+	storage_ui.visible = not storage_ui.visible
+	if storage_ui.visible:
 		_update_storage_ui()
 
 
 func _hide_storage_ui() -> void:
+	if storage_ui != null:
+		storage_ui.visible = false
+
+
+func _setup_storage_ui() -> void:
 	if ui_layer != null:
-		ui_layer.visible = false
+		ui_layer.visible = true
+
+	if storage_ui == null:
+		push_warning("Storage is missing CanvasLayer/StorageUI.")
+		return
+
+	storage_ui.visible = false
+	storage_ui.mouse_filter = Control.MOUSE_FILTER_STOP
+	item_slots.clear()
+	slot_controls.clear()
+	_collect_item_slots(storage_ui)
 
 
-func _create_storage_ui() -> void:
-	ui_layer = CanvasLayer.new()
-	ui_layer.name = "StorageUI"
-	ui_layer.visible = false
-	add_child(ui_layer)
+func _collect_item_slots(root: Node) -> void:
+	for child in root.get_children():
+		var texture_rect := child as TextureRect
+		if texture_rect != null:
+			var slot_index := item_slots.size()
+			item_slots.append(texture_rect)
 
-	var panel := Panel.new()
-	panel.name = "Panel"
-	panel.position = Vector2(32, 96)
-	panel.size = Vector2(280, 220)
-	ui_layer.add_child(panel)
+			var slot_control := texture_rect.get_parent() as Control
+			slot_controls.append(slot_control)
+			if slot_control != null:
+				slot_control.set_script(STORAGE_SLOT_DROP_TARGET_SCRIPT)
+				slot_control.set_meta("storage", self)
+				slot_control.set_meta("slot_index", slot_index)
+				slot_control.mouse_filter = Control.MOUSE_FILTER_STOP
 
-	var title := Label.new()
-	title.name = "Title"
-	title.text = "Storage"
-	title.position = Vector2(12, 10)
-	title.size = Vector2(256, 28)
-	panel.add_child(title)
+		_collect_item_slots(child)
 
-	item_list_label = Label.new()
-	item_list_label.name = "ItemList"
-	item_list_label.position = Vector2(12, 44)
-	item_list_label.size = Vector2(256, 164)
-	item_list_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	panel.add_child(item_list_label)
+	_ensure_storage_size()
 
 
 func _update_storage_ui() -> void:
-	if item_list_label == null:
-		return
-	if stored_items.is_empty():
-		item_list_label.text = "Empty"
+	for slot_index in item_slots.size():
+		var slot := item_slots[slot_index]
+		var item := _get_stored_item_at(slot_index)
+		if item == null or not is_instance_valid(item):
+			slot.texture = null
+			slot.visible = false
+			continue
+
+		slot.texture = item.hotbar_icon
+		slot.visible = true
+
+
+func can_drop_hotbar_item(data: Variant) -> bool:
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+
+	var drag_data: Dictionary = data
+	if drag_data.get("type", "") != "hotbar_item":
+		return false
+
+	var inventory := drag_data.get("inventory") as PlayerInventory
+	if inventory == null or inventory != _get_player_inventory():
+		return false
+
+	var item := drag_data.get("item") as PickableItem
+	if item == null or not is_instance_valid(item):
+		return false
+
+	return _get_storage_slot_index(-1) != -1
+
+
+func drop_hotbar_item(data: Variant, slot_index: int) -> void:
+	if not can_drop_hotbar_item(data):
 		return
 
-	var lines: Array[String] = []
-	for item in stored_items:
-		if is_instance_valid(item):
-			lines.append("- " + item.name)
-	item_list_label.text = "\n".join(lines)
+	var drag_data: Dictionary = data
+	var item := drag_data.get("item") as PickableItem
+	_store_item(item, slot_index)
+
+
+func get_storage_drag_data(slot_index: int) -> Dictionary:
+	var item := _get_stored_item_at(slot_index)
+	if item == null:
+		return {}
+
+	var preview := TextureRect.new()
+	preview.texture = item.hotbar_icon
+	preview.custom_minimum_size = Vector2(48, 48)
+	preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	preview.modulate = Color(1, 1, 1, 0.8)
+
+	var slot_control := slot_controls[slot_index] if slot_index < slot_controls.size() else null
+	if slot_control != null:
+		slot_control.set_drag_preview(preview)
+
+	return {
+		"type": "storage_item",
+		"storage": self,
+		"item": item,
+		"slot_index": slot_index,
+	}
+
+
+func retrieve_stored_item(data: Variant, inventory: PlayerInventory, hotbar_slot_index: int) -> bool:
+	if typeof(data) != TYPE_DICTIONARY or inventory == null:
+		return false
+
+	var drag_data: Dictionary = data
+	if drag_data.get("type", "") != "storage_item" or drag_data.get("storage") != self:
+		return false
+
+	var item := drag_data.get("item") as PickableItem
+	var storage_slot_index := int(drag_data.get("slot_index", -1))
+	if item == null or not is_instance_valid(item):
+		return false
+	if _get_stored_item_at(storage_slot_index) != item:
+		return false
+	if not inventory.can_drop_storage_item(data, hotbar_slot_index):
+		return false
+	if not item.take_from_storage(nearby_player):
+		return false
+	if not inventory.add_item_to_slot(item, hotbar_slot_index):
+		item.store_in_ambulance(stored_items_parent)
+		return false
+
+	stored_items[storage_slot_index] = null
+	_update_storage_ui()
+	return true
+
+
+func _get_player_inventory() -> PlayerInventory:
+	if nearby_player == null:
+		return null
+
+	return nearby_player.get_node_or_null("PlayerInventory") as PlayerInventory
+
+
+func _get_inventory_item_at(inventory: PlayerInventory, slot_index: int) -> PickableItem:
+	if inventory == null or slot_index < 0 or slot_index >= inventory.items.size():
+		return null
+
+	var item := inventory.items[slot_index]
+	if item == null or not is_instance_valid(item):
+		return null
+
+	return item
+
+
+func _get_stored_item_at(slot_index: int) -> PickableItem:
+	if slot_index < 0 or slot_index >= stored_items.size():
+		return null
+
+	var item := stored_items[slot_index]
+	if item == null or not is_instance_valid(item):
+		return null
+
+	return item
+
+
+func _get_storage_slot_index(preferred_slot_index: int) -> int:
+	_ensure_storage_size()
+
+	if preferred_slot_index >= 0 and preferred_slot_index < stored_items.size():
+		var preferred_item := stored_items[preferred_slot_index]
+		if preferred_item == null or not is_instance_valid(preferred_item):
+			return preferred_slot_index
+
+	for slot_index in stored_items.size():
+		var item := stored_items[slot_index]
+		if item == null or not is_instance_valid(item):
+			return slot_index
+
+	return -1
+
+
+func _ensure_storage_size() -> void:
+	while stored_items.size() < item_slots.size():
+		stored_items.append(null)
 
 
 func _get_or_create_stored_items_parent() -> Node3D:

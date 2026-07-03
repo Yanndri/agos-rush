@@ -3,6 +3,8 @@ class_name PlayerInventory
 
 signal selected_item_changed(item: PickableItem)
 
+const HOTBAR_DRAG_SOURCE_SCRIPT := preload("res://scripts/hotbar_drag_source.gd")
+
 @export var hotbar_path: NodePath = NodePath("../PlayerUI/Hotbar")
 @export var max_hotbar_slots := 5
 
@@ -85,6 +87,29 @@ func add_item(item: PickableItem) -> bool:
 	return true
 
 
+func add_item_to_slot(item: PickableItem, slot_index: int) -> bool:
+	if item == null:
+		return false
+
+	_ensure_inventory_size()
+
+	if slot_index < 0 or slot_index >= items.size():
+		return false
+
+	var existing_index := items.find(item)
+	if existing_index != -1:
+		items[existing_index] = null
+
+	var slot_item := items[slot_index]
+	if slot_item != null and is_instance_valid(slot_item):
+		return false
+
+	items[slot_index] = item
+	selected_slot_index = slot_index
+	_sync_selected_item()
+	return true
+
+
 func remove_item(item: PickableItem) -> void:
 	var slot_index := items.find(item)
 	if slot_index == -1:
@@ -140,6 +165,7 @@ func _cache_hotbar_slots() -> void:
 		var slot := child as Control
 		if slot != null:
 			hotbar_slots.append(slot)
+			_setup_slot_drag_source(slot, hotbar_slots.size() - 1)
 
 	_ensure_inventory_size()
 
@@ -168,6 +194,8 @@ func _create_hotbar_slot(slot_index: int) -> Control:
 	if icon != null:
 		icon.texture = null
 		icon.visible = false
+
+	_setup_slot_drag_source(new_slot, slot_index)
 
 	return new_slot
 
@@ -202,6 +230,76 @@ func _get_slot_icon(slot: Control) -> TextureRect:
 			return icon
 
 	return null
+
+
+func _setup_slot_drag_source(slot: Control, slot_index: int) -> void:
+	slot.set_script(HOTBAR_DRAG_SOURCE_SCRIPT)
+	slot.set_meta("inventory", self)
+	slot.set_meta("slot_index", slot_index)
+	slot.mouse_filter = Control.MOUSE_FILTER_STOP
+
+
+func get_hotbar_drag_data(slot_index: int) -> Dictionary:
+	_ensure_inventory_size()
+
+	if slot_index < 0 or slot_index >= items.size():
+		return {}
+
+	var item := items[slot_index]
+	if item == null or not is_instance_valid(item):
+		return {}
+
+	var preview := TextureRect.new()
+	preview.texture = item.hotbar_icon
+	preview.custom_minimum_size = Vector2(48, 48)
+	preview.expand_mode = TextureRect.EXPAND_FIT_WIDTH_PROPORTIONAL
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	preview.modulate = Color(1, 1, 1, 0.8)
+
+	var slot := hotbar_slots[slot_index] if slot_index < hotbar_slots.size() else null
+	if slot != null:
+		slot.set_drag_preview(preview)
+
+	return {
+		"type": "hotbar_item",
+		"inventory": self,
+		"item": item,
+		"slot_index": slot_index,
+	}
+
+
+func can_drop_storage_item(data: Variant, slot_index: int) -> bool:
+	if typeof(data) != TYPE_DICTIONARY:
+		return false
+
+	_ensure_inventory_size()
+	if slot_index < 0 or slot_index >= items.size():
+		return false
+
+	var slot_item := items[slot_index]
+	if slot_item != null and is_instance_valid(slot_item):
+		return false
+
+	var drag_data: Dictionary = data
+	if drag_data.get("type", "") != "storage_item":
+		return false
+
+	var item := drag_data.get("item") as PickableItem
+	if item == null or not is_instance_valid(item):
+		return false
+
+	var storage := drag_data.get("storage") as Node
+	return storage != null and storage.has_method("retrieve_stored_item")
+
+
+func drop_storage_item(data: Variant, slot_index: int) -> void:
+	if not can_drop_storage_item(data, slot_index):
+		return
+
+	var drag_data: Dictionary = data
+	var storage := drag_data.get("storage") as Node
+	if storage != null:
+		storage.retrieve_stored_item(data, self, slot_index)
 
 
 func _ensure_inventory_size() -> void:

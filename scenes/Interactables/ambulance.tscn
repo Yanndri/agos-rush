@@ -307,7 +307,7 @@ shadow_mesh = SubResource("ArrayMesh_y4rbg")
 radius = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_y57d8"]
-size = Vector3(10, 10, 10)
+size = Vector3(7, 5, 5)
 
 [node name="Ambulance" type="CharacterBody3D" unique_id=658099606]
 collision_layer = 32
@@ -412,7 +412,7 @@ disabled = true
 [node name="DriverArea" parent="." unique_id=989733329 instance=ExtResource("7_3fhhq")]
 
 [node name="CollisionShape3D" parent="DriverArea" index="0" unique_id=1844716175]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2839627, 4.518586, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7873683, 1.2323635, 0)
 shape = SubResource("BoxShape3D_y57d8")
 debug_color = Color(0.9999737, 0, 0.110571496, 0.41960785)
 

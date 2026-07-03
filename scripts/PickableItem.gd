@@ -245,5 +245,34 @@ func store_in_ambulance(storage_parent: Node3D) -> void:
 	position = Vector3.ZERO
 	rotation = Vector3.ZERO
 
+
+func take_from_storage(player: CharacterBody3D) -> bool:
+	if player == null:
+		return false
+
+	var hand := _get_hand_for_player(player)
+	if hand == null:
+		push_warning("No pickup hand found for player: " + str(player.name))
+		return false
+
+	if drop_tween:
+		drop_tween.kill()
+		drop_tween = null
+
+	picked_up = true
+	holder = player
+	visible = true
+	process_mode = Node.PROCESS_MODE_INHERIT
+	prompt_area.set_prompt_enabled(false)
+
+	if spin_node != null:
+		spin_node.transform = spin_node_start_transform
+
+	reparent(hand, false)
+	position = held_position
+	rotation_degrees = held_rotation_degrees
+	scale = held_scale
+	return true
+
 func _finish_drop_glide() -> void:
 	prompt_area.set_prompt_enabled(true)

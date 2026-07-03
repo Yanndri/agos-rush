@@ -2,9 +2,36 @@
 
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="1_d8tty"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptkwr"]
+bg_color = Color(0.7162962, 0.7162962, 0.7162962, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 12
+border_color = Color(0.19076231, 0.19076234, 0.19076231, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lc3u1"]
+bg_color = Color(0.43134022, 0.43134025, 0.43134025, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
 
 [resource]
 Label/constants/outline_size = 8
 Label/fonts/font = ExtResource("1_d8tty")
+Panel/styles/panel = SubResource("StyleBoxFlat_ptkwr")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_lc3u1")

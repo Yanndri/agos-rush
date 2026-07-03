@@ -5,6 +5,9 @@
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="3_0em1q"]
 [ext_resource type="Script" uid="uid://bjs2627vo6mf1" path="res://scripts/storage.gd" id="3_storage"]
 [ext_resource type="Texture2D" uid="uid://b6nx2awaqwnfs" path="res://GameAssets/Icons/Star Gem/Star Gem Yellow Outline 64.png" id="4_kwt21"]
+[ext_resource type="Theme" uid="uid://dyuuqg8g5hnqw" path="res://Themes/hotbar.tres" id="6_j6qnm"]
+[ext_resource type="Texture2D" uid="uid://cttmvy6uqcii4" path="res://icon.svg" id="7_a3mhi"]
+[ext_resource type="Texture2D" uid="uid://cbc0k025jfsk1" path="res://GameAssets/Icons/medicine-and-thematic-things-pixel-art-3232-icon-pack/1 Icons/Icon2_13.png" id="8_qkhkf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y57d8"]
 radius = 1.0
@@ -148,5 +151,214 @@ collision_mask = 56
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Chest/StaticBody3D" unique_id=1267369322]
 shape = SubResource("BoxShape3D_taf4q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1121212336]
+
+[node name="StorageUI" type="Control" parent="CanvasLayer" unique_id=1471762048]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_j6qnm")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/StorageUI" unique_id=1304135813]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Storage" type="MarginContainer" parent="CanvasLayer/StorageUI" unique_id=1034286525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_j6qnm")
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/StorageUI/Storage" unique_id=515426101]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Row1" type="HBoxContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer" unique_id=1381461532]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1" unique_id=220529787]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1/Slot1" unique_id=930305103]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("7_a3mhi")
+expand_mode = 2
+
+[node name="Slot2" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1" unique_id=919637324]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1/Slot2" unique_id=1038714706]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Slot3" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1" unique_id=1533360843]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row1/Slot3" unique_id=998626358]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Row2" type="HBoxContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer" unique_id=130539152]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2" unique_id=1322966437]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2/Slot1" unique_id=840688871]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("7_a3mhi")
+expand_mode = 2
+
+[node name="Slot2" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2" unique_id=378116319]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2/Slot2" unique_id=1257855838]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Slot3" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2" unique_id=1804054005]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row2/Slot3" unique_id=499100267]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Row3" type="HBoxContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer" unique_id=1491125901]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3" unique_id=665779344]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3/Slot1" unique_id=1786093578]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("7_a3mhi")
+expand_mode = 2
+
+[node name="Slot2" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3" unique_id=2048646554]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3/Slot2" unique_id=766333367]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Slot3" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3" unique_id=1805550764]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row3/Slot3" unique_id=124348429]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Row4" type="HBoxContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer" unique_id=729899817]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Slot1" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4" unique_id=1272947150]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4/Slot1" unique_id=319092822]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("7_a3mhi")
+expand_mode = 2
+
+[node name="Slot2" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4" unique_id=1352213859]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4/Slot2" unique_id=1890397134]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Slot3" type="PanelContainer" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4" unique_id=838281905]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/StorageUI/Storage/VBoxContainer/Row4/Slot3" unique_id=119461040]
+texture_filter = 1
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture = ExtResource("8_qkhkf")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/StorageUI" unique_id=258119497]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -61.5
+offset_right = 61.5
+offset_bottom = 26.0
+grow_horizontal = 2
+text = "Storage"
+vertical_alignment = 1
 
 [editable path="PromptArea"]
