@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="1_u001w"]
 [ext_resource type="Script" uid="uid://iiqdj6w33gcv" path="res://scripts/game_ui.gd" id="2_bt76a"]
 [ext_resource type="Script" uid="uid://pdr437eaqql1" path="res://scripts/game_timer.gd" id="2_u2dgd"]
-[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="3_bt76a"]
+[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/TextChat.tscn" id="3_bt76a"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp0k4"]
 bg_color = Color(1, 0.6313726, 0, 1)
@@ -52,6 +52,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wp0k4")
 [node name="GameTimer" type="MarginContainer" parent="TopBar" unique_id=1042639952]
 layout_mode = 2
 script = ExtResource("2_u2dgd")
+start_time_seconds = 50.0
 
 [node name="TimerLabel" type="Label" parent="TopBar/GameTimer" unique_id=499418632]
 layout_mode = 2
@@ -136,6 +137,20 @@ size_flags_horizontal = 3
 text = "1200"
 horizontal_alignment = 2
 
+[node name="TotalScore" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer" unique_id=327945410]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/TotalScore" unique_id=900106327]
+layout_mode = 2
+text = "Total Score"
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/TotalScore" unique_id=517451807]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
 [node name="Player2" type="MarginContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores" unique_id=428533601]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -172,5 +187,19 @@ size_flags_horizontal = 3
 text = "1200"
 horizontal_alignment = 2
 
-[node name="Milestone" parent="." unique_id=487340569 instance=ExtResource("3_bt76a")]
+[node name="TotalScore" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer" unique_id=1710644123]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/TotalScore" unique_id=1967713692]
+layout_mode = 2
+text = "Total Score"
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/TotalScore" unique_id=914525862]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="TextChat" parent="." unique_id=487340569 instance=ExtResource("3_bt76a")]
 layout_mode = 1

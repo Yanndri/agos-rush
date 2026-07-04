@@ -110,6 +110,13 @@ flooded_water = NodePath("Water")
 [node name="Water" parent="WaterValve" unique_id=883607251 instance=ExtResource("7_piqqr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.482395, -1.132979, -19.45842)
 mesh = SubResource("BoxMesh_tkq6o")
+rise_speed = 0.12
+max_height = 2.5
+min_height = -3.0
+drain_duration = 0.8
+water_margin = 0.05
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
 
 [node name="CollisionShape3D" parent="WaterValve/Water/WaterArea" parent_id_path=PackedInt32Array(883607251, 1121966791) index="0" unique_id=723112628]
 shape = SubResource("BoxShape3D_0jjuu")
@@ -163,5 +170,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -103.827896, 0.7999878, -88.0
 
 [node name="FirstAidKit7" parent="Interactables" unique_id=1788068380 instance=ExtResource("10_ukxo5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.06448, 0.7999878, -86.926025)
+
+[node name="NPC1" parent="." unique_id=1024053492 instance=ExtResource("11_ukxo5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34.381916, 0.42788887, 58.696392)
+
+[node name="FirstAidKit" parent="." unique_id=454510882 instance=ExtResource("10_ukxo5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.468628, 0.24427402, 60.31753)
+
+[node name="Camp5" parent="." unique_id=1527630607 instance=ExtResource("4_86qib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.76366, -0.12963465, 315.41864)
+
+[node name="Camp6" parent="." unique_id=1090771675 instance=ExtResource("4_86qib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 242.56961, -0.12966517, -124.92654)
 
 [editable path="WaterValve/Water"]
