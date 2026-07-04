@@ -21,6 +21,9 @@ sky = SubResource("Sky_lhr70")
 ambient_light_source = 3
 tonemap_mode = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3huio"]
+albedo_color = Color(0.7607843, 1, 0, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_whfsr"]
 size = Vector3(4, 0.5, 2)
 
@@ -69,10 +72,11 @@ light_specular = 0.0
 shadow_opacity = 0.8
 
 [node name="Spawn" type="Node3D" parent="." unique_id=733550696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.981796, 2.4312305, 60.03761)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.141872, 2.4312305, 60.03761)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn" unique_id=917562218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.8358362, -0.03419113)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99370956, -2.8358362, -0.03419113)
+material_override = SubResource("StandardMaterial3D_3huio")
 mesh = SubResource("BoxMesh_whfsr")
 
 [node name="WaitingPlayers" type="Node" parent="." unique_id=1725163035]
