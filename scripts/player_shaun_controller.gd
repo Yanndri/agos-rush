@@ -19,6 +19,7 @@ extends CharacterBody3D
 @export var player_ui_path: NodePath = NodePath("PlayerUI")
 @export var dialogue_container_path: NodePath = NodePath("PlayerUI/DialogueContainer")
 @export var dialogue_label_path: NodePath = NodePath("PlayerUI/DialogueContainer/VBoxContainer/MarginContainer/DialogueLabel")
+@export var dialogue_next_ui_path: NodePath = NodePath("PlayerUI/DialogueContainer/VBoxContainer/MarginContainer/NextUI")
 @export var dialogue_type_interval := 0.025
 @export var dialogue_hold_time := 1.0
 @export var dialogue_show_tween_time := 0.18
@@ -29,8 +30,9 @@ extends CharacterBody3D
 @onready var character_armature: Node3D = $PlayerModel/CharacterArmature
 @onready var camera: Camera3D = $PlayerModel/CameraPivot/Camera3D
 @onready var player_ui: CanvasItem = get_node_or_null(player_ui_path) as CanvasItem
-@onready var dialogue_container: CanvasItem = get_node_or_null(dialogue_container_path) as CanvasItem
+@onready var dialogue_container: Control = get_node_or_null(dialogue_container_path) as Control
 @onready var dialogue_label: Label = get_node_or_null(dialogue_label_path) as Label
+@onready var dialogue_next_ui: CanvasItem = get_node_or_null(dialogue_next_ui_path) as CanvasItem
 
 var last_animation: StringName = &"Idle"
 
@@ -44,6 +46,8 @@ var jump_cut_applied := false
 var dialogue_message_id := 0
 var dialogue_tween: Tween
 var dialogue_start_position := Vector2.ZERO
+var can_close_dialogue := false
+var dialogue_hiding := false
 var map_view_active := false
 var in_water := false
 var water_current := Vector3.ZERO
@@ -52,8 +56,10 @@ var water_current := Vector3.ZERO
 
 var is_driving_vehicle := false
 func _ready() -> void:
+	add_to_group("players")
 	if dialogue_container != null:
 		dialogue_start_position = dialogue_container.position
+		_connect_dialogue_gui_input(dialogue_container)
 	_hide_dialogue()
 	visible = true
 	animation_tree.active = true
@@ -242,6 +248,8 @@ func show_dialogue_message(message: String) -> void:
 	var current_message_id := dialogue_message_id
 	_show_dialogue_panel()
 	dialogue_label.text = ""
+	_set_dialogue_next_visible(false)
+	can_close_dialogue = false
 
 	for index in message.length():
 		if current_message_id != dialogue_message_id:
@@ -252,7 +260,8 @@ func show_dialogue_message(message: String) -> void:
 	await get_tree().create_timer(dialogue_hold_time).timeout
 
 	if current_message_id == dialogue_message_id:
-		await _hide_dialogue_with_tween()
+		can_close_dialogue = true
+		_set_dialogue_next_visible(true)
 
 
 func set_map_view_active(value: bool) -> void:
@@ -267,19 +276,63 @@ func set_water_state(value: bool, _surface_y: float = 0.0, current_velocity: Vec
 
 
 func _hide_dialogue() -> void:
+	can_close_dialogue = false
+	dialogue_hiding = false
 	if dialogue_label != null:
 		dialogue_label.text = ""
+	_set_dialogue_next_visible(false)
 	if dialogue_container != null:
 		dialogue_container.visible = false
 		dialogue_container.modulate.a = 0.0
 		dialogue_container.scale = Vector2.ONE
 		dialogue_container.position = dialogue_start_position
+		dialogue_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+
+func _set_dialogue_next_visible(value: bool) -> void:
+	if dialogue_next_ui != null:
+		dialogue_next_ui.visible = value
+
+
+func _connect_dialogue_gui_input(control: Control) -> void:
+	if not control.gui_input.is_connected(_on_dialogue_container_gui_input):
+		control.gui_input.connect(_on_dialogue_container_gui_input)
+
+	for child in control.get_children():
+		var child_control := child as Control
+		if child_control != null:
+			_connect_dialogue_gui_input(child_control)
+
+
+func _on_dialogue_container_gui_input(event: InputEvent) -> void:
+	if not can_close_dialogue:
+		return
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		_request_close_dialogue()
+	elif event is InputEventScreenTouch and event.pressed:
+		_request_close_dialogue()
+
+
+func _request_close_dialogue() -> void:
+	if dialogue_hiding or not can_close_dialogue:
+		return
+
+	dialogue_hiding = true
+	get_viewport().set_input_as_handled()
+	_kill_dialogue_tween()
+	_hide_dialogue()
+
+
 func _show_dialogue_panel() -> void:
 	if dialogue_container == null:
 		return
 
 	_kill_dialogue_tween()
+	can_close_dialogue = false
+	dialogue_hiding = false
+	_set_dialogue_next_visible(false)
 	dialogue_container.visible = true
+	dialogue_container.mouse_filter = Control.MOUSE_FILTER_STOP
 	dialogue_container.modulate.a = 0.0
 	dialogue_container.scale = Vector2(0.96, 0.96)
 	dialogue_container.position = dialogue_start_position + Vector2(0.0, 12.0)
@@ -296,6 +349,8 @@ func _hide_dialogue_with_tween() -> void:
 		return
 
 	_kill_dialogue_tween()
+	can_close_dialogue = false
+	_set_dialogue_next_visible(false)
 	dialogue_tween = create_tween()
 	dialogue_tween.set_parallel(true)
 	dialogue_tween.tween_property(dialogue_container, "modulate:a", 0.0, dialogue_hide_tween_time)
