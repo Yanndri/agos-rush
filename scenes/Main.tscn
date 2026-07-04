@@ -2,6 +2,7 @@
 
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://4h232p4515l4" path="res://scenes/game_ui.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="8_jlsqs"]
 [ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
@@ -82,10 +83,10 @@ mesh = SubResource("BoxMesh_whfsr")
 [node name="WaitingPlayers" type="Node" parent="." unique_id=1725163035]
 
 [node name="WaitPlayer" parent="WaitingPlayers" unique_id=892846362 instance=ExtResource("17_nfivy")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 44.121033, 0.08051467, 50.128178)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 44.121033, 0.08051467, 50.128178)
 
 [node name="WaitPlayer2" parent="WaitingPlayers" unique_id=1192800596 instance=ExtResource("17_nfivy")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 51.921932, 0.08051467, 50.12236)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 51.921932, 0.08051467, 50.12236)
 
 [node name="VHSCanvas" type="CanvasLayer" parent="." unique_id=1280741231]
 layer = -1
@@ -135,3 +136,5 @@ size = 40.0
 [node name="RoadMap" parent="." unique_id=1039222181 instance=ExtResource("10_wp0k4")]
 
 [node name="GameUI" parent="." unique_id=1282615465 instance=ExtResource("7_nxtc6")]
+
+[node name="Settings" parent="." unique_id=379776143 instance=ExtResource("8_jlsqs")]
