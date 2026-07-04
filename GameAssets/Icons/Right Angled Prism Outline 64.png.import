@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqmlykt70va3o"
-path.s3tc="res://.godot/imported/Backpack Outline 256.png-3269fd612da2a809afdff00b709c35ae.s3tc.ctex"
+uid="uid://babbnvujviygj"
+path.s3tc="res://.godot/imported/Right Angled Prism Outline 64.png-b28ec48a96734ad2af8dadec8ee5b13b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://GameAssets/Icons/Backpack Outline 256.png"
-dest_files=["res://.godot/imported/Backpack Outline 256.png-3269fd612da2a809afdff00b709c35ae.s3tc.ctex"]
+source_file="res://GameAssets/Icons/Right Angled Prism Outline 64.png"
+dest_files=["res://.godot/imported/Right Angled Prism Outline 64.png-b28ec48a96734ad2af8dadec8ee5b13b.s3tc.ctex"]
 
 [params]
 

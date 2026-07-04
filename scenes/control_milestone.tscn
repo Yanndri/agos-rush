@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://kdmv8gesh8hy"]
 
+[ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="1_77ufn"]
 [ext_resource type="Script" uid="uid://dyi7hsfexivbo" path="res://scripts/control_milestone.gd" id="1_milestone"]
 
 [node name="TextChat" type="Control" unique_id=487340569]
@@ -10,6 +11,7 @@ anchor_bottom = 1.0
 offset_top = -142.0
 offset_right = 320.0
 grow_vertical = 0
+theme = ExtResource("1_77ufn")
 script = ExtResource("1_milestone")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1994866892]

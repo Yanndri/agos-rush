@@ -8,6 +8,7 @@
 [ext_resource type="ArrayMesh" uid="uid://cfepx3hpjkc2x" path="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/crate_lid.obj" id="6_hl6l6"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="7_3fhhq"]
 [ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/Interactables/storage.tscn" id="7_y57d8"]
+[ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="9_48mh0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
 size = Vector3(3.9853516, 2.2, 2.8)
@@ -423,6 +424,8 @@ disabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7873683, 1.2323635, 0)
 shape = SubResource("BoxShape3D_y57d8")
 debug_color = Color(0.9999737, 0, 0.110571496, 0.41960785)
+
+[node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("9_48mh0")]
 
 [editable path="Storage"]
 [editable path="Storage/PromptArea"]

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqmlykt70va3o"
-path.s3tc="res://.godot/imported/Backpack Outline 256.png-3269fd612da2a809afdff00b709c35ae.s3tc.ctex"
+uid="uid://bm8yocgg2um31"
+path.s3tc="res://.godot/imported/Sphere Outline 64.png-3eb1a508644ff16efa6d400c2a3e5ba8.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://GameAssets/Icons/Backpack Outline 256.png"
-dest_files=["res://.godot/imported/Backpack Outline 256.png-3269fd612da2a809afdff00b709c35ae.s3tc.ctex"]
+source_file="res://GameAssets/Icons/Sphere Outline 64.png"
+dest_files=["res://.godot/imported/Sphere Outline 64.png-3eb1a508644ff16efa6d400c2a3e5ba8.s3tc.ctex"]
 
 [params]
 

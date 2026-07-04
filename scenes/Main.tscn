@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
-[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
+[ext_resource type="PackedScene" uid="uid://4h232p4515l4" path="res://scenes/game_ui.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
@@ -74,8 +74,6 @@ light_energy = 2.0
 light_specular = 0.0
 shadow_opacity = 0.8
 
-[node name="Milestone" parent="." unique_id=1661914291 instance=ExtResource("8_bjd11")]
-
 [node name="Spawn" type="Node3D" parent="." unique_id=733550696]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.259365, 2.4312305, 60.03761)
 
@@ -134,6 +132,7 @@ mouse_filter = 2
 [node name="MapViewController" type="Node3D" parent="." unique_id=924281948]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6488895, 10.539501, -23.789534)
 script = ExtResource("21_map_view")
+map_size = 120.0
 
 [node name="MapCamera3D" type="Camera3D" parent="MapViewController" unique_id=916434691]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
@@ -141,3 +140,5 @@ projection = 1
 size = 40.0
 
 [node name="RoadMap" parent="." unique_id=1039222181 instance=ExtResource("10_wp0k4")]
+
+[node name="GameUI" parent="." unique_id=1282615465 instance=ExtResource("7_nxtc6")]

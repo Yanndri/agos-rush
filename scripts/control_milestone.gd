@@ -38,8 +38,8 @@ func _request_chat_message(message: String) -> void:
 
 @rpc("authority", "call_local", "reliable")
 func _receive_chat_message(sender_id: int, message: String) -> void:
-	var display_name := "Player %s" % sender_id
-	_add_message("%s: %s" % [display_name, message])
+	var display_name := "[b]Player %s[/b]" % sender_id
+	_add_message("%s: [i]%s[/i]" % [display_name, message])
 
 func _add_local_system_message(message: String) -> void:
 	_add_message("[i]%s[/i]" % message)
