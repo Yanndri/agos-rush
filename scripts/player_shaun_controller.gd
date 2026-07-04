@@ -3,6 +3,8 @@ extends CharacterBody3D
 @export var walk_speed := 3.5
 @export var run_speed := 6.0
 @export var carrying_speed_multiplier := 0.5
+@export var water_speed_multiplier := 0.45
+@export var water_jump_multiplier := 0.35
 @export var jump_velocity := 5.0
 @export var low_jump_velocity_multiplier := 0.45
 @export var jump_buffer_time := 0.15
@@ -43,6 +45,8 @@ var dialogue_message_id := 0
 var dialogue_tween: Tween
 var dialogue_start_position := Vector2.ZERO
 var map_view_active := false
+var in_water := false
+var water_current := Vector3.ZERO
 
 
 
@@ -95,6 +99,8 @@ func _physics_process(delta: float) -> void:
 	var current_speed := run_speed if is_running else walk_speed
 	if is_carrying_resident():
 		current_speed *= carrying_speed_multiplier
+	if in_water:
+		current_speed *= water_speed_multiplier
 
 	var jump_key_down := Input.is_key_pressed(KEY_SPACE)
 	var jump_pressed := jump_key_down and not was_jump_key_down
@@ -107,8 +113,8 @@ func _physics_process(delta: float) -> void:
 			velocity.y = min(velocity.y, jump_velocity * low_jump_velocity_multiplier)
 			jump_cut_applied = true
 
-	velocity.x = direction.x * current_speed
-	velocity.z = direction.z * current_speed
+	velocity.x = direction.x * current_speed + water_current.x
+	velocity.z = direction.z * current_speed + water_current.z
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -147,7 +153,7 @@ func _sync_state(remote_transform: Transform3D, remote_model_y: float, remote_an
 
 
 func _start_jump_from_buffer() -> void:
-	velocity.y = jump_velocity
+	velocity.y = jump_velocity * water_jump_multiplier if in_water else jump_velocity
 	jump_buffer_left = 0.0
 	jump_just_started = true
 	jump_cut_applied = false
@@ -253,6 +259,11 @@ func set_map_view_active(value: bool) -> void:
 	map_view_active = value
 	if camera != null:
 		camera.current = is_multiplayer_authority() and not map_view_active
+
+
+func set_water_state(value: bool, _surface_y: float = 0.0, current_velocity: Vector3 = Vector3.ZERO) -> void:
+	in_water = value
+	water_current = current_velocity if value else Vector3.ZERO
 
 
 func _hide_dialogue() -> void:

@@ -10,7 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/Interactables/storage.tscn" id="7_y57d8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
-size = Vector3(6.8, 2.2, 2.8)
+size = Vector3(3.9853516, 2.2, 2.8)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p5nbc"]
+radius = 1.0
+height = 3.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65ndj"]
 resource_name = "PolyPack_Vehicles"
@@ -317,6 +321,10 @@ steer_speed = 1.0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=676644984]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
 shape = SubResource("BoxShape3D_ambulance")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1225393592]
+transform = Transform3D(1, 0, 0, 0, -0.020071514, 0.99979854, 0, -0.99979854, -0.020071514, -2.3977466, 1.0689231, 0)
+shape = SubResource("CapsuleShape3D_p5nbc")
 
 [node name="Model" type="Node3D" parent="." unique_id=1531182922]
 

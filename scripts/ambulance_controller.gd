@@ -10,7 +10,9 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @export var brake_force := 18.0
 @export var coast_drag := 5.0
 @export var steer_speed := 2.2
+@export var stationary_steer_multiplier := 0.45
 @export var gravity := 18.0
+@export var vehicle_forward_axis := Vector3.LEFT
 @export var exit_offset := Vector3(2.4, 0.0, 0.0)
 @export var wheel_spin_speed := 2.0
 @export var wheel_spin_axis := Vector3.UP
@@ -113,11 +115,12 @@ func _physics_process(delta: float) -> void:
 
 	_update_wheel_steering(float(steering), delta)
 
-	if abs(drive_speed) > 0.1 and steering != 0:
+	if steering != 0:
 		var reverse_turn_multiplier := -1.0 if drive_speed < 0.0 else 1.0
-		rotate_y(steering * steer_speed * reverse_turn_multiplier * delta)
+		var speed_steer_multiplier = max(abs(drive_speed) / max_forward_speed, stationary_steer_multiplier)
+		rotate_y(steering * steer_speed * speed_steer_multiplier * reverse_turn_multiplier * delta)
 
-	var forward := -global_basis.x
+	var forward := _get_vehicle_forward_direction()
 	velocity.x = forward.x * drive_speed
 	velocity.z = forward.z * drive_speed
 	_spin_wheels(delta)
@@ -264,6 +267,14 @@ func _apply_gravity(delta: float) -> void:
 		velocity.y -= gravity * delta
 	else:
 		velocity.y = 0.0
+
+
+func _get_vehicle_forward_direction() -> Vector3:
+	var forward := global_basis * vehicle_forward_axis.normalized()
+	forward.y = 0.0
+	if forward == Vector3.ZERO:
+		return Vector3.FORWARD
+	return forward.normalized()
 
 
 func _on_driver_area_body_entered(body: Node3D) -> void:

@@ -1,13 +1,9 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
-[ext_resource type="PackedScene" uid="uid://bmly4u1ykq4lq" path="res://scenes/camp.tscn" id="6_c01mt"]
-[ext_resource type="PackedScene" uid="uid://b0quu4snikcgt" path="res://scenes/Interactables/battery.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
-[ext_resource type="PackedScene" uid="uid://ul4yntffksph" path="res://scenes/Interactables/upgrade_shop.tscn" id="10_lhr70"]
-[ext_resource type="Material" uid="uid://1pld6m8vm05t" path="res://Themes/grass_ground_material.tres" id="11_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
-[ext_resource type="PackedScene" uid="uid://byxwtg6ixky0p" path="res://scenes/main_map.tscn" id="17_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="20_1iba3"]
 [ext_resource type="Script" uid="uid://dykda81dtyd4i" path="res://scripts/map_view_controller.gd" id="21_map_view"]
@@ -16,12 +12,12 @@
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_0bbpv"]
+[sub_resource type="Sky" id="Sky_lhr70"]
 sky_material = SubResource("ProceduralSkyMaterial_rvslj")
 
 [sub_resource type="Environment" id="Environment_rarhs"]
 background_mode = 2
-sky = SubResource("Sky_0bbpv")
+sky = SubResource("Sky_lhr70")
 ambient_light_source = 3
 tonemap_mode = 2
 
@@ -66,9 +62,6 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.1
 shader_parameter/vignette_opacity = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_ptkwr"]
-size = Vector3(100, 1, 100)
-
 [node name="Main" type="Node3D" unique_id=631280010]
 script = ExtResource("16_main")
 
@@ -77,13 +70,14 @@ environment = SubResource("Environment_rarhs")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1178234390]
 transform = Transform3D(-0.96871954, -0.07970491, 0.2350105, 0.23902103, -0.045060538, 0.9699685, -0.06672153, 0.99579966, 0.062702194, 0, 0, 0)
+light_energy = 2.0
 light_specular = 0.0
 shadow_opacity = 0.8
 
 [node name="Milestone" parent="." unique_id=1661914291 instance=ExtResource("8_bjd11")]
 
 [node name="Spawn" type="Node3D" parent="." unique_id=733550696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.589569, 2.3609571, 19.548477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.259365, 2.4312305, 60.03761)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn" unique_id=917562218]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.337883, -0.03419113)
@@ -97,10 +91,10 @@ shape = SubResource("CylinderShape3D_1nqs0")
 [node name="WaitingPlayers" type="Node" parent="." unique_id=1725163035]
 
 [node name="WaitPlayer" parent="WaitingPlayers" unique_id=892846362 instance=ExtResource("17_nfivy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.583887, 0, 23.185696)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 44.121033, 0.08051467, 50.128178)
 
 [node name="WaitPlayer2" parent="WaitingPlayers" unique_id=1192800596 instance=ExtResource("17_nfivy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.583887, 0, 15.656448)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 51.921932, 0.08051467, 50.12236)
 
 [node name="VHSCanvas" type="CanvasLayer" parent="." unique_id=1280741231]
 layer = -1
@@ -137,12 +131,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MainMap" parent="." unique_id=373502355 instance=ExtResource("17_1nqs0")]
-
-[node name="Camp" parent="." unique_id=257249513 instance=ExtResource("6_c01mt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 7)
-
 [node name="MapViewController" type="Node3D" parent="." unique_id=924281948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6488895, 10.539501, -23.789534)
 script = ExtResource("21_map_view")
 
 [node name="MapCamera3D" type="Camera3D" parent="MapViewController" unique_id=916434691]
@@ -150,13 +140,4 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0
 projection = 1
 size = 40.0
 
-[node name="UpgradeShop" parent="." unique_id=1855759488 instance=ExtResource("10_lhr70")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1099205, 0, 9.731138)
-
-[node name="GroundBody" type="MeshInstance3D" parent="." unique_id=947213230]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.83475, 0, 0)
-material_override = ExtResource("11_wp0k4")
-mesh = SubResource("BoxMesh_ptkwr")
-
-[node name="Battery" parent="." unique_id=704979953 instance=ExtResource("7_nxtc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6619, 0.09088302, 11.502735)
+[node name="RoadMap" parent="." unique_id=1039222181 instance=ExtResource("10_wp0k4")]

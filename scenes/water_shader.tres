@@ -1,6 +1,20 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://bh8x7kg3giv3u"]
 
 [ext_resource type="Shader" uid="uid://chxv0qnrifs3i" path="res://Themes/water_shader_shader.tres" id="1_7xv8e"]
+[ext_resource type="Texture2D" uid="uid://uk244nlgqof0" path="res://scenes/surfaceNormalA.tres" id="2_cwmsq"]
+[ext_resource type="Texture2D" uid="uid://b2kaq458ei8iu" path="res://scenes/waveA.tres" id="2_qm48m"]
+[ext_resource type="Texture2D" uid="uid://dcw6j0q81hgeg" path="res://scenes/surfaceNormalB.tres" id="3_j1uoj"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_tf0ow"]
+noise_type = 3
+frequency = 0.0225
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_aq5nf"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_tf0ow")
+seamless = true
+seamless_blend_skirt = 0.5
 
 [resource]
 render_priority = -128
@@ -11,14 +25,18 @@ shader_parameter/transparency = 0.6
 shader_parameter/metallic = 0.0
 shader_parameter/roughness = 0.25
 shader_parameter/max_visible_depth = 20.0
+shader_parameter/wave_a = ExtResource("2_qm48m")
+shader_parameter/wave_b = SubResource("NoiseTexture2D_aq5nf")
 shader_parameter/wave_move_direction_a = Vector2(-1, 0)
 shader_parameter/wave_move_direction_b = Vector2(0, 1)
-shader_parameter/wave_noise_scale_a = 15.0
-shader_parameter/wave_noise_scale_b = 15.0
+shader_parameter/wave_noise_scale_a = 2.0
+shader_parameter/wave_noise_scale_b = 2.0
 shader_parameter/wave_time_scale_a = 0.15
 shader_parameter/wave_time_scale_b = 0.15
 shader_parameter/wave_height_scale = 1.0
 shader_parameter/wave_normal_flatness = 50.0
+shader_parameter/surface_normals_a = ExtResource("2_cwmsq")
+shader_parameter/surface_normals_b = ExtResource("3_j1uoj")
 shader_parameter/surface_normals_move_direction_a = Vector2(-1, 0.2)
 shader_parameter/surface_normals_move_direction_b = Vector2(0.2, 1)
 shader_parameter/surface_texture_roughness = 0.15
