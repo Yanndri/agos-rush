@@ -10,6 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="7_mfgtr"]
 [ext_resource type="PackedScene" uid="uid://bwknle4fydpdp" path="res://scenes/water.tscn" id="8_7c32l"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="9_8ptxs"]
+[ext_resource type="PackedScene" uid="uid://bm1iehwpwp0dn" path="res://scenes/Interactables/water_valve.tscn" id="10_dyl2w"]
+[ext_resource type="PackedScene" uid="uid://b0quu4snikcgt" path="res://scenes/Interactables/battery.tscn" id="12_yibp4"]
+[ext_resource type="PackedScene" uid="uid://cfkev6orpfvm8" path="res://scenes/Interactables/first_aid_kit.tscn" id="13_vqrjv"]
+[ext_resource type="PackedScene" uid="uid://dtba6txko68d3" path="res://scenes/Interactables/coin.tscn" id="14_s8uve"]
+[ext_resource type="PackedScene" uid="uid://bnopqr6dnpqo1" path="res://scenes/Interactables/food_supply.tscn" id="15_ae4y4"]
+[ext_resource type="PackedScene" uid="uid://p3fk4onmffgi" path="res://scenes/Interactables/npc_1.tscn" id="16_t55gh"]
+[ext_resource type="PackedScene" uid="uid://ul4yntffksph" path="res://scenes/Interactables/upgrade_shop.tscn" id="17_8fbci"]
+[ext_resource type="PackedScene" uid="uid://bmly4u1ykq4lq" path="res://scenes/Interactables/camp.tscn" id="18_euars"]
+[ext_resource type="AudioStream" uid="uid://c625w7yp1atkn" path="res://Music/vjgalaxy-gameplay-liquid-drum-and-bass-3629.mp3" id="19_vqrjv"]
+[ext_resource type="PackedScene" uid="uid://bov77qxj47tum" path="res://scenes/Interactables/npc_2.tscn" id="20_s8uve"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8uve"]
 albedo_color = Color(0.7607843, 1, 0, 1)
@@ -49,6 +59,12 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.1
 shader_parameter/vignette_opacity = 0.5
 
+[sub_resource type="BoxMesh" id="BoxMesh_ptkwr"]
+size = Vector3(14.979004, 1, 15.515503)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ebbnj"]
+size = Vector3(14.979004, 1, 15.515503)
+
 [sub_resource type="BoxMesh" id="BoxMesh_euars"]
 size = Vector3(800, 0.2, 800)
 subdivide_width = 300
@@ -57,11 +73,13 @@ subdivide_depth = 300
 [sub_resource type="BoxShape3D" id="BoxShape3D_65vg5"]
 size = Vector3(50, 2, 50)
 
-[sub_resource type="BoxMesh" id="BoxMesh_ptkwr"]
-size = Vector3(14.979004, 1, 15.515503)
+[sub_resource type="BoxMesh" id="BoxMesh_yibp4"]
+size = Vector3(50, 0.2, 83.67676)
+subdivide_width = 300
+subdivide_depth = 300
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ebbnj"]
-size = Vector3(14.979004, 1, 15.515503)
+[sub_resource type="BoxShape3D" id="BoxShape3D_vqrjv"]
+size = Vector3(50, 2, 79.84631)
 
 [node name="RuralMap" type="Node3D" unique_id=1791317413]
 script = ExtResource("1_u0bit")
@@ -79,7 +97,7 @@ shadow_opacity = 0.8
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Spawn" type="Node3D" parent="." unique_id=321993637]
-transform = Transform3D(0.052339427, 0, 0.99862933, 0, 1, 0, -0.99862933, 0, 0.052339427, 2.6643486, 10.527899, -3.9092126)
+transform = Transform3D(-0.9992825, 0, -0.037876334, 0, 1, 0, 0.037876334, 0, -0.9992825, 2.6643486, 10.41393, -3.9092126)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn" unique_id=1182165490]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99370956, -3.7305079, -0.03418827)
@@ -135,20 +153,6 @@ size = 40.0
 
 [node name="Settings" parent="." unique_id=379776143 instance=ExtResource("7_mfgtr")]
 
-[node name="Water" parent="." unique_id=883607251 instance=ExtResource("8_7c32l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -224.956, 2.6404853, -19.45842)
-mesh = SubResource("BoxMesh_euars")
-rise_speed = 0.12
-max_height = 2.5
-min_height = -3.0
-drain_duration = 0.8
-water_margin = 0.05
-current = Vector3(0, 0, 0)
-water_area_path = NodePath("WaterArea")
-
-[node name="CollisionShape3D" parent="Water/WaterArea" parent_id_path=PackedInt32Array(883607251, 1121966791) index="0" unique_id=723112628]
-shape = SubResource("BoxShape3D_65vg5")
-
 [node name="WaitingPlayers" type="Node" parent="." unique_id=1848223181]
 
 [node name="WaitPlayer" parent="WaitingPlayers" unique_id=892846362 instance=ExtResource("9_8ptxs")]
@@ -166,4 +170,77 @@ mesh = SubResource("BoxMesh_ptkwr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WaitingPlayers/MeshInstance3D/StaticBody3D" unique_id=1583238947]
 shape = SubResource("BoxShape3D_ebbnj")
 
+[node name="Water" parent="." unique_id=883607251 instance=ExtResource("8_7c32l")]
+transform = Transform3D(0.99999994, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 0.99999994, -224.95598, 2.0983405, -19.458414)
+mesh = SubResource("BoxMesh_euars")
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
+
+[node name="CollisionShape3D" parent="Water/WaterArea" parent_id_path=PackedInt32Array(883607251, 1121966791) index="0" unique_id=723112628]
+shape = SubResource("BoxShape3D_65vg5")
+
+[node name="WaterValve" parent="." unique_id=699937503 node_paths=PackedStringArray("flooded_water") instance=ExtResource("10_dyl2w")]
+transform = Transform3D(0.9864935, 0, 0.16380075, 0, 1, 0, -0.16380075, 0, 0.9864935, -35.70708, 5.9017744, -4.995505)
+flooded_water = NodePath("Water")
+
+[node name="Water" parent="WaterValve" unique_id=1292212720 instance=ExtResource("8_7c32l")]
+transform = Transform3D(0.9788165, 0.007547747, -0.2045997, -0.0069812182, 0.99996966, 0.0034906522, 0.20461984, -0.0019883513, 0.9788393, -23.027458, -3.0722404, -23.588247)
+mesh = SubResource("BoxMesh_yibp4")
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
+
+[node name="CollisionShape3D" parent="WaterValve/Water/WaterArea" parent_id_path=PackedInt32Array(1292212720, 1121966791) index="0" unique_id=723112628]
+shape = SubResource("BoxShape3D_vqrjv")
+
+[node name="Battery" parent="." unique_id=704979953 instance=ExtResource("12_yibp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.40099, 5.675478, 0.09964657)
+
+[node name="Battery2" parent="." unique_id=989000294 instance=ExtResource("12_yibp4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.74405, 5.675478, -9.222874)
+
+[node name="FirstAidKit" parent="." unique_id=541162600 instance=ExtResource("13_vqrjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.281617, 7.5094004, -7.3015943)
+
+[node name="Coin" parent="." unique_id=748200325 instance=ExtResource("14_s8uve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.52, 4.2704124, 0.18928647)
+
+[node name="FoodSupply" parent="." unique_id=1660509066 instance=ExtResource("15_ae4y4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.361791, 7.5307245, 4.2816157)
+
+[node name="FoodSupply2" parent="." unique_id=1776640715 instance=ExtResource("15_ae4y4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.361791, 7.5307245, -8.924633)
+
+[node name="NPC1" parent="." unique_id=1994827218 instance=ExtResource("16_t55gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.814331, 7.5120716, 37.951736)
+
+[node name="UpgradeShop" parent="." unique_id=1855759488 instance=ExtResource("17_8fbci")]
+transform = Transform3D(-0.88423926, 0, 0.46703416, 0, 1, 0, -0.46703416, 0, -0.88423926, -10.57827, 7.0596733, 3.2052772)
+
+[node name="Camp" parent="." unique_id=257249513 instance=ExtResource("18_euars")]
+transform = Transform3D(-0.9915476, 0, -0.12974356, 0, 1, 0, 0.12974356, 0, -0.9915476, 1.5353785, 7.070348, 6.6520953)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=382207745]
+stream = ExtResource("19_vqrjv")
+autoplay = true
+bus = &"Music"
+
+[node name="WaterValve2" parent="." unique_id=1879927836 instance=ExtResource("10_dyl2w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50.01943, 8, -51.53394)
+
+[node name="NPC2" parent="." unique_id=771866241 instance=ExtResource("20_s8uve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.500484, 8.043493, -43.717457)
+
+[node name="Camp2" parent="." unique_id=1009905908 instance=ExtResource("18_euars")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97.4577, 5.070347, -46.04363)
+
+[node name="UpgradeShop2" parent="." unique_id=139886081 instance=ExtResource("17_8fbci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -94.36299, 7.4767594, 23.860905)
+
+[node name="NPC3" parent="." unique_id=397039768 instance=ExtResource("16_t55gh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -77.864876, 6.000001, -9.835951)
+
+[node name="FirstAidKit2" parent="." unique_id=70088667 instance=ExtResource("13_vqrjv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.367424, 3.1994205, -7.4169245)
+
 [editable path="Water"]
+[editable path="WaterValve/Water"]

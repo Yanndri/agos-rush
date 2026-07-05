@@ -2,12 +2,14 @@ extends Control
 
 @export var room_code_label_path: NodePath = NodePath("Top/VBoxContainer/RoomCodeLabel")
 @export var start_button_path: NodePath = NodePath("StartSettings/VBoxContainer/Start")
+@export var minute_amount_path: NodePath = NodePath("StartSettings/VBoxContainer/SetTime/HBoxContainer/MinuteAmount")
 @export var smart_city_button_path: NodePath = NodePath("StartSettings/VBoxContainer/PanelContainer/Maps/SmartCity/SmartCityButton")
 @export var countryside_button_path: NodePath = NodePath("StartSettings/VBoxContainer/PanelContainer/Maps/Countryside/CountrysideButton")
 @export var preview_player_2_shaun_path: NodePath = NodePath("PlayerPreview/SubViewport/PreviewWorld/PreviewPlayer2/PlayerModel/CharacterArmature/Skeleton3D/Shaun")
 
 @onready var room_code_label: Label = get_node_or_null(room_code_label_path) as Label
 @onready var start_button: Button = get_node_or_null(start_button_path) as Button
+@onready var minute_amount: SpinBox = get_node_or_null(minute_amount_path) as SpinBox
 @onready var smart_city_button: Button = get_node_or_null(smart_city_button_path) as Button
 @onready var countryside_button: Button = get_node_or_null(countryside_button_path) as Button
 @onready var preview_player_2_shaun: MeshInstance3D = get_node_or_null(preview_player_2_shaun_path) as MeshInstance3D
@@ -53,7 +55,7 @@ func _on_peer_count_changed(_peer_id: int) -> void:
 
 func _on_start_pressed() -> void:
 	_update_selected_map_from_buttons()
-	NetworkManager.start_lobby_game(selected_map_scene)
+	NetworkManager.start_lobby_game(selected_map_scene, _get_selected_match_time_seconds())
 
 
 func _on_smart_city_pressed() -> void:
@@ -95,3 +97,10 @@ func _update_selected_map_from_buttons() -> void:
 		selected_map_scene = NetworkManager.RURAL_MAP_SCENE
 	else:
 		selected_map_scene = NetworkManager.MAIN_SCENE
+
+
+func _get_selected_match_time_seconds() -> float:
+	if minute_amount == null:
+		return 0.0
+
+	return max(minute_amount.value, 0.0) * 60.0

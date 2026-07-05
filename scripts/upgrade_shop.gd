@@ -32,6 +32,10 @@ extends Node3D
 @onready var map_label: Label = get_node_or_null(map_label_path) as Label
 @onready var map_button: Button = get_node_or_null(map_button_path) as Button
 
+const MAP_UPGRADES := [
+	{"cost": 1},
+]
+
 const SPEED_UPGRADES := [
 	{"multiplier": 1.2, "cost": 1},
 	{"multiplier": 1.4, "cost": 3},
@@ -41,9 +45,7 @@ const HOTBAR_UPGRADES := [
 	{"slots": 1, "cost": 2},
 	{"slots": 1, "cost": 3},
 ]
-const MAP_UPGRADES := [
-	{"cost": 5},
-]
+
 
 var nearby_player: CharacterBody3D
 var speed_upgrade_index := 0
@@ -204,7 +206,7 @@ func _on_speed_buy_pressed() -> void:
 		return
 
 	var upgrade: Dictionary = SPEED_UPGRADES[speed_upgrade_index]
-	if not _spend_points(upgrade["cost"]):
+	if not _spend_stars(upgrade["cost"]):
 		return
 
 	var player := nearby_player
@@ -220,7 +222,7 @@ func _on_hotbar_buy_pressed() -> void:
 		return
 
 	var upgrade: Dictionary = HOTBAR_UPGRADES[hotbar_upgrade_index]
-	if not _spend_points(upgrade["cost"]):
+	if not _spend_stars(upgrade["cost"]):
 		return
 
 	var inventory := _get_player_inventory()
@@ -236,7 +238,7 @@ func _on_map_buy_pressed() -> void:
 		return
 
 	var upgrade: Dictionary = MAP_UPGRADES[map_upgrade_index]
-	if not _spend_points(upgrade["cost"]):
+	if not _spend_stars(upgrade["cost"]):
 		return
 
 	var map_controller := _get_map_controller()
@@ -254,7 +256,7 @@ func _on_close_button_pressed() -> void:
 func _update_shop_ui() -> void:
 	var score := _get_player_score()
 	if points_amount_label != null:
-		points_amount_label.text = str(score.score if score != null else 0)
+		points_amount_label.text = str(score.stars if score != null else 0)
 
 	_update_speed_ui()
 	_update_hotbar_ui()
@@ -316,12 +318,12 @@ func _set_button_max(button: Button) -> void:
 	button.text = "Max"
 
 
-func _spend_points(cost: int) -> bool:
+func _spend_stars(cost: int) -> bool:
 	var score := _get_player_score()
 	if score == null:
 		return false
 
-	return score.spend_score(cost)
+	return score.spend_stars(cost)
 
 
 func _get_player_score() -> PlayerScore:
