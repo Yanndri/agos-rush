@@ -234,11 +234,13 @@ func _sync_vehicle_state(remote_transform: Transform3D, remote_drive_speed: floa
 
 func _close_doors() -> void:
 	_set_storage_visible(false)
+	_play_door_sfx()
 	_tween_doors(left_door_closed_z_degrees, right_door_closed_z_degrees)
 
 
 func _open_doors() -> void:
 	_set_storage_visible(true)
+	_play_door_sfx()
 	_tween_doors(left_door_open_z_degrees, right_door_open_z_degrees)
 
 
@@ -261,6 +263,11 @@ func _tween_doors(left_z_degrees: float, right_z_degrees: float) -> void:
 		door_tween.tween_property(left_door, "rotation_degrees:z", left_z_degrees, door_close_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if right_door != null:
 		door_tween.tween_property(right_door, "rotation_degrees:z", right_z_degrees, door_close_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+
+func _play_door_sfx() -> void:
+	if ambulance_door_sfx != null:
+		AudioUtility.play_sfx_3d(self, ambulance_door_sfx, global_position)
 
 
 func _apply_gravity(delta: float) -> void:
