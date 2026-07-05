@@ -91,9 +91,8 @@ func _get_spawn_position(spawn_index: int) -> Vector3:
 
 	var base_position := Vector3(-4.8, 1.25, 2.2)
 	if spawn != null:
-		base_position.x = spawn.global_position.x
-		base_position.z = spawn.global_position.z
-	var offset := Vector3(float(spawn_index) * 0.0, 1.5, 0.0)
+		base_position = spawn.global_position
+	var offset := Vector3(float(spawn_index) * 1.5, 0.0, 0.0)
 	return base_position + offset
 
 func _show_host_code_label() -> void:

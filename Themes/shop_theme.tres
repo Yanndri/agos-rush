@@ -2,6 +2,22 @@
 
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="1_bqllb"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1yo0e"]
+bg_color = Color(0.47491902, 0.16237026, 1.92523e-07, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 12
+border_color = Color(0.6392157, 0.23137255, 0, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 12.0
+expand_margin_top = 4.0
+expand_margin_right = 12.0
+expand_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e06cx"]
 bg_color = Color(1, 0.3764706, 0, 1)
 border_width_right = 4
@@ -14,7 +30,31 @@ corner_radius_bottom_left = 24
 expand_margin_left = 4.0
 expand_margin_right = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptkwr"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s4qtl"]
+bg_color = Color(1, 0.74850124, 0.63464046, 1)
+border_color = Color(1, 0.35939988, 0.2709056, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1x75n"]
+bg_color = Color(1, 0.6313726, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.33333334, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqllb"]
 bg_color = Color(1, 0.6313726, 0, 1)
 border_width_left = 4
 border_width_top = 4
@@ -32,13 +72,17 @@ Button/colors/font_outline_color = Color(0.62352943, 0.1764706, 0.007843138, 1)
 Button/constants/outline_size = 6
 Button/font_sizes/font_size = 16
 Button/fonts/font = ExtResource("1_bqllb")
+Button/styles/disabled = SubResource("StyleBoxFlat_1yo0e")
 Button/styles/normal = SubResource("StyleBoxFlat_e06cx")
+Button/styles/pressed = SubResource("StyleBoxFlat_s4qtl")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_outline_color = Color(0.35686275, 0.20784314, 0, 1)
 Label/constants/outline_size = 8
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_bqllb")
-Panel/styles/panel = SubResource("StyleBoxFlat_ptkwr")
+MenuButton/fonts/font = ExtResource("1_bqllb")
+MenuButton/styles/normal = SubResource("StyleBoxFlat_1x75n")
+Panel/styles/panel = SubResource("StyleBoxFlat_bqllb")
 RichTextLabel/colors/default_color = Color(1, 1, 0.49411765, 1)
 RichTextLabel/colors/font_outline_color = Color(0.6156863, 0.16078432, 0, 1)
 RichTextLabel/constants/outline_size = 6

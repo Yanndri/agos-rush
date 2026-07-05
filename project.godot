@@ -107,6 +107,7 @@ map_view={
 3d_physics/layer_4="Interactable"
 3d_physics/layer_5="Player"
 3d_physics/layer_6="Ambulance"
+3d_physics/layer_7="Road"
 
 [physics]
 

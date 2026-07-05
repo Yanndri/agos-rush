@@ -49,6 +49,8 @@ func host_game() -> bool:
 	multiplayer.multiplayer_peer = peer
 	if not multiplayer.peer_connected.is_connected(_on_peer_connected):
 		multiplayer.peer_connected.connect(_on_peer_connected)
+	if not multiplayer.peer_disconnected.is_connected(_on_peer_disconnected):
+		multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	_start_broadcasting()
 	status_changed.emit("Hosting. Code: %s" % host_code)
 	print("network_manager: ", host_code)
@@ -66,6 +68,10 @@ func join_game(address: String) -> bool:
 		status_changed.emit(last_error)
 		return false
 	multiplayer.multiplayer_peer = peer
+	if not multiplayer.connected_to_server.is_connected(_on_connected_to_server):
+		multiplayer.connected_to_server.connect(_on_connected_to_server)
+	if not multiplayer.connection_failed.is_connected(_on_connection_failed):
+		multiplayer.connection_failed.connect(_on_connection_failed)
 	status_changed.emit("Joining game...")
 	return true
 
@@ -91,16 +97,47 @@ func leave_game() -> void:
 	lobby_game_started = false
 	if multiplayer.peer_connected.is_connected(_on_peer_connected):
 		multiplayer.peer_connected.disconnect(_on_peer_connected)
+	if multiplayer.peer_disconnected.is_connected(_on_peer_disconnected):
+		multiplayer.peer_disconnected.disconnect(_on_peer_disconnected)
+	if multiplayer.connected_to_server.is_connected(_on_connected_to_server):
+		multiplayer.connected_to_server.disconnect(_on_connected_to_server)
+	if multiplayer.connection_failed.is_connected(_on_connection_failed):
+		multiplayer.connection_failed.disconnect(_on_connection_failed)
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 
-func _on_peer_connected(_peer_id: int) -> void:
+func start_lobby_game() -> void:
 	if not multiplayer.is_server() or lobby_game_started:
 		return
+
 	lobby_game_started = true
 	_stop_discovery()
 	_load_main_scene.rpc()
+
+func _on_peer_connected(_peer_id: int) -> void:
+	if not multiplayer.is_server() or lobby_game_started:
+		return
+
+	status_changed.emit("Player joined lobby.")
+
+
+func _on_peer_disconnected(_peer_id: int) -> void:
+	if not multiplayer.is_server():
+		return
+
+	status_changed.emit("Player left lobby.")
+
+
+func _on_connected_to_server() -> void:
+	status_changed.emit("Joined lobby.")
+	get_tree().change_scene_to_file(WAITING_LOBBY_SCENE)
+
+
+func _on_connection_failed() -> void:
+	last_error = "Could not connect to host."
+	status_changed.emit(last_error)
+
 
 @rpc("authority", "call_local", "reliable")
 func _load_main_scene() -> void:

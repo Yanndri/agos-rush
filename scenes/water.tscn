@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://bwknle4fydpdp"]
+
+[ext_resource type="Shader" uid="uid://chxv0qnrifs3i" path="res://Themes/water_shader_shader.tres" id="1_xgdjl"]
+[ext_resource type="Texture2D" uid="uid://uk244nlgqof0" path="res://scenes/surfaceNormalA.tres" id="2_5exq1"]
+[ext_resource type="Texture2D" uid="uid://dcw6j0q81hgeg" path="res://scenes/surfaceNormalB.tres" id="3_4pb3l"]
+[ext_resource type="Texture2D" uid="uid://b2kaq458ei8iu" path="res://scenes/waveA.tres" id="4_htah3"]
+[ext_resource type="Texture2D" uid="uid://cr7j51dcas6n2" path="res://scenes/waveB.tres" id="5_a35vf"]
+[ext_resource type="Script" uid="uid://c4yv3itqsy04x" path="res://scripts/flood_water.gd" id="6_b6428"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_cly8o"]
+size = Vector3(20, 0.2, 20)
+subdivide_width = 300
+subdivide_depth = 300
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8yhmk"]
+render_priority = -128
+shader = ExtResource("1_xgdjl")
+shader_parameter/color_shallow = Color(0.01, 0.2, 0.3, 1)
+shader_parameter/color_deep = Color(0.3, 0.5, 0.6, 1)
+shader_parameter/transparency = 0.15999999642368
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.25
+shader_parameter/max_visible_depth = 20.0
+shader_parameter/wave_a = ExtResource("4_htah3")
+shader_parameter/wave_b = ExtResource("5_a35vf")
+shader_parameter/wave_move_direction_a = Vector2(-1, 0)
+shader_parameter/wave_move_direction_b = Vector2(0, 1)
+shader_parameter/wave_noise_scale_a = 15.0
+shader_parameter/wave_noise_scale_b = 15.0
+shader_parameter/wave_time_scale_a = 0.01
+shader_parameter/wave_time_scale_b = 0.1
+shader_parameter/wave_height_scale = 1.0
+shader_parameter/wave_normal_flatness = 50.0
+shader_parameter/surface_normals_a = ExtResource("2_5exq1")
+shader_parameter/surface_normals_b = ExtResource("3_4pb3l")
+shader_parameter/surface_normals_move_direction_a = Vector2(-1, 0.2)
+shader_parameter/surface_normals_move_direction_b = Vector2(0.2, 1)
+shader_parameter/surface_texture_roughness = 0.15
+shader_parameter/surface_texture_scale = 0.1
+shader_parameter/surface_texture_time_scale = 0.06
+shader_parameter/ssr_resolution = 1.0
+shader_parameter/ssr_max_travel = 30.0
+shader_parameter/ssr_max_diff = 4.0
+shader_parameter/ssr_mix_strength = 0.7
+shader_parameter/ssr_screen_border_fadeout = 0.3
+shader_parameter/refraction_intensity = 0.0
+shader_parameter/border_color = Color(1, 1, 1, 1)
+shader_parameter/border_scale = 0.4499999899416
+shader_parameter/border_near = 0.5
+shader_parameter/border_far = 300.0
+shader_parameter/cut_out_x = 0.0
+shader_parameter/cut_out_z = 0.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_water_area"]
+size = Vector3(20, 2, 20)
+
+[node name="Water" type="MeshInstance3D" unique_id=883607251]
+mesh = SubResource("BoxMesh_cly8o")
+surface_material_override/0 = SubResource("ShaderMaterial_8yhmk")
+script = ExtResource("6_b6428")
+start_delay = 1.0
+rise_speed = null
+max_height = null
+min_height = null
+drain_duration = null
+water_margin = null
+current = null
+player_path = NodePath("")
+water_area_path = null
+
+[node name="WaterArea" type="Area3D" parent="." unique_id=1121966791]
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea" unique_id=723112628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5581305, 0)
+shape = SubResource("BoxShape3D_water_area")

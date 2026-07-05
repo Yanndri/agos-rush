@@ -1,38 +1,63 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
+[ext_resource type="Shader" uid="uid://lmrqv6k3cw50" path="res://scenes/sky_shader.gdshader" id="2_q8u5g"]
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
-[ext_resource type="PackedScene" uid="uid://bmly4u1ykq4lq" path="res://scenes/camp.tscn" id="6_c01mt"]
-[ext_resource type="PackedScene" uid="uid://b0quu4snikcgt" path="res://scenes/Interactables/battery.tscn" id="7_nxtc6"]
-[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/control_milestone.tscn" id="8_bjd11"]
-[ext_resource type="PackedScene" uid="uid://ul4yntffksph" path="res://scenes/Interactables/upgrade_shop.tscn" id="10_lhr70"]
-[ext_resource type="Material" uid="uid://1pld6m8vm05t" path="res://Themes/grass_ground_material.tres" id="11_wp0k4"]
+[ext_resource type="PackedScene" uid="uid://4h232p4515l4" path="res://scenes/game_ui.tscn" id="7_nxtc6"]
+[ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="8_jlsqs"]
+[ext_resource type="Script" uid="uid://c7hvji2b2k0bt" path="res://scenes/ambience_leaf.gd" id="10_lhr70"]
+[ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
-[ext_resource type="PackedScene" uid="uid://byxwtg6ixky0p" path="res://scenes/main_map.tscn" id="17_1nqs0"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="20_1iba3"]
 [ext_resource type="Script" uid="uid://dykda81dtyd4i" path="res://scripts/map_view_controller.gd" id="21_map_view"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rvslj"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5nir"]
+shader = ExtResource("2_q8u5g")
+shader_parameter/zenith_color = Color(0.14, 0.55, 0.95, 1)
+shader_parameter/upper_sky_color = Color(0.25, 0.72, 1, 1)
+shader_parameter/horizon_color = Color(0.75, 0.92, 1, 1)
+shader_parameter/ground_horizon_color = Color(0.85, 0.93, 1, 1)
+shader_parameter/ground_color = Color(0.62, 0.78, 0.95, 1)
+shader_parameter/sun_color = Color(1, 0.92, 0.75, 1)
+shader_parameter/sun_size = 0.03
+shader_parameter/sun_blur = 0.08
+shader_parameter/sun_strength = 1.2
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_scale = 4.0
+shader_parameter/cloud_speed = 0.01
+shader_parameter/cloud_density = 0.35
+shader_parameter/cloud_softness = 0.18
+shader_parameter/cloud_strength = 0.22
 
-[sub_resource type="Sky" id="Sky_0bbpv"]
-sky_material = SubResource("ProceduralSkyMaterial_rvslj")
+[sub_resource type="Sky" id="Sky_qfcm7"]
+sky_material = SubResource("ShaderMaterial_r5nir")
 
 [sub_resource type="Environment" id="Environment_rarhs"]
 background_mode = 2
-sky = SubResource("Sky_0bbpv")
+sky = SubResource("Sky_qfcm7")
 ambient_light_source = 3
+ambient_light_color = Color(0, 0.66389817, 0.63677603, 1)
+ambient_light_sky_contribution = 0.69
 tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 2.36
+ssao_intensity = 34.1
+sdfgi_enabled = true
+sdfgi_bounce_feedback = 0.75
+sdfgi_min_cell_size = 10.76
+glow_enabled = true
+glow_bloom = 0.39
+fog_light_color = Color(2.7915835e-06, 0.6090499, 0.68963385, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.87
+adjustment_contrast = 0.765
+adjustment_saturation = 1.47
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_oxdc4"]
-top_radius = 1.0
-bottom_radius = 1.0
-height = 0.5
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3huio"]
+albedo_color = Color(0.7607843, 1, 0, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_1nqs0"]
-height = 0.5
-radius = 1.0
+[sub_resource type="BoxMesh" id="BoxMesh_whfsr"]
+size = Vector3(4, 0.5, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qbhb6"]
 shader = ExtResource("20_1iba3")
@@ -66,41 +91,38 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.1
 shader_parameter/vignette_opacity = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_ptkwr"]
-size = Vector3(100, 1, 100)
-
 [node name="Main" type="Node3D" unique_id=631280010]
 script = ExtResource("16_main")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=296110388]
 environment = SubResource("Environment_rarhs")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1178234390]
-transform = Transform3D(-0.96871954, -0.07970491, 0.2350105, 0.23902103, -0.045060538, 0.9699685, -0.06672153, 0.99579966, 0.062702194, 0, 0, 0)
-light_specular = 0.0
-shadow_opacity = 0.8
-
-[node name="Milestone" parent="." unique_id=1661914291 instance=ExtResource("8_bjd11")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1955310936]
+transform = Transform3D(-0.9687194, -0.079704896, 0.23501049, 0.239021, -0.045060534, 0.9699684, -0.06672152, 0.99579954, 0.06270216, 0, 0, 0)
+light_energy = 0.367
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_transmittance_bias = 8.604
+shadow_blur = 10.0
 
 [node name="Spawn" type="Node3D" parent="." unique_id=733550696]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.589569, 2.3609571, 19.548477)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 47.141872, 2.4312305, 60.03761)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn" unique_id=917562218]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.337883, -0.03419113)
-mesh = SubResource("CylinderMesh_oxdc4")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Spawn/MeshInstance3D" unique_id=1344216587]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Spawn/MeshInstance3D/StaticBody3D" unique_id=41749954]
-shape = SubResource("CylinderShape3D_1nqs0")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99370956, -2.8358362, -0.03419113)
+material_override = SubResource("StandardMaterial3D_3huio")
+mesh = SubResource("BoxMesh_whfsr")
 
 [node name="WaitingPlayers" type="Node" parent="." unique_id=1725163035]
 
 [node name="WaitPlayer" parent="WaitingPlayers" unique_id=892846362 instance=ExtResource("17_nfivy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.583887, 0, 23.185696)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 44.121033, 0.08051467, 50.128178)
 
 [node name="WaitPlayer2" parent="WaitingPlayers" unique_id=1192800596 instance=ExtResource("17_nfivy")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.583887, 0, 15.656448)
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 51.921932, 0.08051467, 50.12236)
 
 [node name="VHSCanvas" type="CanvasLayer" parent="." unique_id=1280741231]
 layer = -1
@@ -137,26 +159,27 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="MainMap" parent="." unique_id=373502355 instance=ExtResource("17_1nqs0")]
-
-[node name="Camp" parent="." unique_id=257249513 instance=ExtResource("6_c01mt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 7)
-
 [node name="MapViewController" type="Node3D" parent="." unique_id=924281948]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6488895, 10.539501, -23.789534)
 script = ExtResource("21_map_view")
+map_size = 120.0
 
 [node name="MapCamera3D" type="Camera3D" parent="MapViewController" unique_id=916434691]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
 projection = 1
 size = 40.0
 
-[node name="UpgradeShop" parent="." unique_id=1855759488 instance=ExtResource("10_lhr70")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1099205, 0, 9.731138)
+[node name="RoadMap" parent="." unique_id=1039222181 instance=ExtResource("10_wp0k4")]
 
-[node name="GroundBody" type="MeshInstance3D" parent="." unique_id=947213230]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.83475, 0, 0)
-material_override = ExtResource("11_wp0k4")
-mesh = SubResource("BoxMesh_ptkwr")
+[node name="GameUI" parent="." unique_id=1282615465 instance=ExtResource("7_nxtc6")]
 
-[node name="Battery" parent="." unique_id=704979953 instance=ExtResource("7_nxtc6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6619, 0.09088302, 11.502735)
+[node name="Settings" parent="." unique_id=379776143 instance=ExtResource("8_jlsqs")]
+
+[node name="GridMap" type="GridMap" parent="." unique_id=685771828]
+
+[node name="leaf_ambience" type="Node3D" parent="." unique_id=343677919]
+script = ExtResource("10_lhr70")
+generate_leaves = true
+particle_amount = 1000
+leaf_color = Color(6.738305e-07, 0.80170447, 0.6001074, 1)
+wind_direction = Vector3(1, 1, 0.25)

@@ -1,0 +1,367 @@
+[gd_scene format=3 uid="uid://4h232p4515l4"]
+
+[ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="1_u001w"]
+[ext_resource type="Script" uid="uid://iiqdj6w33gcv" path="res://scripts/game_ui.gd" id="2_bt76a"]
+[ext_resource type="Script" uid="uid://pdr437eaqql1" path="res://scripts/game_timer.gd" id="2_u2dgd"]
+[ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/TextChat.tscn" id="3_bt76a"]
+[ext_resource type="FontFile" uid="uid://dkdhifqercxa2" path="res://Themes/Fonts/ari_w9500/ari-w9500-condensed-display.ttf" id="4_bt76a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptkwr"]
+bg_color = Color(0.15127608, 0.15127608, 0.15127605, 0.38431373)
+
+[sub_resource type="GDScript" id="GDScript_oxdc4"]
+resource_name = "GameUIBackgroundBlur"
+script/source = "extends Panel
+
+@export var scoreboardpanel: MarginContainer
+
+
+func _ready() -> void:
+	if scoreboardpanel == null:
+		push_warning(\"ScoreboardPanel is not assigned.\")
+		return
+
+	scoreboardpanel.visibility_changed.connect(_on_scoreboard_visibility_changed)
+	_update_visibility()
+
+
+func _on_scoreboard_visibility_changed() -> void:
+	_update_visibility()
+
+
+func _update_visibility() -> void:
+	visible = scoreboardpanel.visible
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp0k4"]
+bg_color = Color(0.8, 0.33333334, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.6723402, 0.5212295, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_top = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_djwj0"]
+bg_color = Color(1, 0.6313726, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.33333334, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 12.0
+expand_margin_top = 4.0
+expand_margin_right = 12.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_q810m"]
+font = ExtResource("4_bt76a")
+font_color = Color(0.8, 0.33333334, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ptkwr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e06cx"]
+font = ExtResource("4_bt76a")
+font_color = Color(0.46666667, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_oxdc4"]
+font = ExtResource("4_bt76a")
+outline_size = 4
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxdc4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ptkwr"]
+outline_size = 12
+outline_color = Color(0, 0.5647059, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2wwe5"]
+outline_size = 12
+outline_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0pfi"]
+bg_color = Color(1, 0.6313726, 0, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.8, 0.33333334, 0, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 12.0
+expand_margin_top = 4.0
+expand_margin_right = 12.0
+expand_margin_bottom = 4.0
+
+[node name="GameUI" type="Control" unique_id=1282615465]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u001w")
+script = ExtResource("2_bt76a")
+
+[node name="Background" type="Panel" parent="." unique_id=1132248006 node_paths=PackedStringArray("scoreboardpanel")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ptkwr")
+script = SubResource("GDScript_oxdc4")
+scoreboardpanel = NodePath("../Scoreboard")
+
+[node name="TopBar" type="MarginContainer" parent="." unique_id=11194293]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 52.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 24
+
+[node name="Panel" type="Panel" parent="TopBar" unique_id=958762630]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wp0k4")
+
+[node name="GameTimer" type="MarginContainer" parent="TopBar" unique_id=1042639952]
+layout_mode = 2
+script = ExtResource("2_u2dgd")
+start_time_seconds = 50.0
+
+[node name="TimerLabel" type="Label" parent="TopBar/GameTimer" unique_id=499418632]
+layout_mode = 2
+text = "10:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Scoreboard" type="MarginContainer" parent="." unique_id=164882774]
+custom_minimum_size = Vector2(560, 480)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Panel" type="Panel" parent="Scoreboard" unique_id=1630938269]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wp0k4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard" unique_id=410891342]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="Scoreboard/VBoxContainer" unique_id=2001529538]
+layout_mode = 2
+text = "Score"
+horizontal_alignment = 1
+
+[node name="Main" type="MarginContainer" parent="Scoreboard/VBoxContainer" unique_id=227122242]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayerScores" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main" unique_id=1317405431]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Player1" type="MarginContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores" unique_id=101039124]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1" unique_id=1560892215]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_djwj0")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1" unique_id=1256388619]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer" unique_id=1840233601]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 1"
+label_settings = SubResource("LabelSettings_q810m")
+horizontal_alignment = 1
+
+[node name="Scores" type="PanelContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer" unique_id=1186030688]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ptkwr")
+
+[node name="ScoreList" type="VBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/Scores" unique_id=1044171648]
+layout_mode = 2
+
+[node name="Score1" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/Scores/ScoreList" unique_id=465609015]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/Scores/ScoreList/Score1" unique_id=1575645936]
+layout_mode = 2
+text = "Scorename.."
+label_settings = SubResource("LabelSettings_e06cx")
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/Scores/ScoreList/Score1" unique_id=399984510]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1200"
+label_settings = SubResource("LabelSettings_e06cx")
+horizontal_alignment = 2
+
+[node name="TotalScore" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer" unique_id=327945410]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/TotalScore" unique_id=900106327]
+layout_mode = 2
+text = "Total Score"
+label_settings = SubResource("LabelSettings_oxdc4")
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/TotalScore" unique_id=517451807]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="ResultUI" type="PanelContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer" unique_id=1648959111]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oxdc4")
+
+[node name="VictoryText" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/ResultUI" unique_id=1881747367]
+visible = false
+layout_mode = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_ptkwr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefeatText" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player1/VBoxContainer/ResultUI" unique_id=1800780819]
+visible = false
+layout_mode = 2
+text = "defeat"
+label_settings = SubResource("LabelSettings_2wwe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2" type="MarginContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores" unique_id=428533601]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2" unique_id=714266963]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e0pfi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2" unique_id=205137902]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PlayerName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer" unique_id=950660148]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 2"
+label_settings = SubResource("LabelSettings_q810m")
+horizontal_alignment = 1
+
+[node name="Scores" type="PanelContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer" unique_id=235196351]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ptkwr")
+
+[node name="ScoreList" type="VBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/Scores" unique_id=486109937]
+layout_mode = 2
+
+[node name="Score1" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/Scores/ScoreList" unique_id=454592680]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/Scores/ScoreList/Score1" unique_id=1657872040]
+layout_mode = 2
+text = "Scorename.."
+label_settings = SubResource("LabelSettings_e06cx")
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/Scores/ScoreList/Score1" unique_id=492453956]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1200"
+label_settings = SubResource("LabelSettings_e06cx")
+horizontal_alignment = 2
+
+[node name="TotalScore" type="HBoxContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer" unique_id=1710644123]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="scoreName" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/TotalScore" unique_id=1967713692]
+layout_mode = 2
+text = "Total Score"
+label_settings = SubResource("LabelSettings_oxdc4")
+
+[node name="scoreAmount" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/TotalScore" unique_id=914525862]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="ResultUI" type="PanelContainer" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer" unique_id=590089880]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oxdc4")
+
+[node name="VictoryText" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/ResultUI" unique_id=2124265044]
+visible = false
+layout_mode = 2
+text = "Victory"
+label_settings = SubResource("LabelSettings_ptkwr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefeatText" type="Label" parent="Scoreboard/VBoxContainer/Main/PlayerScores/Player2/VBoxContainer/ResultUI" unique_id=1647232729]
+visible = false
+layout_mode = 2
+text = "defeat"
+label_settings = SubResource("LabelSettings_2wwe5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bottom" type="MarginContainer" parent="Scoreboard/VBoxContainer" unique_id=82320188]
+layout_mode = 2
+
+[node name="BackToMainMenu" type="Button" parent="Scoreboard/VBoxContainer/Bottom" unique_id=268649323]
+layout_mode = 2
+text = "Back to Main Menu"
+
+[node name="TextChat" parent="." unique_id=487340569 instance=ExtResource("3_bt76a")]
+layout_mode = 1

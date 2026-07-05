@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cj33oy4tm5sgb" path="res://GameAssets/SketchfabExports/hospital_stretcher_trolley_0.png" id="2_ttshn"]
 [ext_resource type="Texture2D" uid="uid://c7rsl7qr2kce0" path="res://Imports/BlenderExports/FatherNPC_Villagers_Texture.png" id="2_xr7qm"]
 [ext_resource type="Script" uid="uid://cwke03stwkk82" path="res://scripts/npc_rescue_interact.gd" id="3_npc_interact"]
+[ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="5_o27vo"]
 [ext_resource type="PackedScene" uid="uid://p2n5pvstsd58" path="res://scenes/Interactables/help_requirement.tscn" id="5_x34vv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ttshn"]
@@ -551,6 +552,9 @@ autoplay = &"metarig|mixamo_com|Layer0"
 
 [node name="Requirements" parent="HelpRequirement" index="0" unique_id=1746257932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("5_o27vo")]
+fixed_size = true
 
 [editable path="HelpRequirement"]
 [editable path="HelpRequirement/PromptArea"]

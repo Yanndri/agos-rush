@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://r36jm1mslqnm"
+path="res://.godot/imported/platform_stone.obj-0efb2a08d64f2c2502046941c2bc46be.mesh"
+
+[deps]
+
+files=["res://.godot/imported/platform_stone.obj-0efb2a08d64f2c2502046941c2bc46be.mesh"]
+
+source_file="res://GameAssets/kenney_nature-kit/Models/OBJ format/platform_stone.obj"
+dest_files=["res://.godot/imported/platform_stone.obj-0efb2a08d64f2c2502046941c2bc46be.mesh", "res://.godot/imported/platform_stone.obj-0efb2a08d64f2c2502046941c2bc46be.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

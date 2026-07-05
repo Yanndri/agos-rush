@@ -55,6 +55,7 @@ var required_item_name := ""
 @export var default_prompt_text := "[F] to Interact"
 @export var idle_prompt_text := "Hold [F] to Use"
 @export var use_progress_text := "Using... %d%%"
+@export var announce_points_to_chat := true
 
 var _requirement_fulfilled := false
 var _show_fulfilled_requirement_visual := false
@@ -478,7 +479,12 @@ func _award_points(requirement_node: Node) -> void:
 	if player_score == null:
 		return
 
-	player_score.add_score(points)
+	var action_text := _get_points_action_text()
+	if not player_score.add_score(points):
+		return
+
+	player_score.record_achievement(action_text, points)
+	_announce_points_action(player, action_text)
 
 
 func _get_player_from_requirement_node(requirement_node: Node) -> CharacterBody3D:
@@ -496,6 +502,55 @@ func _get_player_from_requirement_node(requirement_node: Node) -> CharacterBody3
 		parent = parent.get_parent()
 
 	return null
+
+
+func _announce_points_action(player: CharacterBody3D, action_text := "") -> void:
+	if not announce_points_to_chat or player == null:
+		return
+
+	var player_name := _get_player_display_name(player)
+	if action_text.is_empty():
+		action_text = _get_points_action_text()
+	if action_text.is_empty():
+		return
+
+	var message := "%s %s" % [player_name, action_text]
+	for chat in get_tree().get_nodes_in_group("text_chat"):
+		if chat.has_method("broadcast_system_message"):
+			chat.broadcast_system_message(message)
+		elif chat.has_method("add_system_message"):
+			chat.add_system_message(message)
+
+
+func _get_player_display_name(player: CharacterBody3D) -> String:
+	var raw_name := String(player.name)
+	if raw_name.is_valid_int():
+		return "Player %s" % raw_name
+	if raw_name.is_empty():
+		return "Player"
+
+	return raw_name
+
+
+func _get_points_action_text() -> String:
+	var parent_name := String(get_parent().name).to_lower()
+	var self_name := String(name).to_lower()
+
+	match requirement_type:
+		"Medkit":
+			return "tended to a resident"
+		"FoodSupply":
+			return "delivered food supplies"
+		"Battery":
+			if parent_name.contains("valve") or self_name.contains("valve"):
+				return "fixed a water valve"
+			return "powered an objective"
+		"Resident":
+			return "rescued a resident"
+		"Hospital":
+			return "brought a resident to the hospital"
+
+	return "completed an objective"
 
 
 func _get_help_dialogue() -> String:

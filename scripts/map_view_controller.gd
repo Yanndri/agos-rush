@@ -10,6 +10,7 @@ extends Node3D
 @export var unlocked := false
 @export var map_height := 60.0
 @export var map_size := 40.0
+@export var map_markers_group := "map_markers"
 
 var map_active := false
 
@@ -28,6 +29,7 @@ func _ready() -> void:
 	map_camera.position = Vector3.ZERO
 	map_camera.rotation = Vector3(-PI * 0.5, 0.0, 0.0)
 	map_camera.current = false
+	_update_map_markers()
 
 
 func _input(event: InputEvent) -> void:
@@ -73,6 +75,7 @@ func _set_map_active(value: bool) -> void:
 	map_active = value
 	_update_player_camera(not map_active)
 	_update_map_effects()
+	_update_map_markers()
 	_update_map_camera()
 
 
@@ -89,6 +92,17 @@ func _update_map_effects() -> void:
 
 	if map_effect != null:
 		map_effect.visible = map_active
+
+
+func _update_map_markers() -> void:
+	for marker in get_tree().get_nodes_in_group(map_markers_group):
+		if marker.has_method("set_map_marker_visible"):
+			marker.set_map_marker_visible(map_active)
+			continue
+
+		var marker_node := marker as Node3D
+		if marker_node != null:
+			marker_node.visible = map_active
 
 
 func _is_toggle_pressed(event: InputEvent) -> bool:

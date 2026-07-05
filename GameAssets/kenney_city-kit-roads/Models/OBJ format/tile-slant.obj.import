@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ca7h4tov5ai40"
+path="res://.godot/imported/tile-slant.obj-896b1e9cb71d0533377d28faad71efdf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tile-slant.obj-896b1e9cb71d0533377d28faad71efdf.mesh"]
+
+source_file="res://GameAssets/kenney_city-kit-roads/Models/OBJ format/tile-slant.obj"
+dest_files=["res://.godot/imported/tile-slant.obj-896b1e9cb71d0533377d28faad71efdf.mesh", "res://.godot/imported/tile-slant.obj-896b1e9cb71d0533377d28faad71efdf.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
