@@ -1,3 +1,6 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Local oversized audio archive. Keep out of git unless moved to Git LFS.
+GameAssets/Shapeforms Audio Free Sound Effects.zip
