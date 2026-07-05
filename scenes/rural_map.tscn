@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c7jgip0aju6du"]
 
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="1_u0bit"]
+[ext_resource type="Environment" uid="uid://dulaeew2ml61i" path="res://Themes/default_env.tres" id="2_dyl2w"]
 [ext_resource type="PackedScene" uid="uid://cswb01t1hco2o" path="res://scenes/scene_map.tscn" id="2_wp25b"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="3_dyl2w"]
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="4_gp0rt"]
@@ -9,19 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="7_mfgtr"]
 [ext_resource type="PackedScene" uid="uid://bwknle4fydpdp" path="res://scenes/water.tscn" id="8_7c32l"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="9_8ptxs"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yibp4"]
-sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
-
-[sub_resource type="Sky" id="Sky_lhr70"]
-sky_material = SubResource("ProceduralSkyMaterial_yibp4")
-
-[sub_resource type="Environment" id="Environment_vqrjv"]
-background_mode = 2
-sky = SubResource("Sky_lhr70")
-ambient_light_source = 3
-tonemap_mode = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8uve"]
 albedo_color = Color(0.7607843, 1, 0, 1)
@@ -79,7 +67,7 @@ size = Vector3(14.979004, 1, 15.515503)
 script = ExtResource("1_u0bit")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2096300854]
-environment = SubResource("Environment_vqrjv")
+environment = ExtResource("2_dyl2w")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1220642442]
 transform = Transform3D(-0.96871954, -0.07970491, 0.2350105, 0.23902103, -0.045060538, 0.9699685, -0.06672153, 0.99579966, 0.062702194, 0, 0, 0)

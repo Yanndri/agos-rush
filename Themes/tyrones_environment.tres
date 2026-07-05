@@ -1,0 +1,43 @@
+[gd_resource type="Environment" format=3 uid="uid://bpwahsoiiyls3"]
+
+[ext_resource type="Shader" uid="uid://lmrqv6k3cw50" path="res://scenes/sky_shader.gdshader" id="1_5lgej"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5nir"]
+shader = ExtResource("1_5lgej")
+shader_parameter/zenith_color = Color(0.14, 0.55, 0.95, 1)
+shader_parameter/upper_sky_color = Color(0.25, 0.72, 1, 1)
+shader_parameter/horizon_color = Color(0.75, 0.92, 1, 1)
+shader_parameter/ground_horizon_color = Color(0.85, 0.93, 1, 1)
+shader_parameter/ground_color = Color(0.62, 0.78, 0.95, 1)
+shader_parameter/sun_color = Color(1, 0.92, 0.75, 1)
+shader_parameter/sun_size = 0.03
+shader_parameter/sun_blur = 0.08
+shader_parameter/sun_strength = 1.2
+shader_parameter/cloud_color = Color(1, 1, 1, 1)
+shader_parameter/cloud_scale = 4.0
+shader_parameter/cloud_speed = 0.01
+shader_parameter/cloud_density = 0.35
+shader_parameter/cloud_softness = 0.18
+shader_parameter/cloud_strength = 0.22
+
+[sub_resource type="Sky" id="Sky_qfcm7"]
+sky_material = SubResource("ShaderMaterial_r5nir")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_qfcm7")
+ambient_light_source = 3
+ambient_light_color = Color(0, 0.66389817, 0.63677603, 1)
+ambient_light_sky_contribution = 0.69
+tonemap_mode = 2
+ssao_enabled = true
+ssao_radius = 2.36
+ssao_intensity = 34.1
+sdfgi_bounce_feedback = 0.75
+sdfgi_min_cell_size = 10.76
+glow_bloom = 0.39
+fog_light_color = Color(2.7915835e-06, 0.6090499, 0.68963385, 1)
+adjustment_enabled = true
+adjustment_brightness = 0.87
+adjustment_contrast = 0.765
+adjustment_saturation = 1.47

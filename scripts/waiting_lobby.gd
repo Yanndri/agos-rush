@@ -2,11 +2,17 @@ extends Control
 
 @export var room_code_label_path: NodePath = NodePath("Top/VBoxContainer/RoomCodeLabel")
 @export var start_button_path: NodePath = NodePath("StartSettings/VBoxContainer/Start")
+@export var smart_city_button_path: NodePath = NodePath("StartSettings/VBoxContainer/PanelContainer/Maps/SmartCity/SmartCityButton")
+@export var countryside_button_path: NodePath = NodePath("StartSettings/VBoxContainer/PanelContainer/Maps/Countryside/CountrysideButton")
 @export var preview_player_2_shaun_path: NodePath = NodePath("PlayerPreview/SubViewport/PreviewWorld/PreviewPlayer2/PlayerModel/CharacterArmature/Skeleton3D/Shaun")
 
 @onready var room_code_label: Label = get_node_or_null(room_code_label_path) as Label
 @onready var start_button: Button = get_node_or_null(start_button_path) as Button
+@onready var smart_city_button: Button = get_node_or_null(smart_city_button_path) as Button
+@onready var countryside_button: Button = get_node_or_null(countryside_button_path) as Button
 @onready var preview_player_2_shaun: MeshInstance3D = get_node_or_null(preview_player_2_shaun_path) as MeshInstance3D
+
+var selected_map_scene := NetworkManager.MAIN_SCENE
 
 
 func _ready() -> void:
@@ -19,6 +25,11 @@ func _ready() -> void:
 		multiplayer.peer_disconnected.connect(_on_peer_count_changed)
 	if start_button != null and not start_button.pressed.is_connected(_on_start_pressed):
 		start_button.pressed.connect(_on_start_pressed)
+	if smart_city_button != null and not smart_city_button.pressed.is_connected(_on_smart_city_pressed):
+		smart_city_button.pressed.connect(_on_smart_city_pressed)
+	if countryside_button != null and not countryside_button.pressed.is_connected(_on_countryside_pressed):
+		countryside_button.pressed.connect(_on_countryside_pressed)
+	_update_selected_map_from_buttons()
 	_update_lobby_state()
 
 
@@ -41,7 +52,16 @@ func _on_peer_count_changed(_peer_id: int) -> void:
 
 
 func _on_start_pressed() -> void:
-	NetworkManager.start_lobby_game()
+	_update_selected_map_from_buttons()
+	NetworkManager.start_lobby_game(selected_map_scene)
+
+
+func _on_smart_city_pressed() -> void:
+	selected_map_scene = NetworkManager.MAIN_SCENE
+
+
+func _on_countryside_pressed() -> void:
+	selected_map_scene = NetworkManager.RURAL_MAP_SCENE
 
 
 func _update_room_code_label() -> void:
@@ -68,3 +88,10 @@ func _has_other_player() -> bool:
 		return false
 
 	return not multiplayer.get_peers().is_empty()
+
+
+func _update_selected_map_from_buttons() -> void:
+	if countryside_button != null and countryside_button.button_pressed:
+		selected_map_scene = NetworkManager.RURAL_MAP_SCENE
+	else:
+		selected_map_scene = NetworkManager.MAIN_SCENE

@@ -8161,6 +8161,7 @@ texture_filter = 2
 texture = ExtResource("5_rvjn5")
 
 [node name="UpgradeUI" type="Control" parent="." unique_id=858853247]
+visible = false
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
