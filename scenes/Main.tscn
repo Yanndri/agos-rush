@@ -1,57 +1,16 @@
 [gd_scene format=3 uid="uid://do8bg3mk7rjy8"]
 
-[ext_resource type="Shader" uid="uid://lmrqv6k3cw50" path="res://scenes/sky_shader.gdshader" id="2_q8u5g"]
+[ext_resource type="Environment" uid="uid://dulaeew2ml61i" path="res://Themes/default_env.tres" id="2_lhr70"]
 [ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="5_q8u5g"]
 [ext_resource type="PackedScene" uid="uid://4h232p4515l4" path="res://scenes/game_ui.tscn" id="7_nxtc6"]
 [ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="8_jlsqs"]
 [ext_resource type="Script" uid="uid://c7hvji2b2k0bt" path="res://scenes/ambience_leaf.gd" id="10_lhr70"]
 [ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
+[ext_resource type="AudioStream" uid="uid://c625w7yp1atkn" path="res://Music/vjgalaxy-gameplay-liquid-drum-and-bass-3629.mp3" id="11_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="20_1iba3"]
 [ext_resource type="Script" uid="uid://dykda81dtyd4i" path="res://scripts/map_view_controller.gd" id="21_map_view"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_r5nir"]
-shader = ExtResource("2_q8u5g")
-shader_parameter/zenith_color = Color(0.14, 0.55, 0.95, 1)
-shader_parameter/upper_sky_color = Color(0.25, 0.72, 1, 1)
-shader_parameter/horizon_color = Color(0.75, 0.92, 1, 1)
-shader_parameter/ground_horizon_color = Color(0.85, 0.93, 1, 1)
-shader_parameter/ground_color = Color(0.62, 0.78, 0.95, 1)
-shader_parameter/sun_color = Color(1, 0.92, 0.75, 1)
-shader_parameter/sun_size = 0.03
-shader_parameter/sun_blur = 0.08
-shader_parameter/sun_strength = 1.2
-shader_parameter/cloud_color = Color(1, 1, 1, 1)
-shader_parameter/cloud_scale = 4.0
-shader_parameter/cloud_speed = 0.01
-shader_parameter/cloud_density = 0.35
-shader_parameter/cloud_softness = 0.18
-shader_parameter/cloud_strength = 0.22
-
-[sub_resource type="Sky" id="Sky_qfcm7"]
-sky_material = SubResource("ShaderMaterial_r5nir")
-
-[sub_resource type="Environment" id="Environment_rarhs"]
-background_mode = 2
-sky = SubResource("Sky_qfcm7")
-ambient_light_source = 3
-ambient_light_color = Color(0, 0.66389817, 0.63677603, 1)
-ambient_light_sky_contribution = 0.69
-tonemap_mode = 2
-ssao_enabled = true
-ssao_radius = 2.36
-ssao_intensity = 34.1
-sdfgi_enabled = true
-sdfgi_bounce_feedback = 0.75
-sdfgi_min_cell_size = 10.76
-glow_enabled = true
-glow_bloom = 0.39
-fog_light_color = Color(2.7915835e-06, 0.6090499, 0.68963385, 1)
-adjustment_enabled = true
-adjustment_brightness = 0.87
-adjustment_contrast = 0.765
-adjustment_saturation = 1.47
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3huio"]
 albedo_color = Color(0.7607843, 1, 0, 1)
@@ -95,14 +54,12 @@ shader_parameter/vignette_opacity = 0.5
 script = ExtResource("16_main")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=296110388]
-environment = SubResource("Environment_rarhs")
+environment = ExtResource("2_lhr70")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1955310936]
 transform = Transform3D(-0.9687194, -0.079704896, 0.23501049, 0.239021, -0.045060534, 0.9699684, -0.06672152, 0.99579954, 0.06270216, 0, 0, 0)
-light_energy = 0.367
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
-shadow_enabled = true
 shadow_bias = 0.0
 shadow_normal_bias = 0.0
 shadow_transmittance_bias = 8.604
@@ -179,7 +136,11 @@ size = 40.0
 
 [node name="leaf_ambience" type="Node3D" parent="." unique_id=343677919]
 script = ExtResource("10_lhr70")
-generate_leaves = true
 particle_amount = 1000
 leaf_color = Color(6.738305e-07, 0.80170447, 0.6001074, 1)
 wind_direction = Vector3(1, 1, 0.25)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=90663973]
+stream = ExtResource("11_wp0k4")
+autoplay = true
+bus = &"Music"

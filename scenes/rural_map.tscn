@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://c7jgip0aju6du"]
+
+[ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="1_u0bit"]
+[ext_resource type="Environment" uid="uid://dulaeew2ml61i" path="res://Themes/default_env.tres" id="2_dyl2w"]
+[ext_resource type="PackedScene" uid="uid://cswb01t1hco2o" path="res://scenes/scene_map.tscn" id="2_wp25b"]
+[ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="3_dyl2w"]
+[ext_resource type="Shader" uid="uid://bjv6nltos4v2u" path="res://Themes/vhs_effect.gdshader" id="4_gp0rt"]
+[ext_resource type="Script" uid="uid://dykda81dtyd4i" path="res://scripts/map_view_controller.gd" id="5_ekhyy"]
+[ext_resource type="PackedScene" uid="uid://4h232p4515l4" path="res://scenes/game_ui.tscn" id="6_c4no6"]
+[ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="7_mfgtr"]
+[ext_resource type="PackedScene" uid="uid://bwknle4fydpdp" path="res://scenes/water.tscn" id="8_7c32l"]
+[ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="9_8ptxs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s8uve"]
+albedo_color = Color(0.7607843, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ae4y4"]
+size = Vector3(4, 0.5, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t55gh"]
+shader = ExtResource("3_dyl2w")
+shader_parameter/pixel_size = 1
+shader_parameter/color_levels = 6.0
+shader_parameter/dither_strength = 0.1
+shader_parameter/darkest_color = Color(0.13996774, 8.513728e-05, 0.19209597, 1)
+shader_parameter/lightest_color = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fbci"]
+shader = ExtResource("4_gp0rt")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.0
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.050000002375
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 2.000000095
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.05
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.0
+shader_parameter/aberration = 0.03
+shader_parameter/brightness = 1.0
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.10000000475
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.1
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_euars"]
+size = Vector3(800, 0.2, 800)
+subdivide_width = 300
+subdivide_depth = 300
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_65vg5"]
+size = Vector3(50, 2, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ptkwr"]
+size = Vector3(14.979004, 1, 15.515503)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ebbnj"]
+size = Vector3(14.979004, 1, 15.515503)
+
+[node name="RuralMap" type="Node3D" unique_id=1791317413]
+script = ExtResource("1_u0bit")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2096300854]
+environment = ExtResource("2_dyl2w")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1220642442]
+transform = Transform3D(-0.96871954, -0.07970491, 0.2350105, 0.23902103, -0.045060538, 0.9699685, -0.06672153, 0.99579966, 0.062702194, 0, 0, 0)
+light_energy = 2.0
+light_specular = 0.0
+shadow_opacity = 0.8
+
+[node name="map_agos" parent="." unique_id=127506605 instance=ExtResource("2_wp25b")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Spawn" type="Node3D" parent="." unique_id=321993637]
+transform = Transform3D(0.052339427, 0, 0.99862933, 0, 1, 0, -0.99862933, 0, 0.052339427, 2.6643486, 10.527899, -3.9092126)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn" unique_id=1182165490]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.99370956, -3.7305079, -0.03418827)
+material_override = SubResource("StandardMaterial3D_s8uve")
+mesh = SubResource("BoxMesh_ae4y4")
+
+[node name="VHSCanvas" type="CanvasLayer" parent="." unique_id=208665094]
+layer = -1
+
+[node name="FilterCanvas" type="Control" parent="VHSCanvas" unique_id=1567843465]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="DotDitherEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=1710520081]
+material = SubResource("ShaderMaterial_t55gh")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="VHSEffect" type="ColorRect" parent="VHSCanvas/FilterCanvas" unique_id=648026403]
+visible = false
+material = SubResource("ShaderMaterial_8fbci")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MapViewController" type="Node3D" parent="." unique_id=652024243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6488895, 10.539501, -23.789534)
+script = ExtResource("5_ekhyy")
+map_size = 120.0
+
+[node name="MapCamera3D" type="Camera3D" parent="MapViewController" unique_id=1290007146]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+projection = 1
+size = 40.0
+
+[node name="GameUI" parent="." unique_id=1282615465 instance=ExtResource("6_c4no6")]
+
+[node name="Settings" parent="." unique_id=379776143 instance=ExtResource("7_mfgtr")]
+
+[node name="Water" parent="." unique_id=883607251 instance=ExtResource("8_7c32l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -224.956, 2.6404853, -19.45842)
+mesh = SubResource("BoxMesh_euars")
+rise_speed = 0.12
+max_height = 2.5
+min_height = -3.0
+drain_duration = 0.8
+water_margin = 0.05
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
+
+[node name="CollisionShape3D" parent="Water/WaterArea" parent_id_path=PackedInt32Array(883607251, 1121966791) index="0" unique_id=723112628]
+shape = SubResource("BoxShape3D_65vg5")
+
+[node name="WaitingPlayers" type="Node" parent="." unique_id=1848223181]
+
+[node name="WaitPlayer" parent="WaitingPlayers" unique_id=892846362 instance=ExtResource("9_8ptxs")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 691.29016, 0.08051467, 50.128178)
+
+[node name="WaitPlayer2" parent="WaitingPlayers" unique_id=1125181533 instance=ExtResource("9_8ptxs")]
+transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 699.09106, 0.08051467, 50.12236)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WaitingPlayers" unique_id=957949864]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 695.5462, -1.5020442, 50.144123)
+mesh = SubResource("BoxMesh_ptkwr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="WaitingPlayers/MeshInstance3D" unique_id=1603110596]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaitingPlayers/MeshInstance3D/StaticBody3D" unique_id=1583238947]
+shape = SubResource("BoxShape3D_ebbnj")
+
+[editable path="Water"]

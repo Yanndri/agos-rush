@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AGOS : PVP Rescue Rush"
-run/main_scene="uid://do8bg3mk7rjy8"
+run/main_scene="uid://dean2k5noao13"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

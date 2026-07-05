@@ -1,5 +1,7 @@
 extends CharacterBody3D
 
+@export var dialogue_sfx : AudioStream = preload("res://Music/36505577-pop-up-notify-smooth-modern-332448.mp3")
+
 @export var walk_speed := 3.5
 @export var run_speed := 6.0
 @export var carrying_speed_multiplier := 0.5
@@ -331,6 +333,8 @@ func _show_dialogue_panel() -> void:
 	can_close_dialogue = false
 	dialogue_hiding = false
 	_set_dialogue_next_visible(false)
+	if dialogue_sfx != null:
+		AudioUtility.play_sfx(self, dialogue_sfx)
 	dialogue_container.visible = true
 	dialogue_container.mouse_filter = Control.MOUSE_FILTER_STOP
 	dialogue_container.modulate.a = 0.0

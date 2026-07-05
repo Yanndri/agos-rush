@@ -4,6 +4,7 @@ const PORT := 7777
 const DISCOVERY_PORT := 7778
 const MAX_PLAYERS := 8
 const MAIN_SCENE := "res://scenes/Main.tscn"
+const RURAL_MAP_SCENE := "res://scenes/rural_map.tscn"
 const WAITING_LOBBY_SCENE := "res://scenes/waiting_lobby.tscn"
 const BROADCAST_INTERVAL := 0.5
 
@@ -107,13 +108,13 @@ func leave_game() -> void:
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 
-func start_lobby_game() -> void:
+func start_lobby_game(scene_path: String = MAIN_SCENE) -> void:
 	if not multiplayer.is_server() or lobby_game_started:
 		return
 
 	lobby_game_started = true
 	_stop_discovery()
-	_load_main_scene.rpc()
+	_load_game_scene.rpc(scene_path)
 
 func _on_peer_connected(_peer_id: int) -> void:
 	if not multiplayer.is_server() or lobby_game_started:
@@ -140,8 +141,8 @@ func _on_connection_failed() -> void:
 
 
 @rpc("authority", "call_local", "reliable")
-func _load_main_scene() -> void:
-	get_tree().change_scene_to_file(MAIN_SCENE)
+func _load_game_scene(scene_path: String) -> void:
+	get_tree().change_scene_to_file(scene_path)
 
 func _start_broadcasting() -> void:
 	discovery_peer = PacketPeerUDP.new()

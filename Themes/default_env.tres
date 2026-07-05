@@ -1,0 +1,10 @@
+[gd_resource type="Environment" format=3 uid="uid://dulaeew2ml61i"]
+
+[ext_resource type="Sky" uid="uid://c5dfwpu4004x6" path="res://Themes/default_sky.tres" id="1_570h6"]
+
+[resource]
+background_mode = 2
+sky = ExtResource("1_570h6")
+ambient_light_source = 3
+tonemap_mode = 2
+ssao_intensity = 16.0
