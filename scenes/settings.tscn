@@ -3,6 +3,7 @@
 [ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="1_r6d6q"]
 [ext_resource type="Texture2D" uid="uid://dnxfwh0n38pk" path="res://GameAssets/Icons/Gear 2 Outline 256.png" id="2_6wm04"]
 [ext_resource type="Script" uid="uid://cxou3d86en2su" path="res://scripts/settings.gd" id="3_settings"]
+[ext_resource type="Script" uid="uid://bevwjh53osplf" path="res://scripts/default_button.gd" id="4_f4mfi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxdc4"]
 
@@ -50,6 +51,7 @@ mouse_default_cursor_shape = 2
 icon = ExtResource("2_6wm04")
 icon_alignment = 1
 expand_icon = true
+script = ExtResource("4_f4mfi")
 
 [node name="SettingsPanel" type="PanelContainer" parent="." unique_id=1331290814]
 visible = false
@@ -102,13 +104,14 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
 layout_mode = 2
 text = "Back to Main Menu"
 
-[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/BackToMainMenu" unique_id=1476046954]
+[node name="MainMenuButton" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/BackToMainMenu" unique_id=1476046954]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
+script = ExtResource("4_f4mfi")
 
 [node name="MasterVolume" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=1554414249]
 custom_minimum_size = Vector2(0, 64)
@@ -122,14 +125,6 @@ theme_override_constants/margin_bottom = 4
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
 
-[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume" unique_id=342103677]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
-
 [node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume" unique_id=1840557719]
 layout_mode = 2
 
@@ -137,14 +132,14 @@ layout_mode = 2
 layout_mode = 2
 text = "Master Volume"
 
-[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume/HBoxContainer" unique_id=270498349]
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume/HBoxContainer" unique_id=270498349]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 value = 20.0
 
-[node name="MasterVolume2" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=418325061]
+[node name="MusicVolume" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=418325061]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_constants/margin_left = 12
@@ -152,11 +147,11 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 4
 
-[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=1927290804]
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MusicVolume" unique_id=1927290804]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
 
-[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=214415128]
+[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MusicVolume" unique_id=214415128]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
@@ -164,21 +159,21 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2" unique_id=1511832916]
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MusicVolume" unique_id=1511832916]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2/HBoxContainer" unique_id=958461052]
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MusicVolume/HBoxContainer" unique_id=958461052]
 layout_mode = 2
 text = "Music Volume"
 
-[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume2/HBoxContainer" unique_id=1148827285]
+[node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MusicVolume/HBoxContainer" unique_id=1148827285]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 4
 value = 20.0
 
-[node name="MasterVolume3" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=938212722]
+[node name="SFXVolume" type="MarginContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer" unique_id=938212722]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_constants/margin_left = 12
@@ -186,26 +181,18 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 4
 
-[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=930731668]
+[node name="Panel" type="Panel" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/SFXVolume" unique_id=930731668]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xp2id")
 
-[node name="Button" type="Button" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=2023887424]
-layout_mode = 2
-mouse_default_cursor_shape = 2
-theme_override_styles/normal = SubResource("StyleBoxEmpty_e06cx")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_bqllb")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_1x75n")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_s4qtl")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3" unique_id=2047895694]
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/SFXVolume" unique_id=2047895694]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3/HBoxContainer" unique_id=1871502151]
+[node name="Label" type="Label" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/SFXVolume/HBoxContainer" unique_id=1871502151]
 layout_mode = 2
 text = "SFX Volume"
 
-[node name="HSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/MasterVolume3/HBoxContainer" unique_id=680230456]
+[node name="SFXVolumeSlider" type="HSlider" parent="SettingsPanel/PanelContainer/VBoxContainer/Main/VBoxContainer/SFXVolume/HBoxContainer" unique_id=680230456]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 10

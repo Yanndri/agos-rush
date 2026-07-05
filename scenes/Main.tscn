@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="8_jlsqs"]
 [ext_resource type="Script" uid="uid://c7hvji2b2k0bt" path="res://scenes/ambience_leaf.gd" id="10_lhr70"]
 [ext_resource type="PackedScene" uid="uid://cel6ucp5hkb3o" path="res://scenes/road_map.tscn" id="10_wp0k4"]
+[ext_resource type="AudioStream" uid="uid://c625w7yp1atkn" path="res://Music/vjgalaxy-gameplay-liquid-drum-and-bass-3629.mp3" id="11_wp0k4"]
 [ext_resource type="Script" uid="uid://jv1kkhs8ptvy" path="res://scripts/multiplayer_main.gd" id="16_main"]
 [ext_resource type="PackedScene" uid="uid://cneu15yupj3kc" path="res://scenes/wait_player.tscn" id="17_nfivy"]
 [ext_resource type="Shader" uid="uid://b40j1avxkd34j" path="res://Themes/pixel_art_screen.gdshader" id="20_1iba3"]
@@ -138,3 +139,8 @@ script = ExtResource("10_lhr70")
 particle_amount = 1000
 leaf_color = Color(6.738305e-07, 0.80170447, 0.6001074, 1)
 wind_direction = Vector3(1, 1, 0.25)
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=90663973]
+stream = ExtResource("11_wp0k4")
+autoplay = true
+bus = &"Music"

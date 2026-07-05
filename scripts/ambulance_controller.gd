@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambulance_material.tres")
 
+@export var ambulance_door_sfx : AudioStream = preload("res://Music/dragon-studio-car-engine-372477.mp3")
 @export var ambulance_owner := "Player1"
 @export var acceleration := 10.0
 @export var reverse_acceleration := 7.0

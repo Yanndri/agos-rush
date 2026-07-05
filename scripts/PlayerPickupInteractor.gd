@@ -1,6 +1,7 @@
 extends Node
 class_name PlayerPickupInteractor
 
+@export var pickup_sfx : AudioStream = preload("res://Music/freesound_community-item-pick-up-38258.mp3")
 @export var interact_action := "interact"
 @export var use_action := ""
 @export var drop_action := "drop"
@@ -127,8 +128,8 @@ func is_local_player() -> bool:
 	return player.is_multiplayer_authority()
 
 func set_held_item(item: PickableItem) -> void:
-	if inventory != null:
-		inventory.add_item(item)
+	if inventory != null and inventory.add_item(item):
+		_play_pickup_sfx()
 
 
 func _get_held_item() -> PickableItem:
@@ -136,3 +137,8 @@ func _get_held_item() -> PickableItem:
 		return null
 
 	return inventory.get_selected_item()
+
+
+func _play_pickup_sfx() -> void:
+	if pickup_sfx != null:
+		AudioUtility.play_sfx(self, pickup_sfx)

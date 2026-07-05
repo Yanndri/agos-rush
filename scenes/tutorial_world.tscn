@@ -16,6 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://cpawix47rc7f6" path="res://scenes/settings.tscn" id="14_i6rmq"]
 [ext_resource type="Script" uid="uid://6xy4x3j1na7e" path="res://scripts/scene_teleporter.gd" id="15_kxnta"]
 [ext_resource type="ArrayMesh" uid="uid://dwlu4u4jd0rrf" path="res://GameAssets/KayKit_Restaurant_Bits_1.0_FREE/obj/menu.obj" id="16_y34te"]
+[ext_resource type="AudioStream" uid="uid://dj5kh62maq6qr" path="res://Music/camila_noir-tranquil-gameplay-smooth-chill-326848.mp3" id="17_y34te"]
+[ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="18_llvul"]
+[ext_resource type="Script" uid="uid://dvr3wjd8l27ds" path="res://scripts/tutorial_finished_panel.gd" id="19_76qbc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uduk3"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -37,7 +40,7 @@ subdivide_height = 10
 subdivide_depth = 10
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ero5e"]
-size = Vector3(45.355713, 0.2, 40)
+size = Vector3(51.92639, 0.2, 40)
 
 [sub_resource type="BoxMesh" id="BoxMesh_8ap3v"]
 size = Vector3(16.740356, 0.2, 40)
@@ -131,7 +134,7 @@ mesh = SubResource("BoxMesh_i6rmq")
 [node name="StaticBody3D" type="StaticBody3D" parent="Ground1" unique_id=121822681]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground1/StaticBody3D" unique_id=1873983405]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.524414, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.809753, 0, 0)
 shape = SubResource("BoxShape3D_ero5e")
 
 [node name="Ground2" type="MeshInstance3D" parent="." unique_id=1651474604]
@@ -252,6 +255,16 @@ mesh = SubResource("BoxMesh_ptkwr")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Barriers/Barrier2/StaticBody3D" unique_id=468296521]
 shape = SubResource("BoxShape3D_y6qrh")
 
+[node name="Barrier4" type="MeshInstance3D" parent="Barriers" unique_id=1026713437]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -36.562126, 2.8325272, 0.82073593)
+material_override = SubResource("StandardMaterial3D_oxdc4")
+mesh = SubResource("BoxMesh_ptkwr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Barriers/Barrier4" unique_id=1883298987]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Barriers/Barrier4/StaticBody3D" unique_id=867315225]
+shape = SubResource("BoxShape3D_y6qrh")
+
 [node name="Tutorial3Barrier" type="MeshInstance3D" parent="." unique_id=154746254]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -34.83528, 2.8325272, 0.82073593)
 material_override = SubResource("StandardMaterial3D_oxdc4")
@@ -302,6 +315,41 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8852268, 0)
 billboard = 2
 texture_filter = 0
 text = "Exit"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1505236996]
+stream = ExtResource("17_y34te")
+autoplay = true
+bus = &"Music"
+
+[node name="TutorialFinishedPanel" type="MarginContainer" parent="." unique_id=1187331828]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("18_llvul")
+script = ExtResource("19_76qbc")
+
+[node name="PanelContainer" type="PanelContainer" parent="TutorialFinishedPanel" unique_id=1686859419]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TutorialFinishedPanel/PanelContainer" unique_id=981299447]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Label" type="Label" parent="TutorialFinishedPanel/PanelContainer/VBoxContainer" unique_id=1385528205]
+layout_mode = 2
+text = "Tutorial Finished!!!!!!!!!"
+horizontal_alignment = 1
+
+[node name="MainMenu" type="Button" parent="TutorialFinishedPanel/PanelContainer/VBoxContainer" unique_id=1736406241]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="TutorialFinishedPanel/PanelContainer/VBoxContainer/MainMenu" to="TutorialFinishedPanel" method="_on_main_menu_pressed"]
 
 [editable path="NPC1"]
 [editable path="NPC1/HelpRequirement"]

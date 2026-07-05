@@ -4,6 +4,7 @@ class_name PlayerScore
 signal score_changed(new_score: int)
 signal achievements_changed
 
+@export var score_sfx: AudioStream = preload("res://Music/freesound_community-short-success-sound-glockenspiel-treasure-video-game-6346.mp3")
 @export var score_label_path: NodePath = NodePath("../PlayerUI/ScoreUI/VBoxContainer/ScoreAmount")
 
 var score := 0
@@ -26,6 +27,8 @@ func add_score(points: int) -> bool:
 		return false
 
 	set_score(score + points)
+	if score_sfx != null:
+		AudioUtility.play_sfx(self, score_sfx)
 	return true
 
 

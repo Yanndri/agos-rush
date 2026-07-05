@@ -13,25 +13,25 @@ const AVAILABLE_REQUIREMENTS := {
 	"FoodSupply": {
 		"item_name": "FoodSupply",
 		"visual_node": "FoodSupply",
-		"points_amount": 123213,
+		"points_amount": 100,
 		"help_dialogue": "I should provide some food"
 	},
 	"Battery": {
 		"item_name": "Battery",
 		"visual_node": "Battery",
-		"points_amount": 123213,
+		"points_amount": 150,
 		"help_dialogue": "This needs battery to function"
 	},
 	"Hospital": {
 		"item_name": "",
 		"visual_node": "Hospital",
-		"points_amount": 123213,
+		"points_amount": 100,
 		"help_dialogue": "I have to get them to the Evacuation Center"
 	},
 	"Resident": {
 		"item_name": "",
 		"visual_node": "Resident",
-		"points_amount": 123213,
+		"points_amount": 100,
 		"help_dialogue": "I need to find Residents to evacuate here"
 	},
 }

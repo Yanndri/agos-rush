@@ -33,16 +33,16 @@ extends Node3D
 @onready var map_button: Button = get_node_or_null(map_button_path) as Button
 
 const SPEED_UPGRADES := [
-	{"multiplier": 1.2, "cost": 5},
-	{"multiplier": 1.4, "cost": 20},
-	{"multiplier": 1.6, "cost": 50},
+	{"multiplier": 1.2, "cost": 1},
+	{"multiplier": 1.4, "cost": 3},
+	{"multiplier": 1.6, "cost": 5},
 ]
 const HOTBAR_UPGRADES := [
-	{"slots": 1, "cost": 100},
-	{"slots": 1, "cost": 200},
+	{"slots": 1, "cost": 2},
+	{"slots": 1, "cost": 3},
 ]
 const MAP_UPGRADES := [
-	{"cost": 100},
+	{"cost": 5},
 ]
 
 var nearby_player: CharacterBody3D

@@ -16,6 +16,7 @@ enum TutorialStep {
 @export var valve_requirement_path: NodePath = NodePath("../WaterValve/HelpRequirement")
 @export var tutorial_2_barrier_path: NodePath = NodePath("../Tutorial2Barrier")
 @export var tutorial_3_barrier_path: NodePath = NodePath("../Tutorial3Barrier")
+@export var tutorial_finished_panel_path: NodePath = NodePath("../TutorialFinishedPanel")
 
 @export var rotate_left_action := "pan_left"
 @export var rotate_right_action := "pan_right"
@@ -36,6 +37,7 @@ var hospital_requirement: HelpRequirement
 var valve_requirement: HelpRequirement
 var tutorial_2_barrier: Node3D
 var tutorial_3_barrier: Node3D
+var tutorial_finished_panel: CanvasItem
 
 
 func _ready() -> void:
@@ -45,6 +47,7 @@ func _ready() -> void:
 	valve_requirement = get_node_or_null(valve_requirement_path) as HelpRequirement
 	tutorial_2_barrier = get_node_or_null(tutorial_2_barrier_path) as Node3D
 	tutorial_3_barrier = get_node_or_null(tutorial_3_barrier_path) as Node3D
+	tutorial_finished_panel = get_node_or_null(tutorial_finished_panel_path) as CanvasItem
 
 	if player != null:
 		inventory = player.get_node_or_null("PlayerInventory") as PlayerInventory
@@ -64,6 +67,7 @@ func _ready() -> void:
 
 	_set_barrier_open(tutorial_2_barrier, false)
 	_set_barrier_open(tutorial_3_barrier, false)
+	_set_tutorial_finished_panel_visible(false)
 	call_deferred("_start_tutorial")
 
 
@@ -119,6 +123,7 @@ func _go_to_step(step: TutorialStep) -> void:
 			_show_dialogue(use_battery_dialogue)
 		TutorialStep.COMPLETE:
 			_set_barrier_open(tutorial_3_barrier, true)
+			_set_tutorial_finished_panel_visible(true)
 
 
 func _on_selected_item_changed(_item: PickableItem) -> void:
@@ -175,6 +180,11 @@ func _set_barrier_open(barrier: Node3D, is_open: bool) -> void:
 
 	barrier.visible = not is_open
 	_set_collision_shapes_disabled(barrier, is_open)
+
+
+func _set_tutorial_finished_panel_visible(value: bool) -> void:
+	if tutorial_finished_panel != null:
+		tutorial_finished_panel.visible = value
 
 
 func _set_collision_shapes_disabled(node: Node, disabled: bool) -> void:
