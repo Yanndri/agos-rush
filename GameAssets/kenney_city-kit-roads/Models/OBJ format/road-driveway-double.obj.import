@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bna2na5lnf02q"
+path="res://.godot/imported/road-driveway-double.obj-d30ecc77f3f23db4b0b8789e58214725.mesh"
+
+[deps]
+
+files=["res://.godot/imported/road-driveway-double.obj-d30ecc77f3f23db4b0b8789e58214725.mesh"]
+
+source_file="res://GameAssets/kenney_city-kit-roads/Models/OBJ format/road-driveway-double.obj"
+dest_files=["res://.godot/imported/road-driveway-double.obj-d30ecc77f3f23db4b0b8789e58214725.mesh", "res://.godot/imported/road-driveway-double.obj-d30ecc77f3f23db4b0b8789e58214725.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
