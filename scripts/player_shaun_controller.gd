@@ -13,11 +13,13 @@ extends CharacterBody3D
 @export var gravity := 18.0
 @export var turn_speed := 8.0
 @export var land_animation_time := 0.25
+@export var max_step_height := 0.35
 @export var model_yaw_offset_degrees := 180.0
 @export var move_left_action := "move_left"
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var jump_action := "jump"
 @export var player_ui_path: NodePath = NodePath("PlayerUI")
 @export var dialogue_container_path: NodePath = NodePath("PlayerUI/DialogueContainer")
 @export var dialogue_label_path: NodePath = NodePath("PlayerUI/DialogueContainer/VBoxContainer/MarginContainer/DialogueLabel")
@@ -41,7 +43,6 @@ var last_animation: StringName = &"Idle"
 var was_on_floor_last_frame := true
 var land_time_left := 0.0
 
-var was_jump_key_down := false
 var jump_just_started := false
 var jump_buffer_left := 0.0
 var jump_cut_applied := false
@@ -110,9 +111,7 @@ func _physics_process(delta: float) -> void:
 	if in_water:
 		current_speed *= water_speed_multiplier
 
-	var jump_key_down := Input.is_key_pressed(KEY_SPACE)
-	var jump_pressed := jump_key_down and not was_jump_key_down
-	was_jump_key_down = jump_key_down
+	var jump_key_down := InputMap.has_action(jump_action) and Input.is_action_pressed(jump_action) and not _is_construction_minigame_active()
 	if jump_key_down:
 		jump_buffer_left = jump_buffer_time
 	else:
@@ -139,7 +138,10 @@ func _physics_process(delta: float) -> void:
 			min(turn_speed * delta, 1.0)
 		)
 
+	var was_grounded_before_move := is_on_floor()
+	var horizontal_motion := Vector3(velocity.x, 0.0, velocity.z) * delta
 	move_and_slide()
+	_try_step_up(was_grounded_before_move, horizontal_motion)
 
 	if is_on_floor() and not was_on_floor_last_frame:
 		land_time_left = land_animation_time
@@ -166,6 +168,37 @@ func _start_jump_from_buffer() -> void:
 	jump_just_started = true
 	jump_cut_applied = false
 	land_time_left = 0.0
+
+
+func _try_step_up(was_grounded_before_move: bool, horizontal_motion: Vector3) -> void:
+	if max_step_height <= 0.0:
+		return
+	if not was_grounded_before_move or not is_on_wall():
+		return
+	if horizontal_motion.length_squared() <= 0.0001:
+		return
+
+	var original_transform := global_transform
+	var step_up := Vector3.UP * max_step_height
+	var step_forward = horizontal_motion.normalized() * clamp(horizontal_motion.length(), 0.05, 0.15)
+	var raised_transform := original_transform.translated(step_up)
+	var stepped_transform := raised_transform.translated(step_forward)
+
+	if test_move(original_transform, step_up):
+		return
+	if test_move(raised_transform, step_forward):
+		return
+	if not test_move(stepped_transform, Vector3.DOWN * (max_step_height + 0.08)):
+		return
+
+	global_transform = stepped_transform
+	velocity.y = 0.0
+	apply_floor_snap()
+
+
+func _is_construction_minigame_active() -> bool:
+	return not get_tree().get_nodes_in_group("construction_minigame_active").is_empty()
+
 
 func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
 	if input_dir == Vector2.ZERO:

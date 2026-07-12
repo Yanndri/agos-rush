@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://bqxjdg7c2j6ev"]
+
+[ext_resource type="PackedScene" uid="uid://ba7u3x4dtnocc" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_purpleA.fbx" id="1_rvttr"]
+[ext_resource type="PackedScene" uid="uid://cgusbily0fxl" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_purpleB.fbx" id="2_wy6x2"]
+[ext_resource type="PackedScene" uid="uid://b2873rycjxmds" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_purpleC.fbx" id="3_rod5n"]
+[ext_resource type="PackedScene" uid="uid://2gs1jaxdscta" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_redA.fbx" id="4_jefrj"]
+[ext_resource type="PackedScene" uid="uid://b5ru16u2kd457" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_redB.fbx" id="5_1wje4"]
+[ext_resource type="PackedScene" uid="uid://bll36krhgimym" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_redC.fbx" id="6_nbs4m"]
+[ext_resource type="PackedScene" uid="uid://yjlpokumahvi" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_yellowA.fbx" id="7_g18vr"]
+[ext_resource type="PackedScene" uid="uid://jnd55pjwxqtn" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_yellowB.fbx" id="8_1ea3d"]
+[ext_resource type="PackedScene" uid="uid://dei3n40vrjov6" path="res://GameAssets/kenney_nature-kit/Models/FBX format/flower_yellowC.fbx" id="9_rtsxu"]
+[ext_resource type="PackedScene" uid="uid://bgbjwc6lqyyrc" path="res://GameAssets/kenney_nature-kit/Models/FBX format/grass.fbx" id="10_8nlv2"]
+[ext_resource type="PackedScene" uid="uid://b1hqwmj7dbp1e" path="res://GameAssets/kenney_nature-kit/Models/FBX format/grass_large.fbx" id="11_f66nb"]
+[ext_resource type="PackedScene" uid="uid://sees5ltr6yqs" path="res://GameAssets/kenney_nature-kit/Models/FBX format/grass_leafs.fbx" id="12_ex532"]
+[ext_resource type="PackedScene" uid="uid://b3xn8y42tcml4" path="res://GameAssets/kenney_nature-kit/Models/FBX format/grass_leafsLarge.fbx" id="13_mvr8l"]
+[ext_resource type="PackedScene" uid="uid://bvp4qvcin250a" path="res://GameAssets/kenney_nature-kit/Models/FBX format/path_stone.fbx" id="14_7tyn5"]
+[ext_resource type="PackedScene" uid="uid://b0caq4kvckp5b" path="res://GameAssets/kenney_nature-kit/Models/FBX format/path_stoneCircle.fbx" id="15_jy3jb"]
+[ext_resource type="PackedScene" uid="uid://df7mipox4puye" path="res://GameAssets/kenney_nature-kit/Models/FBX format/path_stoneCorner.fbx" id="16_humka"]
+[ext_resource type="PackedScene" uid="uid://denb81nxp8qnh" path="res://GameAssets/kenney_nature-kit/Models/FBX format/path_stoneEnd.fbx" id="17_54s6l"]
+[ext_resource type="PackedScene" uid="uid://l84ypt4s1qre" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bush.fbx" id="18_o47qt"]
+[ext_resource type="PackedScene" uid="uid://cfmw0eecx1ahl" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bushDetailed.fbx" id="19_y0dd0"]
+[ext_resource type="PackedScene" uid="uid://c26x1tohewd5h" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bushLarge.fbx" id="20_yl3aq"]
+[ext_resource type="PackedScene" uid="uid://ddi1mov4uhu7n" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bushLargeTriangle.fbx" id="21_qy273"]
+[ext_resource type="PackedScene" uid="uid://brw25yrb48arp" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bushSmall.fbx" id="22_2clhe"]
+[ext_resource type="PackedScene" uid="uid://dl5wxvvgto0pp" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_bushTriangle.fbx" id="23_wkc5w"]
+[ext_resource type="PackedScene" uid="uid://g7j20tcnubxw" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_flatShort.fbx" id="24_5iftp"]
+[ext_resource type="PackedScene" uid="uid://dsttsrajok43p" path="res://GameAssets/kenney_nature-kit/Models/FBX format/plant_flatTall.fbx" id="25_v7iyk"]
+
+[node name="FlowersMeshLibrary" type="Node3D" unique_id=2115364328]
+
+[node name="flower_purpleA" parent="." unique_id=1938938139 instance=ExtResource("1_rvttr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_purpleB" parent="." unique_id=2020595629 instance=ExtResource("2_wy6x2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_purpleC" parent="." unique_id=18888317 instance=ExtResource("3_rod5n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_redA" parent="." unique_id=1633499733 instance=ExtResource("4_jefrj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_redB" parent="." unique_id=786302437 instance=ExtResource("5_1wje4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_redC" parent="." unique_id=1539282977 instance=ExtResource("6_nbs4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_yellowA" parent="." unique_id=144498006 instance=ExtResource("7_g18vr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_yellowB" parent="." unique_id=1941993551 instance=ExtResource("8_1ea3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="flower_yellowC" parent="." unique_id=2049927465 instance=ExtResource("9_rtsxu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="grass" parent="." unique_id=715685502 instance=ExtResource("10_8nlv2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="grass_large" parent="." unique_id=558232104 instance=ExtResource("11_f66nb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="grass_leafs" parent="." unique_id=1869897772 instance=ExtResource("12_ex532")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="grass_leafsLarge" parent="." unique_id=1197527290 instance=ExtResource("13_mvr8l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26877618, 0, 0.2650931)
+
+[node name="path_stone" parent="." unique_id=1239756563 instance=ExtResource("14_7tyn5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.99317956, -2.3841858e-07, 0.28210545)
+
+[node name="path_stoneCircle" parent="." unique_id=1263429939 instance=ExtResource("15_jy3jb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6925639, 0, 1.4769452)
+
+[node name="path_stoneCorner" parent="." unique_id=414376008 instance=ExtResource("16_humka")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3271751, 0, 0.73008394)
+
+[node name="path_stoneEnd" parent="." unique_id=839853648 instance=ExtResource("17_54s6l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1209884, 2.3841858e-07, -0.253978)
+
+[node name="plant_bush" parent="." unique_id=1243747052 instance=ExtResource("18_o47qt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8491595, 0, 1.8144648)
+
+[node name="plant_bushDetailed" parent="." unique_id=1935018911 instance=ExtResource("19_y0dd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1361301, 0, 1.1189544)
+
+[node name="plant_bushLarge" parent="." unique_id=1318238826 instance=ExtResource("20_yl3aq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1361301, 0, 1.1189544)
+
+[node name="plant_bushLargeTriangle" parent="." unique_id=1909242558 instance=ExtResource("21_qy273")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1361301, 0, 1.1189544)
+
+[node name="plant_bushSmall" parent="." unique_id=1084278838 instance=ExtResource("22_2clhe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1361301, 0, 1.1189544)
+
+[node name="plant_bushTriangle" parent="." unique_id=731465952 instance=ExtResource("23_wkc5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1361301, 0, 1.1189544)
+
+[node name="plant_flatShort" parent="." unique_id=2104948629 instance=ExtResource("24_5iftp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.77906984, 0, 2.114037)
+
+[node name="plant_flatTall" parent="." unique_id=1870809182 instance=ExtResource("25_v7iyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2897602, 0, 2.0168087)

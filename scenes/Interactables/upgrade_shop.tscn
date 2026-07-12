@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dqmlykt70va3o" path="res://GameAssets/Icons/Backpack Outline 256.png" id="8_edxqe"]
 [ext_resource type="Texture2D" uid="uid://b62aaps1gkkn3" path="res://GameAssets/Icons/Paper Outline 256.png" id="9_eqgco"]
 [ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="11_puyd6"]
+[ext_resource type="Texture2D" uid="uid://b38qj7ppqsh1l" path="res://GameAssets/Icons/Upgrade Outline 256.png" id="12_h8vn6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4xbd"]
 resource_name = "Atlas"
@@ -8351,6 +8352,7 @@ expand_icon = true
 
 [node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("11_puyd6")]
 pixel_size = 0.0005
-texture = ExtResource("7_h8vn6")
+texture = ExtResource("12_h8vn6")
+marker_scale = Vector3(1, 1, 1)
 
 [editable path="PromptArea"]

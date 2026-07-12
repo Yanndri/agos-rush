@@ -9,6 +9,7 @@ extends CharacterBody3D
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var jump_action := "jump"
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -45,7 +46,7 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif Input.is_key_pressed(KEY_SPACE):
+	elif _is_jump_pressed():
 		velocity.y = jump_velocity
 		_start_jump_animation_lock()
 	else:
@@ -81,6 +82,14 @@ func _start_jump_animation_lock() -> void:
 	var jump_animation := animation_player.get_animation("Jump")
 	jump_animation_time_left = jump_animation.length
 	_play_animation("Jump")
+
+
+func _is_jump_pressed() -> bool:
+	if not get_tree().get_nodes_in_group("construction_minigame_active").is_empty():
+		return false
+
+	return InputMap.has_action(jump_action) and Input.is_action_pressed(jump_action)
+
 
 func _play_animation(animation_name: StringName) -> void:
 	last_animation = animation_name

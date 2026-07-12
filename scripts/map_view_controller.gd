@@ -7,6 +7,7 @@ extends Node3D
 @export var default_effect_path: NodePath = NodePath("../VHSCanvas/FilterCanvas/DotDitherEffect")
 @export var map_effect_path: NodePath = NodePath("../VHSCanvas/FilterCanvas/VHSEffect")
 @export var follow_local_player := true
+@export var has_map := true
 @export var unlocked := false
 @export var map_height := 60.0
 @export var map_size := 40.0
@@ -19,6 +20,7 @@ var map_active := false
 
 func _ready() -> void:
 	process_priority = 100
+	unlocked = unlocked or has_map
 
 	if map_camera == null:
 		push_warning("MapViewController is missing its map camera.")
@@ -80,6 +82,7 @@ func _set_map_active(value: bool) -> void:
 
 
 func unlock_map() -> void:
+	has_map = true
 	unlocked = true
 
 
