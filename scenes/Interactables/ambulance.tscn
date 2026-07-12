@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="7_3fhhq"]
 [ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/Interactables/storage.tscn" id="7_y57d8"]
 [ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="9_48mh0"]
+[ext_resource type="Texture2D" uid="uid://bpmju6usgwaq4" path="res://GameAssets/Icons/ambulance.png" id="10_y7f2c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
 size = Vector3(3.9853516, 2.2, 2.8)
@@ -426,6 +427,8 @@ shape = SubResource("BoxShape3D_y57d8")
 debug_color = Color(0.9999737, 0, 0.110571496, 0.41960785)
 
 [node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("9_48mh0")]
+pixel_size = 0.002
+texture = ExtResource("10_y7f2c")
 
 [editable path="Storage"]
 [editable path="Storage/PromptArea"]

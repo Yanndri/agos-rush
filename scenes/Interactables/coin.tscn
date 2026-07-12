@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dtba6txko68d3"]
+
+[ext_resource type="Script" uid="uid://doftwlfjaxabg" path="res://scripts/coin.gd" id="1_p03kh"]
+[ext_resource type="Texture2D" uid="uid://dadqun04oq621" path="res://GameAssets/Icons/Star Gem/Star Gem Purple 256.png" id="1_twcx1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ptkwr"]
+
+[node name="Coin" type="Area3D" unique_id=748200325]
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("1_p03kh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=540589814]
+shape = SubResource("SphereShape3D_ptkwr")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1003001487]
+pixel_size = 0.003
+billboard = 1
+texture_filter = 2
+texture = ExtResource("1_twcx1")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=741948273]
+light_color = Color(1, 0, 1, 1)
+light_energy = 2.0
+omni_range = 1.0

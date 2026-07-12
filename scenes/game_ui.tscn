@@ -143,7 +143,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wp0k4")
 [node name="GameTimer" type="MarginContainer" parent="TopBar" unique_id=1042639952]
 layout_mode = 2
 script = ExtResource("2_u2dgd")
-start_time_seconds = 20.0
+start_time_seconds = 240.0
 
 [node name="TimerLabel" type="Label" parent="TopBar/GameTimer" unique_id=499418632]
 layout_mode = 2

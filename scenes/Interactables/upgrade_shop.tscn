@@ -4,12 +4,14 @@
 [ext_resource type="Script" uid="uid://bguumjgbqur4u" path="res://scripts/upgrade_shop.gd" id="1_pvis0"]
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="2_p5yes"]
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="4_xm3jp"]
-[ext_resource type="Texture2D" uid="uid://b6nx2awaqwnfs" path="res://GameAssets/Icons/Star Gem/Star Gem Yellow Outline 64.png" id="5_rvjn5"]
-[ext_resource type="Theme" uid="uid://0dful3hgisw0" path="res://Themes/shop_theme.tres" id="6_dk8ov"]
+[ext_resource type="Theme" uid="uid://d0gj2tsgmkl5k" path="res://Themes/upgrade_shop_theme.tres" id="6_puyd6"]
 [ext_resource type="Texture2D" uid="uid://4qbd0gdarfg6" path="res://GameAssets/Icons/Shoe Yellow Outline 256.png" id="7_carv0"]
 [ext_resource type="Texture2D" uid="uid://chd2palpoomde" path="res://GameAssets/Icons/X Button Outline 64.png" id="7_eqgco"]
+[ext_resource type="Texture2D" uid="uid://dadqun04oq621" path="res://GameAssets/Icons/Star Gem/Star Gem Purple 256.png" id="7_h8vn6"]
 [ext_resource type="Texture2D" uid="uid://dqmlykt70va3o" path="res://GameAssets/Icons/Backpack Outline 256.png" id="8_edxqe"]
 [ext_resource type="Texture2D" uid="uid://b62aaps1gkkn3" path="res://GameAssets/Icons/Paper Outline 256.png" id="9_eqgco"]
+[ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="11_puyd6"]
+[ext_resource type="Texture2D" uid="uid://b38qj7ppqsh1l" path="res://GameAssets/Icons/Upgrade Outline 256.png" id="12_h8vn6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4xbd"]
 resource_name = "Atlas"
@@ -7651,7 +7653,7 @@ radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q810m"]
 blend_mode = 1
-albedo_color = Color(1, 0.53333336, 0.03529412, 1)
+albedo_color = Color(1, 0, 1, 1)
 roughness = 0.0
 
 [sub_resource type="TorusMesh" id="TorusMesh_oxdc4"]
@@ -7661,7 +7663,7 @@ inner_radius = 1.066
 transparency = 1
 blend_mode = 1
 shading_mode = 0
-albedo_color = Color(1, 0.83137256, 0.16862746, 0.45)
+albedo_color = Color(1, 0, 1, 0.4509804)
 
 [sub_resource type="SphereMesh" id="SphereMesh_shop_glow"]
 radius = 0.45
@@ -7671,14 +7673,14 @@ rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e06cx"]
 transparency = 1
-albedo_color = Color(1, 1, 0.03529412, 0.2627451)
+albedo_color = Color(1, 0, 1, 0.2627451)
 
 [sub_resource type="TorusMesh" id="TorusMesh_pvis0"]
 inner_radius = 1.066
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pvis0"]
 transparency = 1
-albedo_color = Color(1, 1, 0.03529412, 0.2627451)
+albedo_color = Color(1, 0, 1, 0.2627451)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pvis0"]
 top_radius = 1.0
@@ -8134,7 +8136,7 @@ material_override = SubResource("StandardMaterial3D_shop_glow")
 mesh = SubResource("SphereMesh_shop_glow")
 
 [node name="GlowLight" type="OmniLight3D" parent="PromptArea/circle_visual" unique_id=967541706]
-light_color = Color(1, 0.74509805, 0.21960784, 1)
+light_color = Color(1, 0.5058824, 1, 1)
 light_energy = 1.8
 omni_range = 2.5
 
@@ -8156,12 +8158,12 @@ text = "Upgrades"
 font = ExtResource("4_xm3jp")
 
 [node name="Sprite3D" type="Sprite3D" parent="PromptArea/PointsAmount" unique_id=1352482154]
+pixel_size = 0.005
 billboard = 2
 texture_filter = 2
-texture = ExtResource("5_rvjn5")
+texture = ExtResource("7_h8vn6")
 
 [node name="UpgradeUI" type="Control" parent="." unique_id=858853247]
-visible = false
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -8172,7 +8174,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
-theme = ExtResource("6_dk8ov")
+theme = ExtResource("6_puyd6")
 metadata/_edit_lock_ = true
 
 [node name="Panel" type="Panel" parent="UpgradeUI" unique_id=841042363]
@@ -8215,9 +8217,12 @@ layout_mode = 2
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=1312109888]
+custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 size_flags_horizontal = 0
-texture = ExtResource("5_rvjn5")
+texture = ExtResource("7_h8vn6")
+expand_mode = 1
+flip_h = true
 
 [node name="PointsAmount" type="RichTextLabel" parent="UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=330120899]
 clip_contents = false
@@ -8228,7 +8233,7 @@ vertical_alignment = 1
 
 [node name="Label" type="Label" parent="UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=1188587337]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.3764706, 0, 1)
+theme_override_colors/font_color = Color(0.8392157, 0.4117647, 1, 1)
 text = "Upgrades"
 
 [node name="Close" type="Button" parent="UpgradeUI/MarginContainer/VBoxContainer/TopBar/HBoxContainer" unique_id=1705975047]
@@ -8251,6 +8256,37 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_dk8ov")
 [node name="VBoxContainer" type="VBoxContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main" unique_id=659851622]
 layout_mode = 2
 theme_override_constants/separation = 12
+
+[node name="Map" type="MarginContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer" unique_id=1324780470]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map" unique_id=2138794458]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=610576972]
+layout_mode = 2
+texture = ExtResource("9_eqgco")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=577067229]
+layout_mode = 2
+text = "Unlock Map [ m ]"
+
+[node name="Buy" type="Button" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=1649564137]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+mouse_default_cursor_shape = 2
+text = "1"
+icon = ExtResource("7_h8vn6")
+alignment = 2
+icon_alignment = 2
+expand_icon = true
 
 [node name="Speed" type="MarginContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer" unique_id=222052328]
 layout_mode = 2
@@ -8278,7 +8314,7 @@ layout_mode = 2
 size_flags_horizontal = 10
 mouse_default_cursor_shape = 2
 text = "5"
-icon = ExtResource("5_rvjn5")
+icon = ExtResource("7_h8vn6")
 alignment = 2
 icon_alignment = 2
 expand_icon = true
@@ -8309,40 +8345,14 @@ layout_mode = 2
 size_flags_horizontal = 10
 mouse_default_cursor_shape = 2
 text = "100"
-icon = ExtResource("5_rvjn5")
+icon = ExtResource("7_h8vn6")
 alignment = 2
 icon_alignment = 2
 expand_icon = true
 
-[node name="Map" type="MarginContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer" unique_id=1324780470]
-layout_mode = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map" unique_id=2138794458]
-layout_mode = 2
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=610576972]
-layout_mode = 2
-texture = ExtResource("9_eqgco")
-expand_mode = 2
-
-[node name="Label" type="Label" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=577067229]
-layout_mode = 2
-text = "Unlock Map [ m ]"
-
-[node name="Buy" type="Button" parent="UpgradeUI/MarginContainer/VBoxContainer/Main/VBoxContainer/Map/HBoxContainer" unique_id=1649564137]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-size_flags_horizontal = 10
-mouse_default_cursor_shape = 2
-text = "100"
-icon = ExtResource("5_rvjn5")
-alignment = 2
-icon_alignment = 2
-expand_icon = true
+[node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("11_puyd6")]
+pixel_size = 0.0005
+texture = ExtResource("12_h8vn6")
+marker_scale = Vector3(1, 1, 1)
 
 [editable path="PromptArea"]

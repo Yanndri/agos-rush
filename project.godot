@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="AGOS : PVP Rescue Rush"
-run/main_scene="uid://dean2k5noao13"
+run/main_scene="uid://do8bg3mk7rjy8"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -27,8 +27,6 @@ NetworkManager="*res://scripts/network_manager.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/window_width_override=640
-window/size/window_height_override=360
 window/stretch/mode="viewport"
 
 [filesystem]
@@ -99,6 +97,11 @@ slot_3={
 map_view={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":77,"key_label":0,"unicode":109,"location":0,"echo":false,"script":null)
+]
+}
+jump={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"location":0,"echo":false,"script":null)
 ]
 }
 

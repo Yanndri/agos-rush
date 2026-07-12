@@ -15,6 +15,7 @@ var has_finished := false
 
 
 func _ready() -> void:
+	_apply_lobby_match_time()
 	reset_timer()
 	if auto_start:
 		start_timer()
@@ -66,3 +67,8 @@ func _update_timer_label() -> void:
 	var minutes := total_seconds / 60
 	var seconds := total_seconds % 60
 	timer_label.text = "%02d:%02d" % [minutes, seconds]
+
+
+func _apply_lobby_match_time() -> void:
+	if NetworkManager.match_time_seconds > 0.0:
+		start_time_seconds = NetworkManager.match_time_seconds

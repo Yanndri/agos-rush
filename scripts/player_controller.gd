@@ -13,6 +13,7 @@ extends CharacterBody3D
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var jump_action := "jump"
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 
@@ -65,11 +66,11 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * water_gravity_multiplier * delta
 		if global_position.y < water_surface_y:
 			velocity.y += buoyancy * delta
-		if Input.is_key_pressed(KEY_SPACE):
+		if _is_jump_pressed():
 			velocity.y = max(velocity.y, jump_velocity * 0.55)
 	elif not is_on_floor():
 		velocity.y -= gravity * delta
-	elif Input.is_key_pressed(KEY_SPACE):
+	elif _is_jump_pressed():
 		velocity.y = jump_velocity
 
 	move_and_slide()
@@ -85,6 +86,14 @@ func _update_dash(delta: float, direction: Vector3) -> void:
 			dash_direction = Vector3(last_blend_position.x, 0.0, -last_blend_position.y).normalized()
 		dash_time_left = dash_duration
 		dash_cooldown_left = dash_cooldown
+
+
+func _is_jump_pressed() -> bool:
+	if not get_tree().get_nodes_in_group("construction_minigame_active").is_empty():
+		return false
+
+	return InputMap.has_action(jump_action) and Input.is_action_pressed(jump_action)
+
 
 func set_water_state(value: bool, surface_y: float, current_velocity: Vector3 = Vector3.ZERO) -> void:
 	in_water = value

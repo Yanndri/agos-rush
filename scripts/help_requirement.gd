@@ -52,8 +52,9 @@ var required_item_name := ""
 @export var points_amount_label_path: NodePath = NodePath("Requirements/PointsAmount")
 @export var prompt_area_path: NodePath = NodePath("PromptArea")
 @export var progress_label_path: NodePath = NodePath("PromptArea/Control/PromptLabel")
+@export var construction_minigame_path: NodePath = NodePath("CanvasLayer/ConstructionMinigame")
 @export var default_prompt_text := "[F] to Interact"
-@export var idle_prompt_text := "Hold [F] to Use"
+@export var idle_prompt_text := "[F] to Interact"
 @export var use_progress_text := "Using... %d%%"
 @export var announce_points_to_chat := true
 
@@ -62,6 +63,7 @@ var _show_fulfilled_requirement_visual := false
 var nearby_player: CharacterBody3D
 var hold_time := 0.0
 var is_holding := false
+var pending_requirement_node: Node
 
 @export var requirement_fulfilled := false:
 	set(value):
@@ -69,10 +71,13 @@ var is_holding := false
 	get:
 		return _requirement_fulfilled
 
+@export var need_minigame := true
+
 @onready var requirements_visual: Node3D = get_node_or_null(requirements_visual_path) as Node3D
 @onready var points_amount_label: Label3D = get_node_or_null(points_amount_label_path) as Label3D
 @onready var prompt_area: PromptArea = get_node_or_null(prompt_area_path) as PromptArea
 @onready var progress_label: Label = get_node_or_null(progress_label_path) as Label
+@onready var construction_minigame: ConstructionMinigame = get_node_or_null(construction_minigame_path) as ConstructionMinigame
 
 
 func _ready() -> void:
@@ -89,11 +94,17 @@ func _ready() -> void:
 	if not prompt_area.local_player_exited.is_connected(_on_prompt_area_local_player_exited):
 		prompt_area.local_player_exited.connect(_on_prompt_area_local_player_exited)
 
+	if construction_minigame != null and not construction_minigame.completed.is_connected(_on_construction_minigame_completed):
+		construction_minigame.completed.connect(_on_construction_minigame_completed)
+
 	_check_overlapping_players()
 
 
 func _process(delta: float) -> void:
 	if requirement_fulfilled:
+		return
+
+	if construction_minigame != null and construction_minigame.active:
 		return
 
 	if nearby_player == null:
@@ -104,6 +115,14 @@ func _process(delta: float) -> void:
 		if Input.is_action_just_pressed(interact_action):
 			show_requirement_dialogue(nearby_player)
 		_cancel_hold_interact()
+		return
+
+	if need_minigame:
+		if Input.is_action_just_pressed(interact_action):
+			var requirement_node := _get_player_requirement_source(nearby_player)
+			if requirement_node != null:
+				_cancel_hold_interact()
+				_start_minigame(requirement_node)
 		return
 
 	if not Input.is_action_pressed(interact_action):
@@ -134,6 +153,14 @@ func _on_prompt_area_local_player_exited(player: CharacterBody3D) -> void:
 
 	nearby_player = null
 	_cancel_hold_interact()
+	_cancel_minigame()
+
+
+func _on_construction_minigame_completed() -> void:
+	var requirement_node := pending_requirement_node
+	pending_requirement_node = null
+	if requirement_node != null and is_instance_valid(requirement_node):
+		_request_fulfill_node(requirement_node)
 
 
 func _check_overlapping_players() -> void:
@@ -207,6 +234,14 @@ func _finish_hold_interact() -> void:
 
 	_cancel_hold_interact()
 
+	if need_minigame:
+		_start_minigame(requirement_node)
+		return
+
+	_request_fulfill_node(requirement_node)
+
+
+func _request_fulfill_node(requirement_node: Node) -> void:
 	if multiplayer.multiplayer_peer == null:
 		_fulfill(requirement_node)
 	elif multiplayer.is_server():
@@ -234,6 +269,23 @@ func _apply_fulfill(requirement_node_path: NodePath) -> void:
 		return
 
 	_fulfill(requirement_node)
+
+
+func _start_minigame(requirement_node: Node) -> void:
+	if construction_minigame == null:
+		_request_fulfill_node(requirement_node)
+		return
+
+	pending_requirement_node = requirement_node
+	if not construction_minigame.start():
+		pending_requirement_node = null
+		_request_fulfill_node(requirement_node)
+
+
+func _cancel_minigame() -> void:
+	pending_requirement_node = null
+	if construction_minigame != null:
+		construction_minigame.cancel()
 
 
 func _fulfill(requirement_node: Node) -> void:

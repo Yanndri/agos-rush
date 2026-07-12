@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbar7ojmh8h5g"
-path.s3tc="res://.godot/imported/Star Gem 64.png-12cf9c89e901379f3c6ffed4f76f74e6.s3tc.ctex"
+uid="uid://b38qj7ppqsh1l"
+path.s3tc="res://.godot/imported/Upgrade Outline 256.png-b42e1dadccbced0b45f69b703911a2e4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://GameAssets/Icons/Star Gem/Star Gem 64.png"
-dest_files=["res://.godot/imported/Star Gem 64.png-12cf9c89e901379f3c6ffed4f76f74e6.s3tc.ctex"]
+source_file="res://GameAssets/Icons/Upgrade Outline 256.png"
+dest_files=["res://.godot/imported/Upgrade Outline 256.png-b42e1dadccbced0b45f69b703911a2e4.s3tc.ctex"]
 
 [params]
 

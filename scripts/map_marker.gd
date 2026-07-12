@@ -1,4 +1,4 @@
-extends Sprite3D
+extends Node3D
 class_name MapMarker
 
 const MAP_MARKERS_GROUP := "map_markers"
@@ -13,9 +13,7 @@ func _ready() -> void:
 	add_to_group(MAP_MARKERS_GROUP)
 	position.y = marker_height
 	scale = marker_scale
-	modulate = marker_color
-	fixed_size = true
-	no_depth_test = true
+	_apply_marker_visual_settings()
 	set_map_marker_visible(false)
 
 
@@ -24,3 +22,20 @@ func set_map_marker_visible(value: bool) -> void:
 		visible = value
 	else:
 		visible = true
+
+
+func _apply_marker_visual_settings() -> void:
+	if _has_property("modulate"):
+		set("modulate", marker_color)
+	if _has_property("fixed_size"):
+		set("fixed_size", true)
+	if _has_property("no_depth_test"):
+		set("no_depth_test", true)
+
+
+func _has_property(property_name: StringName) -> bool:
+	for property in get_property_list():
+		if property.get("name", &"") == property_name:
+			return true
+
+	return false

@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ds6h2dkjkiaer" path="res://Imports/BlenderExports/KidNPC_Villagers_Texture.png" id="3_gqnby"]
 [ext_resource type="Texture2D" uid="uid://cj33oy4tm5sgb" path="res://GameAssets/SketchfabExports/hospital_stretcher_trolley_0.png" id="4_ligsn"]
 [ext_resource type="PackedScene" uid="uid://p2n5pvstsd58" path="res://scenes/Interactables/help_requirement.tscn" id="5_8tp1l"]
+[ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="5_j1d4j"]
+[ext_resource type="Texture2D" uid="uid://c6rxkjtx5cb4x" path="res://GameAssets/Icons/Free 39 Portraits Pixel Art/2 Portraits with back/Icons_17.png" id="6_ejpl3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_iuc7c"]
 radius = 0.21191406
@@ -620,6 +622,10 @@ mesh = SubResource("ArrayMesh_63iaj")
 
 [node name="GlowLight" parent="HelpRequirement/PromptArea" parent_id_path=PackedInt32Array(556880010, 989733329) index="2" unique_id=1060909871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.043492466, -0.040120214)
+
+[node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("5_j1d4j")]
+pixel_size = 0.003
+texture = ExtResource("6_ejpl3")
 
 [editable path="HelpRequirement"]
 [editable path="HelpRequirement/PromptArea"]

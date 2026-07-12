@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b16jn8d0joa68"]
+
+[ext_resource type="Script" uid="uid://7ofj3ucjcv6y" path="res://scripts/map_marker.gd" id="1_42rtn"]
+[ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="1_58kud"]
+
+[node name="NameMarker" type="Label3D" unique_id=138082882]
+pixel_size = 0.003
+billboard = 1
+fixed_size = true
+texture_filter = 0
+render_priority = 4
+outline_render_priority = 3
+text = "Name"
+font = ExtResource("1_58kud")
+font_size = 12
+outline_size = 8
+script = ExtResource("1_42rtn")
+marker_scale = Vector3(1, 1, 1)

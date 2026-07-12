@@ -18,6 +18,7 @@ var discovery_peer: PacketPeerUDP
 var is_hosting := false
 var is_searching := false
 var lobby_game_started := false
+var match_time_seconds := 0.0
 
 func _process(delta: float) -> void:
 	if is_hosting:
@@ -108,13 +109,13 @@ func leave_game() -> void:
 		multiplayer.multiplayer_peer.close()
 	multiplayer.multiplayer_peer = null
 
-func start_lobby_game(scene_path: String = MAIN_SCENE) -> void:
+func start_lobby_game(scene_path: String = MAIN_SCENE, selected_match_time_seconds: float = 0.0) -> void:
 	if not multiplayer.is_server() or lobby_game_started:
 		return
 
 	lobby_game_started = true
 	_stop_discovery()
-	_load_game_scene.rpc(scene_path)
+	_load_game_scene.rpc(scene_path, selected_match_time_seconds)
 
 func _on_peer_connected(_peer_id: int) -> void:
 	if not multiplayer.is_server() or lobby_game_started:
@@ -141,7 +142,8 @@ func _on_connection_failed() -> void:
 
 
 @rpc("authority", "call_local", "reliable")
-func _load_game_scene(scene_path: String) -> void:
+func _load_game_scene(scene_path: String, selected_match_time_seconds: float) -> void:
+	match_time_seconds = selected_match_time_seconds
 	get_tree().change_scene_to_file(scene_path)
 
 func _start_broadcasting() -> void:

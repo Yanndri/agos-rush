@@ -16,6 +16,7 @@ extends CharacterBody3D
 @export var move_right_action := "move_right"
 @export var move_up_action := "move_up"
 @export var move_down_action := "move_down"
+@export var jump_action := "jump"
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var camera: Camera3D = get_node_or_null(camera_path)
@@ -57,7 +58,7 @@ func _physics_process(delta: float) -> void:
 
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-	elif Input.is_key_pressed(KEY_SPACE):
+	elif _is_jump_pressed():
 		velocity.y = jump_velocity
 		_start_jump_animation_lock()
 
@@ -98,6 +99,14 @@ func _get_camera_relative_direction(input_dir: Vector2) -> Vector3:
 	right.y = 0.0
 	right = right.normalized()
 	return (right * input_dir.x + forward * -input_dir.y).normalized()
+
+
+func _is_jump_pressed() -> bool:
+	if not get_tree().get_nodes_in_group("construction_minigame_active").is_empty():
+		return false
+
+	return InputMap.has_action(jump_action) and Input.is_action_pressed(jump_action)
+
 
 func _update_animation(input_dir: Vector2, is_running: bool) -> void:
 	if jump_animation_time_left > 0.0:
