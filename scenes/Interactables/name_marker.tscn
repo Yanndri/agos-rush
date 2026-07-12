@@ -4,7 +4,6 @@
 [ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="1_58kud"]
 
 [node name="NameMarker" type="Label3D" unique_id=138082882]
-pixel_size = 0.003
 billboard = 1
 fixed_size = true
 texture_filter = 0

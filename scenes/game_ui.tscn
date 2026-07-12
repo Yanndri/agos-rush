@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://pdr437eaqql1" path="res://scripts/game_timer.gd" id="2_u2dgd"]
 [ext_resource type="PackedScene" uid="uid://kdmv8gesh8hy" path="res://scenes/TextChat.tscn" id="3_bt76a"]
 [ext_resource type="FontFile" uid="uid://dkdhifqercxa2" path="res://Themes/Fonts/ari_w9500/ari-w9500-condensed-display.ttf" id="4_bt76a"]
+[ext_resource type="Texture2D" uid="uid://dg2we1a28muos" path="res://GameAssets/Icons/Tetrahedron Outline 64.png" id="6_djwj0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ptkwr"]
 bg_color = Color(0.15127608, 0.15127608, 0.15127605, 0.38431373)
@@ -103,6 +104,14 @@ expand_margin_left = 12.0
 expand_margin_top = 4.0
 expand_margin_right = 12.0
 expand_margin_bottom = 4.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_ad7dv"]
+font_color = Color(1, 1, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ed62p"]
+font_color = Color(0.39607844, 0.8392157, 0.4, 1)
+outline_size = 4
+outline_color = Color(0.06938457, 0.26058418, 0.093393646, 1)
 
 [node name="GameUI" type="Control" unique_id=1282615465]
 layout_mode = 3
@@ -365,5 +374,61 @@ text = "Back to Main Menu"
 
 [node name="TextChat" parent="." unique_id=487340569 instance=ExtResource("3_bt76a")]
 layout_mode = 1
+
+[node name="Announcement" type="MarginContainer" parent="." unique_id=1560374139]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 72
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Announcement" unique_id=1062583793]
+layout_mode = 2
+
+[node name="LabelTemplate" type="Label" parent="Announcement/VBoxContainer" unique_id=1804881941]
+layout_mode = 2
+text = "⚠️💦Flooded in babag need help"
+label_settings = SubResource("LabelSettings_ad7dv")
+
+[node name="Objectives" type="MarginContainer" parent="." unique_id=1444236979]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Objectives" unique_id=513410779]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Objectives/VBoxContainer" unique_id=2074730845]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Objectives/VBoxContainer/HBoxContainer" unique_id=1490841215]
+layout_mode = 2
+texture = ExtResource("6_djwj0")
+
+[node name="Label" type="Label" parent="Objectives/VBoxContainer/HBoxContainer" unique_id=109470293]
+layout_mode = 2
+text = "Objectives"
+label_settings = SubResource("LabelSettings_ed62p")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Objectives/VBoxContainer" unique_id=1078355031]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Objectives/VBoxContainer/VBoxContainer2" unique_id=1868034269]
+layout_mode = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 0
+theme_override_fonts/normal_font = ExtResource("4_bt76a")
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "- Gather Supplies"
+fit_content = true
 
 [connection signal="pressed" from="Scoreboard/VBoxContainer/Bottom/BackToMainMenu" to="." method="_on_back_to_main_menu_pressed"]

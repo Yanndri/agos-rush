@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="1_ccvp6"]
 [ext_resource type="Script" uid="uid://bdadv2mgrph2h" path="res://scripts/battery.gd" id="1_rijul"]
 [ext_resource type="Texture2D" uid="uid://bv7ui55wihj7b" path="res://GameAssets/Icons/battery.png" id="2_7wc3l"]
+[ext_resource type="Material" uid="uid://chg6xlrob0r1f" path="res://Themes/hull_outline.tres" id="4_o6vjt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rijul"]
 radius = 3.603
@@ -116,8 +117,18 @@ shape = SubResource("SphereShape3D_rijul")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.15, 0, 0)
 mesh = SubResource("ArrayMesh_7wc3l")
 
+[node name="Battery_Big_Cylinder_009" type="MeshInstance3D" parent="Visual" unique_id=448977379]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.15, 0, 0)
+material_override = ExtResource("4_o6vjt")
+mesh = SubResource("ArrayMesh_7wc3l")
+
 [node name="Battery_Big_Cylinder_008" type="MeshInstance3D" parent="Visual" unique_id=1838450308]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.15, 0, 0)
+mesh = SubResource("ArrayMesh_7wc3l")
+
+[node name="Battery_Big_Cylinder_010" type="MeshInstance3D" parent="Visual" unique_id=1569590687]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.15, 0, 0)
+material_override = ExtResource("4_o6vjt")
 mesh = SubResource("ArrayMesh_7wc3l")
 
 [editable path="PromptArea"]

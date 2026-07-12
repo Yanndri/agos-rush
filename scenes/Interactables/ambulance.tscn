@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cajrqtke5twpp" path="res://scenes/Interactables/prompt_area.tscn" id="7_3fhhq"]
 [ext_resource type="PackedScene" uid="uid://tspaj4by8a1w" path="res://scenes/Interactables/storage.tscn" id="7_y57d8"]
 [ext_resource type="PackedScene" uid="uid://bollvfi4v27mc" path="res://scenes/Interactables/map_marker.tscn" id="9_48mh0"]
+[ext_resource type="FontFile" uid="uid://cv58kw4qseuv2" path="res://Themes/Fonts/daydream_3/Daydream DEMO.otf" id="9_0883v"]
+[ext_resource type="Texture2D" uid="uid://dp57nu3xyrqxw" path="res://GameAssets/Icons/steering_wheel.png" id="9_e4kke"]
 [ext_resource type="Texture2D" uid="uid://bpmju6usgwaq4" path="res://GameAssets/Icons/ambulance.png" id="10_y7f2c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ambulance"]
@@ -418,6 +420,36 @@ visible = false
 
 [node name="CollisionShape3D" parent="Storage/Chest/StaticBody3D" parent_id_path=PackedInt32Array(2102791721, 1275248115) index="0" unique_id=1267369322]
 disabled = true
+
+[node name="driveLabel2" type="Label3D" parent="Storage" unique_id=1827364206]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -1.6985149, 1.4810532, -4.5209475)
+billboard = 1
+render_priority = 3
+outline_render_priority = 2
+text = "[F] Drive"
+font = ExtResource("9_0883v")
+
+[node name="Sprite3D" type="Sprite3D" parent="Storage/driveLabel2" unique_id=878366700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46491718, 0)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 2
+texture = ExtResource("9_e4kke")
+
+[node name="driveLabel3" type="Label3D" parent="Storage" unique_id=1913966220]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.0775533, 1.4810532, -4.5209475)
+billboard = 1
+render_priority = 3
+outline_render_priority = 2
+text = "[F] Drive"
+font = ExtResource("9_0883v")
+
+[node name="Sprite3D" type="Sprite3D" parent="Storage/driveLabel3" unique_id=653001802]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46491718, 0)
+pixel_size = 0.03
+billboard = 1
+texture_filter = 2
+texture = ExtResource("9_e4kke")
 
 [node name="DriverArea" parent="." unique_id=989733329 instance=ExtResource("7_3fhhq")]
 
