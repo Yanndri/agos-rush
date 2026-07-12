@@ -102,6 +102,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if requirement_fulfilled:
+		_hide_progress_label()
 		return
 
 	if construction_minigame != null and construction_minigame.active:
@@ -309,8 +310,15 @@ func _fulfill(requirement_node: Node) -> void:
 
 func _set_fulfilled(value: bool) -> void:
 	_requirement_fulfilled = value
-	if not value:
+	if value:
+		is_holding = false
+		hold_time = 0.0
+		pending_requirement_node = null
+		_cancel_minigame()
+		_hide_progress_label()
+	else:
 		_show_fulfilled_requirement_visual = false
+		_update_progress_label()
 	_update_visuals()
 
 
@@ -408,6 +416,10 @@ func _get_required_item_name() -> String:
 
 func _update_progress_label() -> void:
 	if progress_label == null:
+		return
+
+	if requirement_fulfilled:
+		_hide_progress_label()
 		return
 
 	if nearby_player == null:

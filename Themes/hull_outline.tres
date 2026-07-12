@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://chg6xlrob0r1f"]
+
+[ext_resource type="Shader" uid="uid://ok0b5bgk5jon" path="res://Themes/hull_outline.gdshader" id="1_vlhp5"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vlhp5")
+shader_parameter/outline_color = Color(1, 0.9490196, 0, 1)
+shader_parameter/thickness = 0.04
+shader_parameter/outline_energy = 1.0
+shader_parameter/outline_transparency = 1.0
+shader_parameter/merge_group = false
+shader_parameter/merge_depth_range = 10.0

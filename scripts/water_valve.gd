@@ -2,10 +2,13 @@ extends Node3D
 
 @onready var help_requirement : HelpRequirement = $HelpRequirement
 @export var flooded_water : MeshInstance3D
+@export var area_name : String #if the valves are for a certain area 
+
 @export var drain_amount := 999.0
 
 var _water_drained := false
-
+var start_drained := true #water will be drained once the game starts putting the water below the original position
+var is_flooded := false #when the water has raised to original height
 
 func _ready() -> void:
 	if help_requirement == null:
