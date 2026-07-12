@@ -107,6 +107,8 @@ expand_margin_bottom = 4.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_ad7dv"]
 font_color = Color(1, 1, 0, 1)
+outline_size = 4
+outline_color = Color(1, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ed62p"]
 font_color = Color(0.39607844, 0.8392157, 0.4, 1)
@@ -152,7 +154,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wp0k4")
 [node name="GameTimer" type="MarginContainer" parent="TopBar" unique_id=1042639952]
 layout_mode = 2
 script = ExtResource("2_u2dgd")
-start_time_seconds = 240.0
 
 [node name="TimerLabel" type="Label" parent="TopBar/GameTimer" unique_id=499418632]
 layout_mode = 2
@@ -388,11 +389,13 @@ theme_override_constants/margin_top = 72
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Announcement" unique_id=1062583793]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="LabelTemplate" type="Label" parent="Announcement/VBoxContainer" unique_id=1804881941]
 layout_mode = 2
-text = "⚠️💦Flooded in babag need help"
+text = "Flood incoming in 30 seconds"
 label_settings = SubResource("LabelSettings_ad7dv")
+horizontal_alignment = 1
 
 [node name="Objectives" type="MarginContainer" parent="." unique_id=1444236979]
 layout_mode = 0
@@ -406,22 +409,22 @@ theme_override_constants/margin_bottom = 12
 [node name="VBoxContainer" type="VBoxContainer" parent="Objectives" unique_id=513410779]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Objectives/VBoxContainer" unique_id=2074730845]
+[node name="Title" type="HBoxContainer" parent="Objectives/VBoxContainer" unique_id=2074730845]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Objectives/VBoxContainer/HBoxContainer" unique_id=1490841215]
+[node name="TextureRect" type="TextureRect" parent="Objectives/VBoxContainer/Title" unique_id=1490841215]
 layout_mode = 2
 texture = ExtResource("6_djwj0")
 
-[node name="Label" type="Label" parent="Objectives/VBoxContainer/HBoxContainer" unique_id=109470293]
+[node name="Label" type="Label" parent="Objectives/VBoxContainer/Title" unique_id=109470293]
 layout_mode = 2
 text = "Objectives"
 label_settings = SubResource("LabelSettings_ed62p")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Objectives/VBoxContainer" unique_id=1078355031]
+[node name="ObjectivesList" type="VBoxContainer" parent="Objectives/VBoxContainer" unique_id=1078355031]
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Objectives/VBoxContainer/VBoxContainer2" unique_id=1868034269]
+[node name="objectivetemplate" type="RichTextLabel" parent="Objectives/VBoxContainer/ObjectivesList" unique_id=1868034269]
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 0

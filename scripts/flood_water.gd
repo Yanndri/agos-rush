@@ -91,6 +91,8 @@ func _on_water_area_body_exited(body: Node3D) -> void:
 func _refresh_overlapping_players() -> void:
 	if water_area == null:
 		return
+	if not water_area.monitoring:
+		return
 	for body in water_area.get_overlapping_bodies():
 		if body is Node3D:
 			_on_water_area_body_entered(body)

@@ -158,11 +158,11 @@ transform = Transform3D(0.9994857, 0, -0.032070994, 0, 1, 0, 0.032070994, 0, 0.9
 
 [node name="Interactables" type="Node3D" parent="." unique_id=557352906]
 
-[node name="Battery" parent="Interactables" unique_id=704979953 instance=ExtResource("9_0jjuu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.13733, 0.79999924, 18.104137)
-
 [node name="Battery15" parent="Interactables" unique_id=1145338935 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63.325546, 0.66464067, 25.972)
+
+[node name="Battery16" parent="Interactables" unique_id=704979953 instance=ExtResource("9_0jjuu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88.022446, 0.365942, 20.039333)
 
 [node name="Battery2" parent="Interactables" unique_id=1007982213 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -157.74487, 0.7999878, 104.04108)
@@ -211,7 +211,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 144.06448, 0.7999878, -86.926
 
 [node name="Battery10" parent="Interactables" unique_id=1818558339 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 93.80392, 0.5419569, 61.489098)
-spin_node_path = NodePath("../Battery/Visual")
+spin_node_path = NodePath("")
 
 [node name="Battery11" parent="Interactables" unique_id=409828217 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.631084, 0.25325894, 116.49037)
@@ -223,7 +223,7 @@ spin_node_path = NodePath("../Battery3/Visual")
 
 [node name="Battery13" parent="Interactables" unique_id=144677028 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.101639, 0.4, -81.755264)
-spin_node_path = NodePath("../Battery/Visual")
+spin_node_path = NodePath("")
 
 [node name="Battery14" parent="Interactables" unique_id=804528522 instance=ExtResource("9_0jjuu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.704292, 0.4, 267.8276)
