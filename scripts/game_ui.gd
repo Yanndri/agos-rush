@@ -6,7 +6,7 @@ extends Control
 @export var back_to_main_menu_path: NodePath = NodePath("Scoreboard/VBoxContainer/Bottom/BackToMainMenu")
 @export var announcement_container_path: NodePath = NodePath("Announcement/VBoxContainer")
 @export var announcement_label_template_path: NodePath = NodePath("Announcement/VBoxContainer/LabelTemplate")
-@export var announcement_duration := 3.0
+@export var announcement_duration := 8.0
 @export var objectives_list_path: NodePath = NodePath("Objectives/VBoxContainer/ObjectivesList")
 @export var objective_template_path: NodePath = NodePath("Objectives/VBoxContainer/ObjectivesList/objectivetemplate")
 @export_file("*.tscn") var main_menu_scene: String = "res://scenes/main_menu.tscn"

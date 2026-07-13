@@ -7,6 +7,8 @@ extends Node3D
 @export var drain_amount := 999.0
 @export var flood_rise_duration := 1.0
 @export var start_drained := true #water will be drained once the game starts putting the water below the original position
+@export var map_marker_path: NodePath = NodePath("MapMarker")
+@onready var map_marker: Node3D = get_node_or_null(map_marker_path) as Node3D
 
 var _water_drained := false
 var is_flooded := false #when the water has raised to original height
@@ -15,6 +17,7 @@ var _water_tween: Tween
 
 func _ready() -> void:
 	_cache_flooded_water_start_state()
+	_set_map_marker_visible(false)
 
 	if help_requirement == null:
 		push_warning("WaterValve is missing its HelpRequirement node.")
@@ -30,6 +33,7 @@ func _ready() -> void:
 	else:
 		is_flooded = true
 		_set_help_requirement_enabled(true)
+		_set_map_marker_visible(true)
 
 
 func _on_help_requirement_fulfilled(_requirement_node: Node) -> void:
@@ -70,6 +74,7 @@ func _set_water_drained_immediately() -> void:
 	is_flooded = false
 	_set_water_runtime_state(false)
 	_set_help_requirement_enabled(false)
+	_set_map_marker_visible(false)
 
 
 func _raise_flooded_water() -> void:
@@ -84,6 +89,7 @@ func _raise_flooded_water() -> void:
 	if help_requirement != null:
 		help_requirement.requirement_fulfilled = false
 	_set_help_requirement_enabled(true)
+	_set_map_marker_visible(true)
 	_add_flood_objective()
 
 	_water_tween = create_tween()
@@ -95,9 +101,11 @@ func _raise_flooded_water() -> void:
 
 func _drain_flooded_water() -> void:
 	if _water_drained:
+		_set_map_marker_visible(false)
 		return
 
 	if flooded_water == null:
+		_set_map_marker_visible(false)
 		push_warning("WaterValve has no flooded_water assigned.")
 		return
 
@@ -105,6 +113,7 @@ func _drain_flooded_water() -> void:
 	is_flooded = false
 	_kill_water_tween()
 	_set_help_requirement_enabled(false)
+	_set_map_marker_visible(false)
 	_remove_flood_objective()
 
 	if flooded_water.has_method("reduce_water"):
@@ -147,6 +156,16 @@ func _set_help_requirement_enabled(enabled: bool) -> void:
 	var prompt_area := help_requirement.get_node_or_null("PromptArea") as PromptArea
 	if prompt_area != null:
 		prompt_area.set_prompt_enabled(enabled)
+
+
+func _set_map_marker_visible(enabled: bool) -> void:
+	if map_marker == null:
+		return
+
+	if map_marker.has_method("set_marker_enabled"):
+		map_marker.set_marker_enabled(enabled)
+
+	map_marker.visible = enabled
 
 
 func get_flood_objective_id() -> String:

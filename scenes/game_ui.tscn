@@ -427,9 +427,9 @@ layout_mode = 2
 [node name="objectivetemplate" type="RichTextLabel" parent="Objectives/VBoxContainer/ObjectivesList" unique_id=1868034269]
 layout_mode = 2
 theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 0
+theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("4_bt76a")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "- Gather Supplies"
 fit_content = true

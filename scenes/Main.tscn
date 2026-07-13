@@ -69,6 +69,11 @@ subdivide_depth = 300
 [sub_resource type="BoxShape3D" id="BoxShape3D_bb450"]
 size = Vector3(50, 2, 79.84631)
 
+[sub_resource type="BoxMesh" id="BoxMesh_mwfav"]
+size = Vector3(50, 0.2, 83.67676)
+subdivide_width = 300
+subdivide_depth = 300
+
 [sub_resource type="BoxMesh" id="BoxMesh_nfivy"]
 size = Vector3(50, 0.2, 83.67676)
 subdivide_width = 300
@@ -76,6 +81,11 @@ subdivide_depth = 300
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1nqs0"]
 size = Vector3(50, 2, 79.84631)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cvmbd"]
+size = Vector3(50, 0.2, 83.67676)
+subdivide_width = 300
+subdivide_depth = 300
 
 [node name="Main" type="Node3D" unique_id=631280010]
 script = ExtResource("16_main")
@@ -202,6 +212,20 @@ water_area_path = NodePath("WaterArea")
 [node name="CollisionShape3D" parent="WaterValves/WaterValve2/Water/WaterArea" parent_id_path=PackedInt32Array(232778900, 1121966791) index="0" unique_id=723112628]
 shape = SubResource("BoxShape3D_bb450")
 
+[node name="WaterValve4" parent="WaterValves" unique_id=1875586558 node_paths=PackedStringArray("flooded_water") instance=ExtResource("12_qmy6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -235.46205, 0.80000114, 317.68216)
+flooded_water = NodePath("Water")
+area_name = "South Western"
+
+[node name="Water" parent="WaterValves/WaterValve4" unique_id=1269490959 instance=ExtResource("13_mwfav")]
+transform = Transform3D(0.9999756, 0.00698126, 0, -0.006981218, 0.99996954, 0.0034906515, 2.4369147e-05, -0.0034905665, 0.9999939, 20.237259, -1.132979, -38.916046)
+mesh = SubResource("BoxMesh_mwfav")
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
+
+[node name="CollisionShape3D" parent="WaterValves/WaterValve4/Water/WaterArea" parent_id_path=PackedInt32Array(1269490959, 1121966791) index="0" unique_id=723112628]
+shape = SubResource("BoxShape3D_bb450")
+
 [node name="WaterValve3" parent="WaterValves" unique_id=2071421401 node_paths=PackedStringArray("flooded_water") instance=ExtResource("12_qmy6f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65.07947, 0.80000114, 22.198145)
 flooded_water = NodePath("Water")
@@ -217,6 +241,23 @@ water_area_path = NodePath("WaterArea")
 transform = Transform3D(1, 1.5388935e-10, 4.9112714e-11, 2.2506086e-08, 1, -1.1175871e-08, -5.4569682e-11, 0, 1, 1.5258789e-05, -0.5581306, -1.592598)
 shape = SubResource("BoxShape3D_1nqs0")
 
+[node name="WaterValve5" parent="WaterValves" unique_id=606004527 node_paths=PackedStringArray("flooded_water") instance=ExtResource("12_qmy6f")]
+transform = Transform3D(0.007709671, 0, 0.99997026, 0, 1, 0, -0.99997026, 0, 0.007709671, 174.56503, 0.80000114, 35.870598)
+flooded_water = NodePath("Water")
+area_name = "Colon Market"
+
+[node name="Water" parent="WaterValves/WaterValve5" unique_id=442768216 instance=ExtResource("13_mwfav")]
+transform = Transform3D(0.9999756, 0.00698126, 0, -0.006981218, 0.99996954, 0.0034906515, 2.4369147e-05, -0.0034905665, 0.9999939, -20.482391, -1.132979, -38.91606)
+mesh = SubResource("BoxMesh_cvmbd")
+current = Vector3(0, 0, 0)
+water_area_path = NodePath("WaterArea")
+
+[node name="CollisionShape3D" parent="WaterValves/WaterValve5/Water/WaterArea" parent_id_path=PackedInt32Array(442768216, 1121966791) index="0" unique_id=723112628]
+transform = Transform3D(1, 1.5388935e-10, 4.9112714e-11, 2.2506086e-08, 1, -1.1175871e-08, -5.4569682e-11, 0, 1, 1.5258789e-05, -0.5581306, -1.592598)
+shape = SubResource("BoxShape3D_1nqs0")
+
 [editable path="WaterValves/WaterValve/Water"]
 [editable path="WaterValves/WaterValve2/Water"]
+[editable path="WaterValves/WaterValve4/Water"]
 [editable path="WaterValves/WaterValve3/Water"]
+[editable path="WaterValves/WaterValve5/Water"]

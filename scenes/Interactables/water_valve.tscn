@@ -209,7 +209,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5055461, 0)
 visible = true
 
 [node name="MapMarker" parent="." unique_id=708202809 instance=ExtResource("9_bqe4c")]
-pixel_size = 0.0005
 texture = ExtResource("12_mfsir")
 marker_scale = Vector3(1, 1, 1)
 

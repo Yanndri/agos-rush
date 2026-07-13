@@ -8,6 +8,7 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @export var reverse_acceleration := 7.0
 @export var max_forward_speed := 11.0
 @export var max_reverse_speed := 5.0
+@export var boost_speed_multiplier := 1.5
 @export var brake_force := 18.0
 @export var coast_drag := 5.0
 @export var steer_speed := 2.2
@@ -27,6 +28,7 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @export var left_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorL")
 @export var right_door_path: NodePath = NodePath("Model/Ambulance-Truck/DoorR")
 @export var storage_path: NodePath = NodePath("Storage")
+@export var outline_shader_path: NodePath = NodePath("Model/outlineShader")
 @export var left_door_closed_z_degrees := -140.0
 @export var right_door_closed_z_degrees := 140.0
 @export var door_close_duration := 1.0
@@ -36,6 +38,7 @@ const TRANSPARENT_AMBULANCE_MATERIAL := preload("res://Themes/transparent_ambula
 @onready var left_door: Node3D = get_node_or_null(left_door_path) as Node3D
 @onready var right_door: Node3D = get_node_or_null(right_door_path) as Node3D
 @onready var storage: Node3D = get_node_or_null(storage_path) as Node3D
+@onready var outline_shader: Node3D = get_node_or_null(outline_shader_path) as Node3D
 @onready var front_left_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL"
 @onready var front_right_wheel: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFR"
 @onready var front_left_wheel_mesh: Node3D = $"Model/Ambulance-Truck/FrontWheels/Ambulance-Truck_TireFL/Ambulance-Truck_TireFL"
@@ -57,6 +60,7 @@ var last_owner_visual_state := ""
 var door_tween: Tween
 var left_door_open_z_degrees := 0.0
 var right_door_open_z_degrees := 0.0
+var storage_requested_visible := true
 
 
 func _ready() -> void:
@@ -104,9 +108,12 @@ func _physics_process(delta: float) -> void:
 	var throttle := int(Input.is_action_pressed(move_forward_action)) - int(Input.is_action_pressed(move_back_action))
 	var steering := int(Input.is_action_pressed(steer_left_action)) - int(Input.is_action_pressed(steer_right_action))
 	var braking := Input.is_key_pressed(KEY_SPACE)
+	var current_max_forward_speed := max_forward_speed
+	if Input.is_key_pressed(KEY_SHIFT):
+		current_max_forward_speed *= boost_speed_multiplier
 
 	if throttle > 0:
-		drive_speed = move_toward(drive_speed, max_forward_speed, acceleration * delta)
+		drive_speed = move_toward(drive_speed, current_max_forward_speed, acceleration * delta)
 	elif throttle < 0:
 		drive_speed = move_toward(drive_speed, -max_reverse_speed, reverse_acceleration * delta)
 	elif braking:
@@ -118,7 +125,7 @@ func _physics_process(delta: float) -> void:
 
 	if steering != 0:
 		var reverse_turn_multiplier := -1.0 if drive_speed < 0.0 else 1.0
-		var speed_steer_multiplier = max(abs(drive_speed) / max_forward_speed, stationary_steer_multiplier)
+		var speed_steer_multiplier = max(abs(drive_speed) / current_max_forward_speed, stationary_steer_multiplier)
 		rotate_y(steering * steer_speed * speed_steer_multiplier * reverse_turn_multiplier * delta)
 
 	var forward := _get_vehicle_forward_direction()
@@ -143,6 +150,9 @@ func _update_owner_material() -> void:
 		truck.material_override = normal_truck_material
 	else:
 		truck.material_override = TRANSPARENT_AMBULANCE_MATERIAL
+		_remove_remote_outline()
+
+	_apply_storage_visibility()
 
 
 func _is_owned_by_local_player() -> bool:
@@ -245,11 +255,29 @@ func _open_doors() -> void:
 
 
 func _set_storage_visible(value: bool) -> void:
+	storage_requested_visible = value
+	_apply_storage_visibility()
+
+
+func _apply_storage_visibility() -> void:
 	if storage == null:
 		return
 
-	storage.visible = value
-	storage.process_mode = Node.PROCESS_MODE_INHERIT if value else Node.PROCESS_MODE_DISABLED
+	var should_show := storage_requested_visible and _is_owned_by_local_player()
+	storage.visible = should_show
+	storage.process_mode = Node.PROCESS_MODE_INHERIT if should_show else Node.PROCESS_MODE_DISABLED
+
+	var prompt_area := storage.get_node_or_null("PromptArea") as PromptArea
+	if prompt_area != null:
+		prompt_area.set_prompt_enabled(should_show)
+
+
+func _remove_remote_outline() -> void:
+	if outline_shader == null:
+		return
+
+	outline_shader.queue_free()
+	outline_shader = null
 
 
 func _tween_doors(left_z_degrees: float, right_z_degrees: float) -> void:
