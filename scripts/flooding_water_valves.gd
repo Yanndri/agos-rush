@@ -1,15 +1,17 @@
 extends Node3D
 
-@export var flood_start := 30 #when game starts, it countdowns
+@export var flood_start := 10 #when game starts, it countdowns
 @export var floodingInterval := 60 #when the next flood in seconds
 @export var auto_start := true
 
 
 func _ready() -> void:
 	if auto_start:
-		get_tree().call_group("game_ui", "add_objective", "Gather Supplies before the flood", "ID01")
+		get_tree().call_group("game_ui", "add_objective", "- Gather Supplies before the flood", "ID01")
 		await get_tree().create_timer(3).timeout
 		_start_flood_loop()
+		await get_tree().create_timer(flood_start).timeout
+		get_tree().call_group("game_ui", "remove_objective", "ID01")
 
 
 func _start_flood_loop() -> void:

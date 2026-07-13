@@ -7,6 +7,7 @@ const MAP_MARKERS_GROUP := "map_markers"
 @export var marker_scale := Vector3(2.0, 2.0, 2.0)
 @export var marker_color := Color.WHITE
 @export var hide_when_not_in_map := true
+@export var marker_enabled := true
 
 
 func _ready() -> void:
@@ -18,10 +19,20 @@ func _ready() -> void:
 
 
 func set_map_marker_visible(value: bool) -> void:
+	if not marker_enabled:
+		visible = false
+		return
+
 	if hide_when_not_in_map:
 		visible = value
 	else:
 		visible = true
+
+
+func set_marker_enabled(value: bool) -> void:
+	marker_enabled = value
+	if not marker_enabled:
+		visible = false
 
 
 func _apply_marker_visual_settings() -> void:
